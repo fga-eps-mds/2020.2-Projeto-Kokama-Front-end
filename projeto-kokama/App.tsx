@@ -26,7 +26,7 @@ let dictionary =
         {
             "Português": "Amor",
             "Kokama": "Tsachi",
-            "Ex-Português": "Foi amor a prmeira vista",
+            "Ex-Português": "Foi amor a primeira vista",
             "Ex-Kokama-H": "Tsachi lorem ipsum",
             "Ex-Kokama-M": "lorem ipsum Tsachi"
         }
@@ -63,6 +63,31 @@ export default function App() {
     }
     wordObject = null;
     return "Palavra Não Existe";
+  }
+
+  function getExample(language:string) {
+    if (wordObject != null) {
+
+      let att = String();
+      att = att.concat("Ex-", language);
+
+      if (language == "Português" || !wordObject[att.concat("-H")]) {
+        let text = String();
+        text = text.concat("Frase em ", language, ":\n", wordObject[att]);
+        return text
+      }
+      else {
+        att = att.concat("-H");
+        let text = String();
+        text = text.concat("Frase em ", language, ":\n(H) ", wordObject[att]);
+        att = ""
+        att = att.concat("Ex-", language, "-M");
+        text = text.concat("\n(M) ", wordObject[att]);
+        return text
+      }
+
+      
+    }
   }
 
   return (
@@ -112,7 +137,7 @@ export default function App() {
           </Text>
           <View style={styles.exampleArea}>
             <Text style={styles.examples}>
-              {/* {getExample(originLanguage)} */}
+              {getExample(originLanguage)}
             </Text>
           </View>
 
