@@ -16,6 +16,18 @@ const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 
 export default function App() {
+
+  const [translation, setTranslation] = useState(" ");
+  const [originLanguage, setOriginLanguage] = useState("Português");
+  const [destLanguage, setDestLanguage] = useState("Kokama");
+
+  function changeLanguage() {
+    let temp = originLanguage;
+    setOriginLanguage(destLanguage);
+    setDestLanguage(temp);
+    // Apagar caixa de texto
+  }
+
   return (
     <ScrollView style={styles.scrollBar}>
       <SafeAreaView style={styles.container}>
@@ -28,12 +40,12 @@ export default function App() {
         <View style={styles.changeLanguage}>
           {/* Primeiro idioma */}
           <View style={styles.originLanguageArea}>
-            <Text style={styles.originLanguage}>{"originLanguage"}</Text>
+            <Text style={styles.originLanguage}>{originLanguage}</Text>
           </View>
 
           {/* Ícone de mudança de idioma */}
           <View style={styles.languageExchangeArea}>
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={changeLanguage}>
               <Image
                 style={styles.languageExchange}
                 source={require("./assets/exchange.png")}
@@ -43,8 +55,17 @@ export default function App() {
 
           {/* Segundo idioma */}
           <View style={styles.destLanguageArea}>
-            <Text style={styles.destLanguage}>{"destLanguage"}</Text>
+            <Text style={styles.destLanguage}>{destLanguage}</Text>
           </View>
+        </View>
+
+        {/* Área da caixa de texto para entrada do usuário */}
+        <View style={styles.userInput}>
+          <TextInput
+            style={styles.textBox}
+            placeholder="Toque para digitar"
+            onChangeText={(word) => setTranslation(word)}
+          />
         </View>
 
       </SafeAreaView>
@@ -106,5 +127,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
     left: 8,
     fontSize: 22,
+  },
+  userInput: {
+    width: "100%",
+    flexDirection: "row",
+    marginVertical: 5,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    height: 50,
+    backgroundColor: "#FFF",
+  },
+  textBox: {
+    flex: 1,
+    textAlign: "left",
+    fontSize: 23,
+    paddingLeft: 23,
   },
 });
