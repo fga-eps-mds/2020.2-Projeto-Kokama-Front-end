@@ -33,8 +33,14 @@ let dictionary =
 
     ]`
 
-export default function App() {
+function otherLanguage(language: string) {
+  if (language == "Português") {
+    return "Kokama"
+  }
+  return "Português"
+}
 
+const App = () => {
   const [translation, setTranslation] = useState(" ");
   const [originLanguage, setOriginLanguage] = useState("Português");
   const [destLanguage, setDestLanguage] = useState("Kokama");
@@ -45,13 +51,6 @@ export default function App() {
     setOriginLanguage(destLanguage);
     setDestLanguage(temp);
     // Apagar caixa de texto
-  }
-
-  function otherLanguage(language: string) {
-    if (language == "Português") {
-      return "Kokama"
-    }
-    return "Português"
   }
 
   function Translate(language: string, entry:string) {
@@ -90,7 +89,35 @@ export default function App() {
     }
   }
 
+  // de PT-KK Checar se existe ambos exemplos em kokama
+  // 
+  function genderSpeech(language:string) {
+
+    if (wordObject != null) {
+
+      let att = String();
+      att = att.concat("Ex-", otherLanguage(language));
+
+      if (language == "Kokama" || (language == "Português" && !wordObject[att.concat("-H")])) {
+        let text = String();
+        text = text.concat("Frase em ", otherLanguage(language), ":\n", wordObject[att]);
+        return text;
+      }
+      else {
+        att = att.concat("-H");
+        let text = String();
+        text = text.concat("Frase em ", otherLanguage(language), ":\n(H) ", wordObject[att]);
+        att = ""
+        att = att.concat("Ex-", otherLanguage(language), "-M");
+        text = text.concat("\n(M) ", wordObject[att]);
+        return text
+      }
+
+    }
+  }
+
   return (
+    // Div principal com estilização em linha
     <ScrollView style={styles.scrollBar}>
       <SafeAreaView style={styles.container}>
         {/* Área da logo */}
@@ -143,7 +170,7 @@ export default function App() {
 
           <View style={styles.exampleArea}>
             <Text style={styles.examples}>
-              {/* {genderSpeech(originLanguage)} */}
+              {genderSpeech(originLanguage)}
             </Text>
           </View>
           
@@ -157,14 +184,14 @@ export default function App() {
       </SafeAreaView>
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: Dimensions.get("screen").height,
+    backgroundColor: "#d5d5d5",
+    alignItems: "center",
   },
   scrollBar: {},
   logoArea: {
@@ -269,3 +296,5 @@ const styles = StyleSheet.create({
     color: "#a5a5a5",
   },
 });
+
+export default App;
