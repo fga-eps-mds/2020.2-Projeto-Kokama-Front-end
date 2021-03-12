@@ -54,6 +54,7 @@ const App = () => {
   }
 
   function Translate(language: string, entry:string) {
+    // Começa relógio
     for (let word of JSON.parse(dictionary)) {
       if(entry == word[language]){
         wordObject = word;
@@ -61,7 +62,9 @@ const App = () => {
       }
     }
     wordObject = null;
-    return "Palavra Não Existe";
+    if (entry != "") {
+      return "Tradução não encontrada";
+    }
   }
 
   function getExample(language:string) {
@@ -123,6 +126,7 @@ const App = () => {
         {/* Área da logo */}
         <View style={styles.logoArea}>
           <Image style={styles.logo} source={require("./assets/logo.png")} />
+          <Text>Tradução</Text>
         </View>
 
         {/* Área de escolha da língua */}
@@ -178,7 +182,7 @@ const App = () => {
 
         {/* Histórico */}
         <View style={styles.historyArea}>
-          <Text style={styles.historyText}>Histórico</Text>
+          <Text style={styles.historyText}>Histórico ></Text>
         </View>
 
       </SafeAreaView>
@@ -189,19 +193,20 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: Dimensions.get("screen").height,
-    backgroundColor: "#d5d5d5",
+    height: screen.height,
+    backgroundColor: "#F0F0F0",
     alignItems: "center",
   },
   scrollBar: {},
   logoArea: {
     height: 100,
-    borderBottomWidth: 1,
+    borderBottomWidth: 1.5,
+    borderColor: "#BBB",
     width: "100%",
     alignItems: "center",
     justifyContent: "flex-end",
     paddingBottom: 10,
-    backgroundColor: "#e5e5e5",
+    backgroundColor: "#F0F0F0",
   },
   logo: {
     height: 80,
@@ -212,8 +217,9 @@ const styles = StyleSheet.create({
     height: 55,
     flexDirection: "row",
     borderBottomWidth: 1,
+    borderColor: "#BBB",
     width: window.width,
-    backgroundColor: "#e5e5e5",
+    backgroundColor: "#F0F0F0",
   },
   originLanguageArea: {
     flex: 1,
@@ -244,9 +250,10 @@ const styles = StyleSheet.create({
   userInput: {
     width: "100%",
     flexDirection: "row",
-    marginVertical: 5,
+    marginBottom: 5,
     borderTopWidth: 1,
     borderBottomWidth: 1,
+    borderColor: "#BBB",
     height: 50,
     backgroundColor: "#FFF",
   },
@@ -259,18 +266,22 @@ const styles = StyleSheet.create({
   translationArea: {
     width: "100%",
     backgroundColor: "#FFF",
+    borderBottomWidth: 1.5,
+    borderTopWidth: 1,
+    borderColor: "#BBB",
     alignItems: "center",
   },
   translatedWord: {
-    height: 60,
-    width: "90%",
+    height: 80,
+    width: "80%",
     alignSelf: "center",
     textAlignVertical: "center",
     textAlign: "left",
     fontSize: 30,
     paddingLeft: 23,
     marginBottom: 20,
-    borderBottomWidth: 1,
+    borderBottomWidth: 1.5,
+    borderColor: "#BBB",
   },
   exampleArea: {
     width: "90%",
@@ -281,10 +292,13 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   historyArea: {
-    width: Dimensions.get("window").width,
+    width: window.width,
     flexDirection: "row",
     marginTop: 10,
     height: 40,
+    borderBottomWidth: 1.5,
+    borderTopWidth: 1.5,
+    borderColor: "#BBB",
     backgroundColor: "#FFF",
   },
   historyText: {
