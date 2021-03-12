@@ -15,17 +15,54 @@ import {
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 
+let dictionary =
+    `[
+        {
+            "Português": "Banana",
+            "Kokama": "Panara",
+            "Ex-Português": "Eu comi uma banana hoje",
+            "Ex-Kokama": "ore wa Panara wo tabetai"
+        },
+        {
+            "Português": "Amor",
+            "Kokama": "Tsachi",
+            "Ex-Português": "Foi amor a prmeira vista",
+            "Ex-Kokama-H": "Tsachi lorem ipsum",
+            "Ex-Kokama-M": "lorem ipsum Tsachi"
+        }
+
+    ]`
+
 export default function App() {
 
   const [translation, setTranslation] = useState(" ");
   const [originLanguage, setOriginLanguage] = useState("Português");
   const [destLanguage, setDestLanguage] = useState("Kokama");
+  let wordObject = Object();
 
   function changeLanguage() {
     let temp = originLanguage;
     setOriginLanguage(destLanguage);
     setDestLanguage(temp);
     // Apagar caixa de texto
+  }
+
+  function otherLanguage(language: string) {
+    if (language == "Português") {
+      return "Kokama"
+    }
+    return "Português"
+  }
+
+  function Translate(language: string, entry:string) {
+    for (let word of JSON.parse(dictionary)) {
+      if(entry == word[language]){
+        wordObject = word;
+        return word[otherLanguage(language)];
+      }
+    }
+    wordObject = null;
+    return "Palavra Não Existe";
   }
 
   return (
@@ -66,6 +103,30 @@ export default function App() {
             placeholder="Toque para digitar"
             onChangeText={(word) => setTranslation(word)}
           />
+        </View>
+
+        {/* Resposta da tradução */}
+        <View style={styles.translationArea}>
+          <Text style={styles.translatedWord}>
+            {Translate(originLanguage, translation)}
+          </Text>
+          <View style={styles.exampleArea}>
+            <Text style={styles.examples}>
+              {/* {getExample(originLanguage)} */}
+            </Text>
+          </View>
+
+          <View style={styles.exampleArea}>
+            <Text style={styles.examples}>
+              {/* {genderSpeech(originLanguage)} */}
+            </Text>
+          </View>
+          
+        </View>
+
+        {/* Histórico */}
+        <View style={styles.historyArea}>
+          <Text style={styles.historyText}>Histórico</Text>
         </View>
 
       </SafeAreaView>
@@ -142,5 +203,44 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 23,
     paddingLeft: 23,
+  },
+  translationArea: {
+    width: "100%",
+    backgroundColor: "#FFF",
+    alignItems: "center",
+  },
+  translatedWord: {
+    height: 60,
+    width: "90%",
+    alignSelf: "center",
+    textAlignVertical: "center",
+    textAlign: "left",
+    fontSize: 30,
+    paddingLeft: 23,
+    marginBottom: 20,
+    borderBottomWidth: 1,
+  },
+  exampleArea: {
+    width: "90%",
+    height: 100,
+    marginVertical: 10,
+  },
+  examples: {
+    fontSize: 25,
+  },
+  historyArea: {
+    width: Dimensions.get("window").width,
+    flexDirection: "row",
+    marginTop: 10,
+    height: 40,
+    backgroundColor: "#FFF",
+  },
+  historyText: {
+    flex: 1,
+    textAlignVertical: "center",
+    textAlign: "left",
+    fontSize: 20,
+    paddingLeft: 23,
+    color: "#a5a5a5",
   },
 });
