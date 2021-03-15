@@ -9,11 +9,17 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
   ScrollView,
+  StatusBar,
+  Platform,
 } from "react-native";
 
 // Constantes e variáveis globais
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
+
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
+
+
 
 let dictionary =
     `[
@@ -90,22 +96,21 @@ const App = () => {
 
       let att = String();
       att = att.concat("EX", lang1);
+      let text = String();
 
       if (language == "Português" || !wordObject[att.concat("F")]) {
-        let text = String();
-        text = text.concat("Frase em ", language, ":\n", wordObject[att]);
-        return text
+        text = text.concat("Frase em ", language, ":\n", wordObject[att]);     
       }
       else {
-        let text = String();
         text = text.concat("Frase em ", language, ":\n(H) ", wordObject[att]);
         att = ""
         att = att.concat("EX", lang1, "F");
         text = text.concat("\n(M) ", wordObject[att]);
-        return text
+        
       }
 
-      
+      return text
+
     }
   }
 
@@ -113,11 +118,12 @@ const App = () => {
   return (
     // Div principal com estilização em linha
     <ScrollView style={styles.scrollBar}>
+      <StatusBar translucent backgroundColor={"#f23232"}/>
       <SafeAreaView style={styles.container}>
         {/* Área da logo */}
         <View style={styles.logoArea}>
           <Image style={styles.logo} source={require("./assets/logo.png")} />
-          <Text>Tradução</Text>
+          <Text style={styles.windowName}>Tradução</Text>
         </View>
 
         {/* Área de escolha da língua */}
@@ -151,7 +157,7 @@ const App = () => {
             onChangeText={(word) => setTranslation(word)}
           />
         </View>
-
+        
         {/* Resposta da tradução */}
         <View style={styles.translationArea}>
 
@@ -193,19 +199,22 @@ const styles = StyleSheet.create({
   },
   scrollBar: {},
   logoArea: {
-    height: 100,
+    height: 80,
+    flexDirection: 'row',
+    marginTop: STATUSBAR_HEIGHT,
     borderBottomWidth: 1.5,
     borderColor: "#BBB",
     width: "100%",
     alignItems: "center",
-    justifyContent: "flex-end",
-    paddingBottom: 10,
     backgroundColor: "#F0F0F0",
   },
   logo: {
     height: 80,
     width: 80,
-    top: 15,
+  },
+  windowName: {
+    textAlignVertical: 'center',
+    fontSize: 28,
   },
   changeLanguage: {
     height: 55,
@@ -254,7 +263,7 @@ const styles = StyleSheet.create({
   textBox: {
     flex: 1,
     textAlign: "left",
-    fontSize: 23,
+    fontSize: 18,
     paddingLeft: 23,
   },
   translationArea: {
@@ -271,7 +280,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     textAlignVertical: "center",
     textAlign: "left",
-    fontSize: 30,
+    fontSize: 28,
     paddingLeft: 23,
     marginBottom: 20,
     borderBottomWidth: 1.5,
@@ -283,7 +292,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   examples: {
-    fontSize: 25,
+    fontSize: 20,
   },
   historyArea: {
     width: window.width,
