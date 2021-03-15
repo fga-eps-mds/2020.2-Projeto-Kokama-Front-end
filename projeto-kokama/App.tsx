@@ -18,27 +18,23 @@ const screen = Dimensions.get("screen");
 let dictionary =
     `[
         {
-            "Português": "Banana",
-            "Kokama": "Panara",
-            "Ex-Português": "Eu comi uma banana hoje",
-            "Ex-Kokama": "ore wa Panara wo tabetai"
+            "PT": "Banana",
+            "KK": "Panara",
+            "KKF": "",
+            "EXPT": "Eu comi uma banana hoje",
+            "EXKK": "ore wa Panara wo tabetai",
+            "EXKKF": ""
         },
         {
-            "Português": "Amor",
-            "Kokama": "Tsachi",
-            "Ex-Português": "Foi amor a primeira vista",
-            "Ex-Kokama-H": "Tsachi lorem ipsum",
-            "Ex-Kokama-M": "lorem ipsum Tsachi"
+            "PT": "Amor",
+            "KK": "Tsachi",
+            "KKF": "Tsachi",
+            "EXPT": "Foi amor a primeira vista",
+            "EXKK": "Tsachi lorem ipsum",
+            "EXKKF": "lorem ipsum Tsachi"
         }
 
     ]`
-
-function otherLanguage(language: string) {
-  if (language == "Português") {
-    return "Kokama"
-  }
-  return "Português"
-}
 
 const App = () => {
   const [translation, setTranslation] = useState("");
@@ -54,11 +50,21 @@ const App = () => {
   }
 
   function Translate(language: string, entry:string) {
-    // Começa relógio
+    
+    let lang1: string;
+    let lang2: string;
+    if (language == "Português") {
+      lang1 = "PT";
+      lang2 = "KK";
+    } else {
+      lang1 = "KK"
+      lang2 = "PT"
+    }
+
     for (let word of JSON.parse(dictionary)) {
-      if(entry.toLowerCase() == word[language].toLowerCase()){
+      if(entry.toLowerCase() == word[lang1].toLowerCase()){
         wordObject = word;
-        return word[otherLanguage(language)];
+        return word[lang2];
       }
     }
 
@@ -69,22 +75,32 @@ const App = () => {
   }
 
   function getExample(language:string) {
+
+    let lang1: string;
+    let lang2: string;
+    if (language == "Português") {
+      lang1 = "PT";
+      lang2 = "KK";
+    } else {
+      lang1 = "KK"
+      lang2 = "PT"
+    }
+
     if (wordObject != null) {
 
       let att = String();
-      att = att.concat("Ex-", language);
+      att = att.concat("EX", lang1);
 
-      if (language == "Português" || !wordObject[att.concat("-H")]) {
+      if (language == "Português" || !wordObject[att.concat("F")]) {
         let text = String();
         text = text.concat("Frase em ", language, ":\n", wordObject[att]);
         return text
       }
       else {
-        att = att.concat("-H");
         let text = String();
         text = text.concat("Frase em ", language, ":\n(H) ", wordObject[att]);
         att = ""
-        att = att.concat("Ex-", language, "-M");
+        att = att.concat("EX", lang1, "F");
         text = text.concat("\n(M) ", wordObject[att]);
         return text
       }
@@ -93,32 +109,6 @@ const App = () => {
     }
   }
 
-  // de PT-KK Checar se existe ambos exemplos em kokama
-  // 
-  function genderSpeech(language:string) {
-
-    if (wordObject != null) {
-
-      let att = String();
-      att = att.concat("Ex-", otherLanguage(language));
-
-      if (language == "Kokama" || (language == "Português" && !wordObject[att.concat("-H")])) {
-        let text = String();
-        text = text.concat("Frase em ", otherLanguage(language), ":\n", wordObject[att]);
-        return text;
-      }
-      else {
-        att = att.concat("-H");
-        let text = String();
-        text = text.concat("Frase em ", otherLanguage(language), ":\n(H) ", wordObject[att]);
-        att = ""
-        att = att.concat("Ex-", otherLanguage(language), "-M");
-        text = text.concat("\n(M) ", wordObject[att]);
-        return text
-      }
-
-    }
-  }
 
   return (
     // Div principal com estilização em linha
@@ -177,7 +167,7 @@ const App = () => {
 
           <View style={styles.exampleArea}>
             <Text style={styles.examples}>
-              {genderSpeech(originLanguage)}
+              {getExample(destLanguage)}
             </Text>
           </View>
           
@@ -196,6 +186,7 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    maxWidth: screen.width,
     height: screen.height,
     backgroundColor: "#F0F0F0",
     alignItems: "center",
