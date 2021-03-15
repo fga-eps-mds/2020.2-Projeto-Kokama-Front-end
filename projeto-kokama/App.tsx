@@ -41,7 +41,7 @@ function otherLanguage(language: string) {
 }
 
 const App = () => {
-  const [translation, setTranslation] = useState(" ");
+  const [translation, setTranslation] = useState("");
   const [originLanguage, setOriginLanguage] = useState("Português");
   const [destLanguage, setDestLanguage] = useState("Kokama");
   let wordObject = Object();
@@ -56,11 +56,12 @@ const App = () => {
   function Translate(language: string, entry:string) {
     // Começa relógio
     for (let word of JSON.parse(dictionary)) {
-      if(entry == word[language]){
+      if(entry.toLowerCase() == word[language].toLowerCase()){
         wordObject = word;
         return word[otherLanguage(language)];
       }
     }
+
     wordObject = null;
     if (entry != "") {
       return "Tradução não encontrada";
@@ -163,9 +164,11 @@ const App = () => {
 
         {/* Resposta da tradução */}
         <View style={styles.translationArea}>
+
           <Text style={styles.translatedWord}>
             {Translate(originLanguage, translation)}
           </Text>
+
           <View style={styles.exampleArea}>
             <Text style={styles.examples}>
               {getExample(originLanguage)}
@@ -220,6 +223,7 @@ const styles = StyleSheet.create({
     borderColor: "#BBB",
     width: window.width,
     backgroundColor: "#F0F0F0",
+    justifyContent: "space-around",
   },
   originLanguageArea: {
     flex: 1,
@@ -244,7 +248,6 @@ const styles = StyleSheet.create({
   },
   destLanguage: {
     textAlign: "center",
-    left: 8,
     fontSize: 22,
   },
   userInput: {
