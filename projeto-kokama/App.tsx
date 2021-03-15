@@ -16,10 +16,7 @@ import {
 // Constantes e variáveis globais
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
-
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
-
-
 
 let dictionary =
     `[
@@ -35,7 +32,7 @@ let dictionary =
             "PT": "Amor",
             "KK": "Tsachi",
             "KKF": "Tsachi",
-            "EXPT": "Foi amor a primeira vista",
+            "EXPT": "istaFoi amor a primeira vistaFoi amor a primeira vista",
             "EXKK": "Tsachi lorem ipsum",
             "EXKKF": "lorem ipsum Tsachi"
         }
@@ -51,8 +48,7 @@ const App = () => {
   function changeLanguage() {
     let temp = originLanguage;
     setOriginLanguage(destLanguage);
-    setDestLanguage(temp);
-    // Apagar caixa de texto
+    setDestLanguage(temp); 
   }
 
   function Translate(language: string, entry:string) {
@@ -199,10 +195,10 @@ const styles = StyleSheet.create({
   },
   scrollBar: {},
   logoArea: {
-    height: 80,
+    flex: 0.13,
     flexDirection: 'row',
     marginTop: STATUSBAR_HEIGHT,
-    borderBottomWidth: 1.5,
+    borderBottomWidth: 2,
     borderColor: "#BBB",
     width: "100%",
     alignItems: "center",
@@ -213,11 +209,10 @@ const styles = StyleSheet.create({
     width: 80,
   },
   windowName: {
-    textAlignVertical: 'center',
     fontSize: 28,
   },
   changeLanguage: {
-    height: 55,
+    flex: 0.095,
     flexDirection: "row",
     borderBottomWidth: 1,
     borderColor: "#BBB",
@@ -257,7 +252,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: "#BBB",
-    height: 50,
+    flex: 0.085,
     backgroundColor: "#FFF",
   },
   textBox: {
@@ -268,6 +263,7 @@ const styles = StyleSheet.create({
   },
   translationArea: {
     width: "100%",
+    flex: 0.8,
     backgroundColor: "#FFF",
     borderBottomWidth: 1.5,
     borderTopWidth: 1,
@@ -288,17 +284,17 @@ const styles = StyleSheet.create({
   },
   exampleArea: {
     width: "90%",
-    height: 100,
+    flex: 1,
     marginVertical: 10,
   },
   examples: {
     fontSize: 20,
+    height: '100%',
   },
   historyArea: {
-    width: window.width,
     flexDirection: "row",
     marginTop: 10,
-    height: 40,
+    flex: 0.08,
     borderBottomWidth: 1.5,
     borderTopWidth: 1.5,
     borderColor: "#BBB",
