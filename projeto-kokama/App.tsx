@@ -13,31 +13,41 @@ import {
   Platform,
 } from "react-native";
 
-// Constantes e variáveis globais
+// Constants and Global Variables
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 
-let dictionary =
-    `[
-        {
-            "PT": "Banana",
-            "KK": "Panara",
-            "KKF": "",
-            "EXPT": "Eu comi uma banana hoje",
-            "EXKK": "ore wa Panara wo tabetai",
-            "EXKKF": ""
-        },
-        {
-            "PT": "Amor",
-            "KK": "Tsachi",
-            "KKF": "Tsachi",
-            "EXPT": "istaFoi amor a primeira vistaFoi amor a primeira vista",
-            "EXKK": "Tsachi lorem ipsum",
-            "EXKKF": "lorem ipsum Tsachi"
-        }
+interface Word {
+  PT: string,
+  KK: string,
+  KKF: string,
+  EXPT: string,
+  EXKK: string,
+  EXKKF: string
+}
+interface DictWord {
+  [id: number]: Word
+}
 
-    ]`
+const Dictionary: DictWord = [
+  {
+    PT: "Banana",
+    KK: "Panara",
+    KKF: "",
+    EXPT: "Eu comi uma banana hoje",
+    EXKK: "ore wa Panara wo tabetai",
+    EXKKF: ""
+  },
+  {
+    PT: "Amor",
+    KK: "Tsachi",
+    KKF: "Tsachi",
+    EXPT: "istaFoi amor a primeira vistaFoi amor a primeira vista",
+    EXKK: "Tsachi lorem ipsum",
+    EXKKF: "lorem ipsum Tsachi"
+  },
+]
 
 const App = () => {
   const [translation, setTranslation] = useState("");
@@ -63,10 +73,10 @@ const App = () => {
       lang2 = "PT"
     }
 
-    for (let word of JSON.parse(dictionary)) {
-      if(entry.toLowerCase() == word[lang1].toLowerCase()){
-        wordObject = word;
-        return word[lang2];
+    for (let index = 0; index < Object(Dictionary).length; index++) {
+      if(entry.toLowerCase() == Object(Dictionary[index])[lang1].toLowerCase()) {
+        wordObject = Dictionary[index];
+        return wordObject[lang2];
       }
     }
 
@@ -76,60 +86,60 @@ const App = () => {
     }
   }
 
-  function getExample(language:string) {
-
-    let lang1: string;
-    let lang2: string;
-    if (language == "Português") {
-      lang1 = "PT";
-      lang2 = "KK";
-    } else {
-      lang1 = "KK"
-      lang2 = "PT"
-    }
-
+  function setLabel(language:string) {
     if (wordObject != null) {
+      return "Frase em " + language + '\n';
+    }
+  }
 
+  function getExample(language:string) {
+    
+    let lang: string;
+    if (language == "Português") {
+      lang = "PT";
+    } else {
+      lang = "KK";
+    }
+    
+    if (wordObject != null) {
       let att = String();
-      att = att.concat("EX", lang1);
-      let text = String();
+      att = att.concat("EX", lang);
+      let text = "";
 
       if (language == "Português" || !wordObject[att.concat("F")]) {
-        text = text.concat("Frase em ", language, ":\n", wordObject[att]);     
+        text = wordObject[att];     
       }
       else {
-        text = text.concat("Frase em ", language, ":\n(H) ", wordObject[att]);
-        att = ""
-        att = att.concat("EX", lang1, "F");
+        text = text.concat("(H) ", wordObject[att]);
+        att = "";
+        att = att.concat("EX", lang, "F");
         text = text.concat("\n(M) ", wordObject[att]);
         
       }
-
       return text
-
     }
   }
 
 
   return (
-    // Div principal com estilização em linha
+    // Main View
     <ScrollView style={styles.scrollBar}>
       <StatusBar translucent backgroundColor={"#f23232"}/>
       <SafeAreaView style={styles.container}>
-        {/* Área da logo */}
+        {/* Logo area */}
         <View style={styles.logoArea}>
           <Image style={styles.logo} source={require("./assets/logo.png")} />
           <Text style={styles.windowName}>Tradução</Text>
         </View>
 
-        {/* Área de escolha da língua */}
+        {/* Change language area */}
         <View style={styles.changeLanguage}>
-          {/* Primeiro idioma */}
+          {/* First language */}
           <View style={styles.originLanguageArea}>
             <Text style={styles.originLanguage}>{originLanguage}</Text>
           </View>
 
-          {/* Ícone de mudança de idioma */}
+          {/* Change language icon */}
           <View style={styles.languageExchangeArea}>
             <TouchableWithoutFeedback onPress={changeLanguage}>
               <Image
@@ -139,13 +149,13 @@ const App = () => {
             </TouchableWithoutFeedback>
           </View>
 
-          {/* Segundo idioma */}
+          {/* Second Language */}
           <View style={styles.destLanguageArea}>
             <Text style={styles.destLanguage}>{destLanguage}</Text>
           </View>
         </View>
 
-        {/* Área da caixa de texto para entrada do usuário */}
+        {/* Text box for the user entry */}
         <View style={styles.userInput}>
           <TextInput
             style={styles.textBox}
@@ -154,7 +164,7 @@ const App = () => {
           />
         </View>
         
-        {/* Resposta da tradução */}
+        {/* Translate answer */}
         <View style={styles.translationArea}>
 
           <Text style={styles.translatedWord}>
@@ -162,22 +172,33 @@ const App = () => {
           </Text>
 
           <View style={styles.exampleArea}>
+
+            <Text style={styles.label}>
+              {setLabel(originLanguage)}
+            </Text>
             <Text style={styles.examples}>
               {getExample(originLanguage)}
             </Text>
           </View>
 
           <View style={styles.exampleArea}>
+
+            <Text style={styles.label}>
+              {setLabel(destLanguage)}
+            </Text>
             <Text style={styles.examples}>
               {getExample(destLanguage)}
             </Text>
+
           </View>
+
+          
           
         </View>
 
-        {/* Histórico */}
+        {/* Historic */}
         <View style={styles.historyArea}>
-          <Text style={styles.historyText}>Histórico ></Text>
+          <Text style={styles.historyText}>Histórico</Text>
         </View>
 
       </SafeAreaView>
@@ -263,7 +284,7 @@ const styles = StyleSheet.create({
   },
   translationArea: {
     width: "100%",
-    flex: 0.8,
+    flex: 0.45,
     backgroundColor: "#FFF",
     borderBottomWidth: 1.5,
     borderTopWidth: 1,
@@ -286,6 +307,10 @@ const styles = StyleSheet.create({
     width: "90%",
     flex: 1,
     marginVertical: 10,
+  },
+  label: {
+    fontWeight: "bold",
+    fontSize: 17,
   },
   examples: {
     fontSize: 20,
