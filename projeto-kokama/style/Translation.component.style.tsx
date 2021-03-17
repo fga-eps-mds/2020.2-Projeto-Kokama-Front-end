@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     scrollBar: {},
     logoArea: {
       flex: 0.13,
+      maxHeight: 100,
       flexDirection: 'row',
       marginTop: STATUSBAR_HEIGHT,
       borderBottomWidth: 2,
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
     },
     changeLanguage: {
       flex: 0.095,
+      maxHeight: 70,
       flexDirection: "row",
       borderBottomWidth: 1,
       borderColor: "#BBB",
@@ -69,11 +71,11 @@ const styles = StyleSheet.create({
     userInput: {
       width: "100%",
       flexDirection: "row",
-      marginBottom: 5,
       borderTopWidth: 1,
       borderBottomWidth: 1,
       borderColor: "#BBB",
       flex: 0.085,
+      maxHeight: 70,
       backgroundColor: "#FFF",
     },
     textBox: {
@@ -88,6 +90,7 @@ const styles = StyleSheet.create({
       backgroundColor: "#FFF",
       borderBottomWidth: 1.5,
       borderTopWidth: 1,
+      marginTop: 5,
       borderColor: "#BBB",
       alignItems: "center",
     },
@@ -118,7 +121,7 @@ const styles = StyleSheet.create({
     },
     historyArea: {
       flexDirection: "row",
-      marginTop: 10,
+      marginTop: 5,
       flex: 0.08,
       borderBottomWidth: 1.5,
       borderTopWidth: 1.5,

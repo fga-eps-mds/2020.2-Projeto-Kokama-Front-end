@@ -1,51 +1,20 @@
-import React, { useState } from "react";
 import {
   View,
-  Dimensions,
   Text,
   TextInput,
-  StyleSheet,
   Image,
   SafeAreaView,
   TouchableWithoutFeedback,
   ScrollView,
   StatusBar,
-  Platform,
 } from "react-native";
 import styles from './style/Translation.component.style';
+import React, { useState } from "react";
+import Dictionary from './dictionary';
 
-interface Word {
-  PT: string,
-  KK: string,
-  KKF: string,
-  EXPT: string,
-  EXKK: string,
-  EXKKF: string
-}
-interface DictWord {
-  [id: number]: Word
-}
-
-const Dictionary: DictWord = [
-  {
-    PT: "Banana",
-    KK: "Panara",
-    KKF: "",
-    EXPT: "Eu comi uma banana hoje",
-    EXKK: "ore wa Panara wo tabetai",
-    EXKKF: ""
-  },
-  {
-    PT: "Amor",
-    KK: "Tsachi",
-    KKF: "Tsachi",
-    EXPT: "istaFoi amor a primeira vistaFoi amor a primeira vista",
-    EXKK: "Tsachi lorem ipsum",
-    EXKKF: "lorem ipsum Tsachi"
-  },
-]
 
 const App = () => {
+
   const [translation, setTranslation] = useState("");
   const [originLanguage, setOriginLanguage] = useState("Português");
   const [destLanguage, setDestLanguage] = useState("Kokama");
@@ -54,73 +23,103 @@ const App = () => {
   function changeLanguage() {
     let temp = originLanguage;
     setOriginLanguage(destLanguage);
-    setDestLanguage(temp); 
+    setDestLanguage(temp);
   }
 
-  function Translate(language: string, entry:string) {
-    
+  function languageToAtt(language: string) {
+    if (language == "Português") {
+      return ["PT", "KK"];
+    }
+    return ["KK", "PT"];
+  }
+
+  function Translate(language: string, entry: string) {
+
     let lang1: string;
     let lang2: string;
-    if (language == "Português") {
-      lang1 = "PT";
-      lang2 = "KK";
-    } else {
-      lang1 = "KK"
-      lang2 = "PT"
-    }
+    [lang1, lang2] = languageToAtt(language);
 
     for (let index = 0; index < Object(Dictionary).length; index++) {
-      if(entry.toLowerCase() == Object(Dictionary[index])[lang1].toLowerCase()) {
+      if (entry.toLowerCase() == Object(Dictionary[index])[lang1].toLowerCase()) {
         wordObject = Dictionary[index];
-        return wordObject[lang2];
+        return (
+
+          <View style={styles.translationArea}>
+            <Text style={styles.translatedWord}>
+              {wordObject[lang2]}
+            </Text>
+
+            <View style={styles.exampleArea}>
+
+              <Text style={styles.label}>
+                {setLabel(originLanguage)}
+              </Text>
+              <Text style={styles.examples}>
+                {getExample(originLanguage)}
+              </Text>
+            </View>
+
+            <View style={styles.exampleArea}>
+
+              <Text style={styles.label}>
+                {setLabel(destLanguage)}
+              </Text>
+              <Text style={styles.examples}>
+                {getExample(destLanguage)}
+              </Text>
+
+            </View>
+
+          </View>
+
+        );
       }
     }
 
     wordObject = null;
     if (entry != "") {
-      return "Tradução não encontrada";
+      return (
+        <Text>
+          Tradução não encontrada
+        </Text>
+      );
     }
   }
 
-  function setLabel(language:string) {
+  function setLabel(language: string) {
     if (wordObject != null) {
       return "Frase em " + language + '\n';
     }
   }
 
-  function getExample(language:string) {
-    
+  function getExample(language: string) {
+
     let lang: string;
-    if (language == "Português") {
-      lang = "PT";
-    } else {
-      lang = "KK";
-    }
-    
+    lang = languageToAtt(language)[0];
+
     if (wordObject != null) {
       let att = String();
       att = att.concat("EX", lang);
       let text = "";
 
       if (language == "Português" || !wordObject[att.concat("F")]) {
-        text = wordObject[att];     
+        text = wordObject[att];
       }
       else {
         text = text.concat("(H) ", wordObject[att]);
         att = "";
         att = att.concat("EX", lang, "F");
         text = text.concat("\n(M) ", wordObject[att]);
-        
+
       }
       return text
     }
   }
 
-
   return (
     // Main View
     <ScrollView style={styles.scrollBar}>
-      <StatusBar translucent backgroundColor={"#f23232"}/>
+      <StatusBar translucent backgroundColor={"#f23232"} />
       <SafeAreaView style={styles.container}>
         {/* Logo area */}
         <View style={styles.logoArea}>
@@ -159,38 +158,9 @@ const App = () => {
             onChangeText={(word) => setTranslation(word)}
           />
         </View>
-        
+
         {/* Translate answer */}
-        <View style={styles.translationArea}>
-
-          <Text style={styles.translatedWord}>
-            {Translate(originLanguage, translation)}
-          </Text>
-
-          <View style={styles.exampleArea}>
-
-            <Text style={styles.label}>
-              {setLabel(originLanguage)}
-            </Text>
-            <Text style={styles.examples}>
-              {getExample(originLanguage)}
-            </Text>
-          </View>
-
-          <View style={styles.exampleArea}>
-
-            <Text style={styles.label}>
-              {setLabel(destLanguage)}
-            </Text>
-            <Text style={styles.examples}>
-              {getExample(destLanguage)}
-            </Text>
-
-          </View>
-
-          
-          
-        </View>
+        {Translate(originLanguage, translation)}
 
         {/* Historic */}
         <View style={styles.historyArea}>
