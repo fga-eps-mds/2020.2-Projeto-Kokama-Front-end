@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     scrollBar: {},
     logoArea: {
       flex: 0.13,
-      maxHeight: 100,
+      maxHeight: 85,
       flexDirection: 'row',
       marginTop: STATUSBAR_HEIGHT,
       borderBottomWidth: 2,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     },
     changeLanguage: {
       flex: 0.095,
-      maxHeight: 70,
+      maxHeight: 60,
       flexDirection: "row",
       borderBottomWidth: 1,
       borderColor: "#BBB",
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
       borderBottomWidth: 1,
       borderColor: "#BBB",
       flex: 0.085,
-      maxHeight: 70,
+      maxHeight: 58,
       backgroundColor: "#FFF",
       alignItems: 'center',
       justifyContent: 'space-between'
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     },
     translationArea: {
       width: "100%",
-      flex: 0.45,
+      flex: 0.6,
       backgroundColor: "#FFF",
       borderBottomWidth: 1.5,
       borderTopWidth: 1,
@@ -123,16 +123,31 @@ const styles = StyleSheet.create({
     },
     exampleArea: {
       width: "90%",
-      flex: 1,
       marginVertical: 10,
     },
     label: {
+      height: 30,
       fontWeight: "bold",
       fontSize: 17,
     },
     examples: {
+      width: "100%",
+      marginHorizontal: 10,
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+      flexDirection: 'row'
+    },
+    examplesText: {
       fontSize: 20,
+      color: '#000',
       height: '100%',
+      flexWrap: 'wrap'
+    },
+    examplesWord: {
+      fontSize: 20,
+      color: 'red',
+      height: '100%',
+      flexWrap: 'wrap'
     },
     historyArea: {
       flexDirection: "row",

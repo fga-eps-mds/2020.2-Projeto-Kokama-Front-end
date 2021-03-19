@@ -15,15 +15,15 @@ const Dictionary: DictWord = [
         PT: "Banana",
         KK: "Panara",
         KKF: "",
-        EXPT: "Eu comi uma banana hoje",
-        EXKK: "ore wa Panara wo tabetai",
+        EXPT: "A banana aos dez meses pendura sua fruta e leva um mês para engrossar",
+        EXKK: "Panara chunka yatstsui ya iya wachukuka, ya itaru wepe yatsi tapiar",
         EXKKF: ""
     },
     {
         PT: "Amor",
         KK: "Tsachi",
         KKF: "Tsachi",
-        EXPT: "istaFoi amor a primeira vistaFoi amor a primeira vista",
+        EXPT: "Foi amor a primeira vista",
         EXKK: "Tsachi lorem ipsum",
         EXKKF: "lorem ipsum Tsachi"
     },
