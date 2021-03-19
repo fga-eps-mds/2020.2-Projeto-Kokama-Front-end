@@ -77,12 +77,27 @@ const styles = StyleSheet.create({
       flex: 0.085,
       maxHeight: 70,
       backgroundColor: "#FFF",
+      alignItems: 'center',
+      justifyContent: 'space-between'
     },
     textBox: {
-      flex: 1,
+      flex: 0.7,
       textAlign: "left",
       fontSize: 18,
       paddingLeft: 23,
+    },
+    symbolArea: {
+      flex: 0.15,
+      height: "65%",
+      margin: 15,
+      borderWidth: 2.5,
+      borderColor: "#ff6363",
+      borderRadius: 15,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    symbol: {
+      fontSize: 30,
     },
     translationArea: {
       width: "100%",

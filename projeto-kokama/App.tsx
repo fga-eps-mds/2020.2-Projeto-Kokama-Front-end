@@ -7,10 +7,12 @@ import {
   TouchableWithoutFeedback,
   ScrollView,
   StatusBar,
+  Button,
 } from "react-native";
 import styles from './style/Translation.component.style';
 import React, { useState } from "react";
 import Dictionary from './dictionary';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const App = () => {
@@ -24,6 +26,7 @@ const App = () => {
     let temp = originLanguage;
     setOriginLanguage(destLanguage);
     setDestLanguage(temp);
+    setTranslation('');
   }
 
   function languageToAtt(language: string) {
@@ -31,6 +34,10 @@ const App = () => {
       return ["PT", "KK"];
     }
     return ["KK", "PT"];
+  }
+
+  function insertSymbol() {
+    setTranslation(translation + 'ɨ');
   }
 
   function Translate(language: string, entry: string) {
@@ -118,7 +125,7 @@ const App = () => {
 
   return (
     // Main View
-    <ScrollView style={styles.scrollBar}>
+    <ScrollView style={styles.scrollBar} keyboardShouldPersistTaps={'always'}>
       <StatusBar translucent backgroundColor={"#f23232"} />
       <SafeAreaView style={styles.container}>
         {/* Logo area */}
@@ -155,8 +162,18 @@ const App = () => {
           <TextInput
             style={styles.textBox}
             placeholder="Toque para digitar"
-            onChangeText={(word) => setTranslation(word)}
+            onChangeText={translation => setTranslation(translation)}
+            defaultValue={translation}
           />
+
+          <TouchableWithoutFeedback onPress={insertSymbol}>
+            <View style={styles.symbolArea}>
+              <Text style={styles.symbol}>
+                ɨ
+              </Text>
+            </View>
+          </TouchableWithoutFeedback>
+
         </View>
 
         {/* Translate answer */}
