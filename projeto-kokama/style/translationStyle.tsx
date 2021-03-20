@@ -4,7 +4,6 @@ import {
   Platform,
   StatusBar
 } from 'react-native';
-import { useRef } from "react";
 
 // Constants and Global Variables
 const window = Dimensions.get("window");
@@ -41,31 +40,36 @@ const translationStyle = StyleSheet.create({
       fontSize: 28,
     },
     changeLanguage: {
-      flex: 0.095,
-      maxHeight: 60,
+      display: "flex",
+      height: 55,
       flexDirection: "row",
       borderBottomWidth: 1,
       borderColor: "#BBB",
-      width: window.width,
       backgroundColor: "#F0F0F0",
+      justifyContent: "space-between",
+      alignItems: "center"
     },
-    languageArea: {
-      flex: 1,
-      justifyContent: "center",
+    originLanguageArea: {
+      flex: 3,
     },
-    language: {
-      textAlign: "center",
+    originLanguage: {
+      textAlign: "left",
+      marginLeft: 24,
       fontSize: 22,
     },
     languageExchangeArea: {
-      flex: 0.4,
-      alignItems: "center",
-      justifyContent: "center",
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center'
     },
-    languageExchange: {
-      width: 40,
-      height: 35,
+    destLanguageArea: {
+      flex: 3,
     },
+    destLanguage: {
+      textAlign: "right",
+      marginRight: 24,
+      fontSize: 22,
+    }, 
     userInput: {
       width: "100%",
       flexDirection: "row",

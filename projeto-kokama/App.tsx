@@ -13,6 +13,7 @@ import translationStyle from "./style/translationStyle";
 import React, { useState, useRef } from "react";
 import dictionary from "./dictionary.json";
 import HighlightText from "@sanar/react-native-highlight-text";
+import Icon from "react-native-vector-icons/AntDesign";
 
 const App = () => {
   const [translation, setTranslation] = useState("");
@@ -34,7 +35,7 @@ const App = () => {
     if (wordObject != null) {
       setTranslation(wordObject[lang]);
     } else {
-      setTranslation('');
+      setTranslation("");
     }
   }
 
@@ -43,14 +44,14 @@ const App = () => {
     Animated.timing(fadeAnim, {
       useNativeDriver: true,
       toValue: 1,
-      duration: 500
+      duration: 500,
     }).start();
   };
   const fadeOut = () => {
     Animated.timing(fadeAnim, {
       useNativeDriver: true,
       toValue: 0,
-      duration: 150
+      duration: 150,
     }).start();
   };
 
@@ -71,21 +72,25 @@ const App = () => {
     [lang1, lang2] = languageToAtt(language);
 
     for (let word of Dictionary) {
-      if (
-        entry.toLowerCase() == word[lang1].toLowerCase()
-      ) {
+      if (entry.toLowerCase() == word[lang1].toLowerCase()) {
         wordObject = word;
         return (
           <View style={translationStyle.translationArea}>
-            <Text style={translationStyle.translatedWord}>{wordObject[lang2]}</Text>
+            <Text style={translationStyle.translatedWord}>
+              {wordObject[lang2]}
+            </Text>
 
             <View style={translationStyle.exampleArea}>
-              <Text style={translationStyle.label}>{setLabel(originLanguage)}</Text>
+              <Text style={translationStyle.label}>
+                {setLabel(originLanguage)}
+              </Text>
               {getExample(originLanguage)}
             </View>
 
             <View style={translationStyle.exampleArea}>
-              <Text style={translationStyle.label}>{setLabel(destLanguage)}</Text>
+              <Text style={translationStyle.label}>
+                {setLabel(destLanguage)}
+              </Text>
               {getExample(destLanguage)}
             </View>
           </View>
@@ -128,7 +133,7 @@ const App = () => {
       return (
         <View style={translationStyle.examples}>
           <HighlightText
-            highlightStyle={{ color: 'red' }}
+            highlightStyle={{ color: "red" }}
             searchWords={[word]}
             textToHighlight={text}
           />
@@ -139,35 +144,49 @@ const App = () => {
 
   return (
     // Main View
-    <ScrollView style={translationStyle.scrollBar} keyboardShouldPersistTaps={"always"}>
+    <ScrollView
+      style={translationStyle.scrollBar}
+      keyboardShouldPersistTaps={"always"}
+    >
       <StatusBar translucent backgroundColor={"#f23232"} />
       <SafeAreaView style={translationStyle.container}>
         {/* Logo area */}
         <View style={translationStyle.logoArea}>
-          <Image style={translationStyle.logo} source={require("./assets/logo.png")} />
+          <Image
+            style={translationStyle.logo}
+            source={require("./assets/logo.png")}
+          />
           <Text style={translationStyle.windowName}>Tradução</Text>
         </View>
 
         {/* Change language area */}
         <View style={translationStyle.changeLanguage}>
           {/* First language */}
-          <Animated.View style={[translationStyle.languageArea, {opacity: fadeAnim}]}>
-            <Text style={translationStyle.language}>{originLanguage}</Text>
+          <Animated.View
+            style={[translationStyle.originLanguageArea, { opacity: fadeAnim }]}
+          >
+            <Text style={translationStyle.originLanguage}>
+              {originLanguage}
+            </Text>
           </Animated.View>
 
           {/* Change language icon */}
           <View style={translationStyle.languageExchangeArea}>
             <TouchableWithoutFeedback onPress={changeLanguage}>
-              <Image
+              <Icon
                 style={translationStyle.languageExchange}
-                source={require("./assets/exchange.png")}
+                name="swap"
+                size={40}
+                color="#333"
               />
             </TouchableWithoutFeedback>
           </View>
 
           {/* Second Language */}
-          <Animated.View style={[translationStyle.languageArea, {opacity: fadeAnim}]}>
-            <Text style={translationStyle.language}>{destLanguage}</Text>
+          <Animated.View
+            style={[translationStyle.destLanguageArea, { opacity: fadeAnim }]}
+          >
+            <Text style={translationStyle.destLanguage}>{destLanguage}</Text>
           </Animated.View>
         </View>
 
