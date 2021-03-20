@@ -1,4 +1,10 @@
-import { StyleSheet, Dimensions, Platform, StatusBar } from 'react-native';
+import {
+  StyleSheet,
+  Dimensions,
+  Platform,
+  StatusBar
+} from 'react-native';
+import { useRef } from "react";
 
 // Constants and Global Variables
 const window = Dimensions.get("window");
@@ -6,7 +12,7 @@ const screen = Dimensions.get("screen");
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
 
 
-const styles = StyleSheet.create({
+const translationStyle = StyleSheet.create({
     container: {
       flex: 1,
       maxWidth: screen.width,
@@ -24,6 +30,7 @@ const styles = StyleSheet.create({
       borderColor: "#BBB",
       width: "100%",
       alignItems: "center",
+      justifyContent: 'center',
       backgroundColor: "#F0F0F0",
     },
     logo: {
@@ -41,32 +48,23 @@ const styles = StyleSheet.create({
       borderColor: "#BBB",
       width: window.width,
       backgroundColor: "#F0F0F0",
-      justifyContent: "space-around",
     },
-    originLanguageArea: {
+    languageArea: {
       flex: 1,
       justifyContent: "center",
     },
-    originLanguage: {
+    language: {
       textAlign: "center",
       fontSize: 22,
     },
     languageExchangeArea: {
-      flex: 0.7,
+      flex: 0.4,
       alignItems: "center",
       justifyContent: "center",
     },
     languageExchange: {
-      width: 50,
-      height: 45,
-    },
-    destLanguageArea: {
-      flex: 1,
-      justifyContent: "center",
-    },
-    destLanguage: {
-      textAlign: "center",
-      fontSize: 22,
+      width: 40,
+      height: 35,
     },
     userInput: {
       width: "100%",
@@ -152,7 +150,7 @@ const styles = StyleSheet.create({
     historyArea: {
       flexDirection: "row",
       marginTop: 5,
-      flex: 0.08,
+      flex: 0.065,
       borderBottomWidth: 1.5,
       borderTopWidth: 1.5,
       borderColor: "#BBB",
@@ -168,4 +166,4 @@ const styles = StyleSheet.create({
     },
   });
 
-export default styles; 
+export default translationStyle; 

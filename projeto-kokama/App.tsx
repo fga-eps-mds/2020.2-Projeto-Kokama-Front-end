@@ -9,7 +9,7 @@ import {
   StatusBar,
   Animated,
 } from "react-native";
-import styles from "./style/Translation.component.style";
+import translationStyle from "./style/translationStyle";
 import React, { useState, useRef } from "react";
 import dictionary from "./dictionary.json";
 import HighlightText from "@sanar/react-native-highlight-text";
@@ -18,30 +18,35 @@ const App = () => {
   const [translation, setTranslation] = useState("");
   const [originLanguage, setOriginLanguage] = useState("Português");
   const [destLanguage, setDestLanguage] = useState("Kokama");
-  let wordObject = Object();
   let Dictionary = JSON.parse(JSON.stringify(dictionary));
+  let wordObject = Object();
 
   function changeLanguage() {
+    // Exchange the languages
+    fadeOut();
     let temp = originLanguage;
     setOriginLanguage(destLanguage);
     setDestLanguage(temp);
-    setTranslation('');
+    fadeIn();
+    // Clear text input if not a word in the dictionary
+    // else replace word for it's translation
+    let lang = languageToAtt(destLanguage)[0];
+    if (wordObject != null) {
+      setTranslation(wordObject[lang]);
+    } else {
+      setTranslation('');
+    }
   }
 
-  // fadeAnim will be used as the value for opacity. Initial Value: 0
   const fadeAnim = useRef(new Animated.Value(0)).current;
-
   const fadeIn = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
     Animated.timing(fadeAnim, {
       useNativeDriver: true,
       toValue: 1,
       duration: 500
     }).start();
   };
-
   const fadeOut = () => {
-    // Will change fadeAnim value to 0 in 5 seconds
     Animated.timing(fadeAnim, {
       useNativeDriver: true,
       toValue: 0,
@@ -65,22 +70,22 @@ const App = () => {
     let lang2: string;
     [lang1, lang2] = languageToAtt(language);
 
-    for (let index = 0; index < Dictionary.length; index++) {
+    for (let word of Dictionary) {
       if (
-        entry.toLowerCase() == Dictionary[index][lang1].toLowerCase()
+        entry.toLowerCase() == word[lang1].toLowerCase()
       ) {
-        wordObject = Dictionary[index];
+        wordObject = word;
         return (
-          <View style={styles.translationArea}>
-            <Text style={styles.translatedWord}>{wordObject[lang2]}</Text>
+          <View style={translationStyle.translationArea}>
+            <Text style={translationStyle.translatedWord}>{wordObject[lang2]}</Text>
 
-            <View style={styles.exampleArea}>
-              <Text style={styles.label}>{setLabel(originLanguage)}</Text>
+            <View style={translationStyle.exampleArea}>
+              <Text style={translationStyle.label}>{setLabel(originLanguage)}</Text>
               {getExample(originLanguage)}
             </View>
 
-            <View style={styles.exampleArea}>
-              <Text style={styles.label}>{setLabel(destLanguage)}</Text>
+            <View style={translationStyle.exampleArea}>
+              <Text style={translationStyle.label}>{setLabel(destLanguage)}</Text>
               {getExample(destLanguage)}
             </View>
           </View>
@@ -118,24 +123,10 @@ const App = () => {
         text = text.concat("\n(M) ", wordObject[att]);
       }
 
-      let before = "";
       let word = wordObject[lang];
-      let after = "";
-
-      let befIndex = text.toLowerCase().indexOf(word.toLowerCase());
-      before = text.substring(0, befIndex);
-
-      if (befIndex > 0) {
-        word = word.toLowerCase();
-      }
-
-      let aftIndex = befIndex + word.length;
-      after = text.substring(aftIndex);
-
-      after;
 
       return (
-        <View style={styles.examples}>
+        <View style={translationStyle.examples}>
           <HighlightText
             highlightStyle={{ color: 'red' }}
             searchWords={[word]}
@@ -148,50 +139,50 @@ const App = () => {
 
   return (
     // Main View
-    <ScrollView style={styles.scrollBar} keyboardShouldPersistTaps={"always"}>
+    <ScrollView style={translationStyle.scrollBar} keyboardShouldPersistTaps={"always"}>
       <StatusBar translucent backgroundColor={"#f23232"} />
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={translationStyle.container}>
         {/* Logo area */}
-        <View style={styles.logoArea}>
-          <Image style={styles.logo} source={require("./assets/logo.png")} />
-          <Text style={styles.windowName}>Tradução</Text>
+        <View style={translationStyle.logoArea}>
+          <Image style={translationStyle.logo} source={require("./assets/logo.png")} />
+          <Text style={translationStyle.windowName}>Tradução</Text>
         </View>
 
         {/* Change language area */}
-        <View style={styles.changeLanguage}>
+        <View style={translationStyle.changeLanguage}>
           {/* First language */}
-          <Animated.View style={[styles.originLanguageArea, {opacity: fadeAnim}]}>
-            <Text style={styles.originLanguage}>{originLanguage}</Text>
+          <Animated.View style={[translationStyle.languageArea, {opacity: fadeAnim}]}>
+            <Text style={translationStyle.language}>{originLanguage}</Text>
           </Animated.View>
 
           {/* Change language icon */}
-          <View style={styles.languageExchangeArea}>
-            <TouchableWithoutFeedback  onPress={changeLanguage} onPressIn={fadeOut} onPressOut={fadeIn}>
+          <View style={translationStyle.languageExchangeArea}>
+            <TouchableWithoutFeedback onPress={changeLanguage}>
               <Image
-                style={styles.languageExchange}
+                style={translationStyle.languageExchange}
                 source={require("./assets/exchange.png")}
               />
             </TouchableWithoutFeedback>
           </View>
 
           {/* Second Language */}
-          <Animated.View style={[styles.destLanguageArea, {opacity: fadeAnim}]}>
-            <Text style={styles.destLanguage}>{destLanguage}</Text>
+          <Animated.View style={[translationStyle.languageArea, {opacity: fadeAnim}]}>
+            <Text style={translationStyle.language}>{destLanguage}</Text>
           </Animated.View>
         </View>
 
         {/* Text box for the user entry */}
-        <View style={styles.userInput}>
+        <View style={translationStyle.userInput}>
           <TextInput
-            style={styles.textBox}
+            style={translationStyle.textBox}
             placeholder="Toque para digitar"
             onChangeText={(translation) => setTranslation(translation)}
             defaultValue={translation}
           />
 
           <TouchableWithoutFeedback onPress={insertSymbol}>
-            <View style={styles.symbolArea}>
-              <Text style={styles.symbol}>ɨ</Text>
+            <View style={translationStyle.symbolArea}>
+              <Text style={translationStyle.symbol}>ɨ</Text>
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -200,8 +191,8 @@ const App = () => {
         {Translate(originLanguage, translation)}
 
         {/* Historic */}
-        <View style={styles.historyArea}>
-          <Text style={styles.historyText}>Histórico</Text>
+        <View style={translationStyle.historyArea}>
+          <Text style={translationStyle.historyText}>Histórico</Text>
         </View>
       </SafeAreaView>
     </ScrollView>
