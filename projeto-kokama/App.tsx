@@ -7,24 +7,47 @@ import {
   TouchableWithoutFeedback,
   ScrollView,
   StatusBar,
+  Animated,
 } from "react-native";
 import styles from "./style/Translation.component.style";
-import React, { useState } from "react";
-import Dictionary from "./dictionary";
-//import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState, useRef } from "react";
+import dictionary from "./dictionary.json";
+import HighlightText from "@sanar/react-native-highlight-text";
 
 const App = () => {
   const [translation, setTranslation] = useState("");
   const [originLanguage, setOriginLanguage] = useState("Português");
   const [destLanguage, setDestLanguage] = useState("Kokama");
   let wordObject = Object();
+  let Dictionary = JSON.parse(JSON.stringify(dictionary));
 
   function changeLanguage() {
     let temp = originLanguage;
     setOriginLanguage(destLanguage);
     setDestLanguage(temp);
-    setTranslation("");
+    setTranslation('');
   }
+
+  // fadeAnim will be used as the value for opacity. Initial Value: 0
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  const fadeIn = () => {
+    // Will change fadeAnim value to 1 in 5 seconds
+    Animated.timing(fadeAnim, {
+      useNativeDriver: true,
+      toValue: 1,
+      duration: 500
+    }).start();
+  };
+
+  const fadeOut = () => {
+    // Will change fadeAnim value to 0 in 5 seconds
+    Animated.timing(fadeAnim, {
+      useNativeDriver: true,
+      toValue: 0,
+      duration: 150
+    }).start();
+  };
 
   function languageToAtt(language: string) {
     if (language == "Português") {
@@ -42,9 +65,9 @@ const App = () => {
     let lang2: string;
     [lang1, lang2] = languageToAtt(language);
 
-    for (let index = 0; index < Object(Dictionary).length; index++) {
+    for (let index = 0; index < Dictionary.length; index++) {
       if (
-        entry.toLowerCase() == Object(Dictionary[index])[lang1].toLowerCase()
+        entry.toLowerCase() == Dictionary[index][lang1].toLowerCase()
       ) {
         wordObject = Dictionary[index];
         return (
@@ -109,13 +132,15 @@ const App = () => {
       let aftIndex = befIndex + word.length;
       after = text.substring(aftIndex);
 
-      after
+      after;
 
       return (
         <View style={styles.examples}>
-          <Text style={styles.examplesText}>
-            {before}{word}{after}
-          </Text>
+          <HighlightText
+            highlightStyle={{ color: 'red' }}
+            searchWords={[word]}
+            textToHighlight={text}
+          />
         </View>
       );
     }
@@ -135,13 +160,13 @@ const App = () => {
         {/* Change language area */}
         <View style={styles.changeLanguage}>
           {/* First language */}
-          <View style={styles.originLanguageArea}>
+          <Animated.View style={[styles.originLanguageArea, {opacity: fadeAnim}]}>
             <Text style={styles.originLanguage}>{originLanguage}</Text>
-          </View>
+          </Animated.View>
 
           {/* Change language icon */}
           <View style={styles.languageExchangeArea}>
-            <TouchableWithoutFeedback onPress={changeLanguage}>
+            <TouchableWithoutFeedback  onPress={changeLanguage} onPressIn={fadeOut} onPressOut={fadeIn}>
               <Image
                 style={styles.languageExchange}
                 source={require("./assets/exchange.png")}
@@ -150,9 +175,9 @@ const App = () => {
           </View>
 
           {/* Second Language */}
-          <View style={styles.destLanguageArea}>
+          <Animated.View style={[styles.destLanguageArea, {opacity: fadeAnim}]}>
             <Text style={styles.destLanguage}>{destLanguage}</Text>
-          </View>
+          </Animated.View>
         </View>
 
         {/* Text box for the user entry */}
@@ -183,4 +208,4 @@ const App = () => {
   );
 };
 
-export default App
+export default App;
