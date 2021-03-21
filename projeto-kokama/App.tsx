@@ -6,11 +6,10 @@ import {
   TouchableWithoutFeedback,
   ScrollView,
   StatusBar,
-  Animated,
   SafeAreaView,
 } from "react-native";
 import translationStyle from "./style/translationStyle";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import dictionary from "./dictionary.json";
 import HighlightText from "@sanar/react-native-highlight-text";
 import Icon from "react-native-vector-icons/AntDesign";
