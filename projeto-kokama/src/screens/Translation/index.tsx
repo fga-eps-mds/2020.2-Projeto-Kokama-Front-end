@@ -10,120 +10,95 @@ import {
 } from "react-native";
 import translationStyle from "./styles";
 import React, { useState } from "react";
-import dictionary from "./dictionary.json";
+import dictionaryJSON from "./dictionary.json";
 import HighlightText from "@sanar/react-native-highlight-text";
 import Icon from "react-native-vector-icons/AntDesign";
+import Dictionary from "./interface";
+import { PORTUGUESE, KOKAMA } from "../../config/constants";
 
 const Translation = () => {
   const [translation, setTranslation] = useState("");
-  const [originLanguage, setOriginLanguage] = useState("Português");
-  const [destLanguage, setDestLanguage] = useState("Kokama");
-  let Dictionary = JSON.parse(JSON.stringify(dictionary));
-  let wordObject = Object();
+  const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
+  const [destLanguage, setDestLanguage] = useState(KOKAMA);
+  let dictionary: Array<Dictionary> = JSON.parse(
+    JSON.stringify(dictionaryJSON)
+  );
+  let wordObject: Dictionary;
 
   function changeLanguage() {
-    // Exchange the languages
     let temp = originLanguage;
     setOriginLanguage(destLanguage);
     setDestLanguage(temp);
-    // Clear text input if not a word in the dictionary
-    // else replace word for it's translation
-    let lang = languageToAtt(destLanguage)[0];
-    if (wordObject != null) {
-      setTranslation(wordObject[lang]);
-    } else {
-      setTranslation("");
-    }
-  }
-
-  function languageToAtt(language: string) {
-    if (language == "Português") {
-      return ["PT", "KK"];
-    }
-    return ["KK", "PT"];
   }
 
   function insertSymbol() {
     setTranslation(translation + "ɨ");
   }
 
-  function Translate(language: string, entry: string) {
-    let lang1: string;
-    let lang2: string;
-    [lang1, lang2] = languageToAtt(language);
+  function getDictionaryElements(language: string, userInput: string) {
+    let dictionaryElements: Array<Dictionary> = [];
 
-    for (let word of Dictionary) {
-      if (entry.toLowerCase() == word[lang1].toLowerCase()) {
-        wordObject = word;
-        return (
-          <View style={translationStyle.translationArea}>
-            <Text style={translationStyle.translatedWord}>
-              {wordObject[lang2]}
-            </Text>
-
-            <View style={translationStyle.exampleArea}>
-              <Text style={translationStyle.label}>
-                {setLabel(originLanguage)}
-              </Text>
-              {getExample(originLanguage)}
-            </View>
-
-            <View style={translationStyle.exampleArea}>
-              <Text style={translationStyle.label}>
-                {setLabel(destLanguage)}
-              </Text>
-              {getExample(destLanguage)}
-            </View>
-          </View>
-        );
+    if (language == KOKAMA) {
+      for (let element of dictionary) {
+        if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
+          dictionaryElements.push(element);
+          break;
+        }
+      }
+    } else {
+      for (let element of dictionary) {
+        for (let word of element.translations) {
+          if (userInput.toLowerCase() == word.toLowerCase()) {
+            dictionaryElements.push(element);
+          }
+        }
       }
     }
 
-    wordObject = null;
-    if (entry != "") {
-      return (
-        <Text style={{ textAlign: "center" }}>Tradução não encontrada</Text>
-      );
+    return dictionaryElements;
+  }
+
+  function getWords(language: string, word: Dictionary) {
+    if (language == KOKAMA) {
+      return word.translations;
+    } else {
+      return [word.word_kokama];
     }
   }
 
-  function setLabel(language: string) {
-    if (wordObject != null) {
-      return "Frase em " + language + "\n";
-    }
-  }
+  function getTranslations(
+    language: string,
+    dictionaryElements: Array<Dictionary>
+  ) {
+    let translatedWords: string = "";
 
-  function getExample(language: string) {
-    let lang: string;
-    lang = languageToAtt(language)[0];
-
-    if (wordObject != null) {
-      let att = String();
-      att = att.concat("EX", lang);
-      let text = "";
-
-      if (language == "Português" || !wordObject[att.concat("F")]) {
-        text = wordObject[att];
-      } else {
-        text = text.concat("(H) ", wordObject[att]);
-        att = "";
-        att = att.concat("EX", lang, "F");
-        text = text.concat("\n(M) ", wordObject[att]);
+    for (let element of dictionaryElements) {
+      let words: Array<string> = getWords(language, element);
+      for (let word of words) {
+        if (translatedWords.length == 0) {
+          translatedWords = translatedWords.concat(word);
+        } else {
+          translatedWords = translatedWords.concat(", ", word);
+        }
       }
-
-      let word = wordObject[lang];
-
-      return (
-        <View style={translationStyle.examples}>
-          <HighlightText
-            style={translationStyle.examplesText}
-            highlightStyle={{ color: "red" }}
-            searchWords={[word]}
-            textToHighlight={text}
-          />
-        </View>
-      );
     }
+
+    return translatedWords;
+  }
+
+  function Translate(language: string, userInput: string) {
+    let translationList: Array<Dictionary> = getDictionaryElements(
+      language,
+      userInput
+    );
+
+    let wordList: string = getTranslations(language, translationList);
+
+    return (
+      <View style={translationStyle.translationArea}>
+        <Text style={translationStyle.translatedWord}>{wordList}</Text>
+      </View>
+    );
   }
 
   return (
