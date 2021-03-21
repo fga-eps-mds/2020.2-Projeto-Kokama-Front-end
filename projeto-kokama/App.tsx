@@ -3,11 +3,11 @@ import {
   Text,
   TextInput,
   Image,
-  SafeAreaView,
   TouchableWithoutFeedback,
   ScrollView,
   StatusBar,
   Animated,
+  SafeAreaView,
 } from "react-native";
 import translationStyle from "./style/translationStyle";
 import React, { useState, useRef } from "react";
@@ -24,11 +24,9 @@ const App = () => {
 
   function changeLanguage() {
     // Exchange the languages
-    fadeOut();
     let temp = originLanguage;
     setOriginLanguage(destLanguage);
     setDestLanguage(temp);
-    fadeIn();
     // Clear text input if not a word in the dictionary
     // else replace word for it's translation
     let lang = languageToAtt(destLanguage)[0];
@@ -38,22 +36,6 @@ const App = () => {
       setTranslation("");
     }
   }
-
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const fadeIn = () => {
-    Animated.timing(fadeAnim, {
-      useNativeDriver: true,
-      toValue: 1,
-      duration: 500,
-    }).start();
-  };
-  const fadeOut = () => {
-    Animated.timing(fadeAnim, {
-      useNativeDriver: true,
-      toValue: 0,
-      duration: 150,
-    }).start();
-  };
 
   function languageToAtt(language: string) {
     if (language == "Português") {
@@ -100,7 +82,9 @@ const App = () => {
 
     wordObject = null;
     if (entry != "") {
-      return <Text>Tradução não encontrada</Text>;
+      return (
+        <Text style={{ textAlign: "center" }}>Tradução não encontrada</Text>
+      );
     }
   }
 
@@ -133,6 +117,7 @@ const App = () => {
       return (
         <View style={translationStyle.examples}>
           <HighlightText
+            style={translationStyle.examplesText}
             highlightStyle={{ color: "red" }}
             searchWords={[word]}
             textToHighlight={text}
@@ -143,13 +128,9 @@ const App = () => {
   }
 
   return (
-    // Main View
-    <ScrollView
-      style={translationStyle.scrollBar}
-      keyboardShouldPersistTaps={"always"}
-    >
-      <StatusBar translucent backgroundColor={"#f23232"} />
-      <SafeAreaView style={translationStyle.container}>
+    <SafeAreaView>
+      <ScrollView style={translationStyle.container} keyboardShouldPersistTaps={"always"}>
+        <StatusBar translucent backgroundColor={"#f23232"} />
         {/* Logo area */}
         <View style={translationStyle.logoArea}>
           <Image
@@ -162,32 +143,25 @@ const App = () => {
         {/* Change language area */}
         <View style={translationStyle.changeLanguage}>
           {/* First language */}
-          <Animated.View
-            style={[translationStyle.originLanguageArea, { opacity: fadeAnim }]}
-          >
-            <Text style={translationStyle.originLanguage}>
+          <View style={[translationStyle.originLanguageArea]}>
+            <Text 
+              style={translationStyle.originLanguage}>
+              
               {originLanguage}
             </Text>
-          </Animated.View>
+          </View>
 
           {/* Change language icon */}
           <View style={translationStyle.languageExchangeArea}>
             <TouchableWithoutFeedback onPress={changeLanguage}>
-              <Icon
-                style={translationStyle.languageExchange}
-                name="swap"
-                size={40}
-                color="#333"
-              />
+              <Icon name="swap" size={40} color="#333" />
             </TouchableWithoutFeedback>
           </View>
 
           {/* Second Language */}
-          <Animated.View
-            style={[translationStyle.destLanguageArea, { opacity: fadeAnim }]}
-          >
+          <View style={[translationStyle.destLanguageArea]}>
             <Text style={translationStyle.destLanguage}>{destLanguage}</Text>
-          </Animated.View>
+          </View>
         </View>
 
         {/* Text box for the user entry */}
@@ -213,8 +187,9 @@ const App = () => {
         <View style={translationStyle.historyArea}>
           <Text style={translationStyle.historyText}>Histórico</Text>
         </View>
-      </SafeAreaView>
-    </ScrollView>
+
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
