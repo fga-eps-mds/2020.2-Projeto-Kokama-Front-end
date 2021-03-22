@@ -15,6 +15,15 @@ import Icon from "react-native-vector-icons/AntDesign";
 import { Dictionary, Phrase } from "./interface";
 import { PORTUGUESE, KOKAMA } from "../../config/constants";
 
+let history: Array<string> = [];
+
+function addHistoryWord(word:string) {
+  if (history.length >= 10) {
+    history.pop();
+  }
+  history.unshift(word);
+}
+
 const Translation = () => {
   const [translation, setTranslation] = useState("");
   const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
@@ -22,7 +31,9 @@ const Translation = () => {
   let dictionary: Array<Dictionary> = JSON.parse(
     JSON.stringify(dictionaryJSON)
   );
-  let wordObject: Dictionary;
+
+  const [historyIsEnabled, setHistoryIsEnabled] = useState(false);
+  const toggleHistory = () => setHistoryIsEnabled((previousState) => !previousState);
 
   function changeLanguage() {
     let temp = originLanguage;
@@ -34,10 +45,11 @@ const Translation = () => {
     setTranslation(translation + "ɨ");
   }
 
-  function getKokamaElement(userInput: string){ 
+  function getKokamaElement(userInput: string) {
     let kokamaElement: Array<Dictionary> = [];
     for (let element of dictionary) {
       if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
+        addHistoryWord(element.word_kokama);
         kokamaElement.push(element);
         break;
       }
@@ -51,6 +63,7 @@ const Translation = () => {
     for (let element of dictionary) {
       for (let word of element.translations) {
         if (userInput.toLowerCase() == word.toLowerCase()) {
+          addHistoryWord(word);
           portugueseElements.push(element);
         }
       }
@@ -69,7 +82,6 @@ const Translation = () => {
       let portugueseElements = getPortugueseElement(userInput);
       dictionaryElements = dictionaryElements.concat(portugueseElements);
     }
-
     return dictionaryElements;
   }
 
@@ -188,7 +200,6 @@ const Translation = () => {
             style={translationStyle.textBox}
             placeholder="Toque para digitar"
             onChangeText={(userInput) => setTranslation(userInput)}
-            defaultValue={translation}
           />
 
           <TouchableWithoutFeedback onPress={insertSymbol}>
@@ -202,9 +213,21 @@ const Translation = () => {
         {Translate(originLanguage, translation)}
 
         {/* Historic */}
-        <View style={translationStyle.historyArea}>
-          <Text style={translationStyle.historyText}>Histórico</Text>
-        </View>
+        <TouchableWithoutFeedback onPress={toggleHistory}>
+          <View style={translationStyle.historyArea}>
+            <Text style={translationStyle.historyText}>Histórico</Text>
+          </View>
+        </TouchableWithoutFeedback>
+
+        {historyIsEnabled && history.length >= 1 && (
+          <View style={translationStyle.historyWordsArea}>
+            {history.map((item, index) => (
+              <Text style={translationStyle.historyWords} key={index}>
+                {item}
+              </Text>
+            ))}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

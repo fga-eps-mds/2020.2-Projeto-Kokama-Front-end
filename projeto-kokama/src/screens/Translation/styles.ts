@@ -159,6 +159,18 @@ const styles = StyleSheet.create({
     paddingLeft: 23,
     color: "#a5a5a5",
   },
+  historyWordsArea: {
+    flexDirection: "column",
+    padding: 10,
+    borderBottomWidth: 1.5,
+    borderColor: "#BBB",
+    backgroundColor: "#FFF",
+  },
+  historyWords: {
+    width: "100%",
+    fontSize: 20,
+    color: "#555",
+  },
 });
 
 export default styles;
