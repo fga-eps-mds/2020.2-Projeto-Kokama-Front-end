@@ -55,7 +55,7 @@ const Translation = () => {
         }
       }
     }
-0
+
     return portugueseElements;
   }
 
