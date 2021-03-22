@@ -144,10 +144,10 @@ const translationStyle = StyleSheet.create({
   },
   historyArea: {
     flexDirection: "row",
-    marginTop: 5,
     height: 40,
     borderBottomWidth: 1.5,
     borderTopWidth: 1.5,
+    marginTop: 5,
     borderColor: "#BBB",
     backgroundColor: "#FFF",
   },

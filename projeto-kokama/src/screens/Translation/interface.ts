@@ -3,7 +3,7 @@ export interface Phrase {
     phrase_kokama: string;
 }
 
-export default interface Dictionary {
+export interface Dictionary {
     word_kokama: string;
     pronunciation_type: string;
     phrases: Phrase[];
