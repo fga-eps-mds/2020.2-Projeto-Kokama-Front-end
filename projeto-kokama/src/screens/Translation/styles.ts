@@ -5,7 +5,7 @@ const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
 
-const translationStyle = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     maxWidth: screen.width,
     height: window.height,
@@ -161,4 +161,4 @@ const translationStyle = StyleSheet.create({
   },
 });
 
-export default translationStyle;
+export default styles;

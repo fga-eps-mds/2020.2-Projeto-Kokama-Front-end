@@ -11,7 +11,6 @@ import {
 import translationStyle from "./styles";
 import React, { useState } from "react";
 import dictionaryJSON from "./dictionary.json";
-import HighlightText from "@sanar/react-native-highlight-text";
 import Icon from "react-native-vector-icons/AntDesign";
 import { Dictionary, Phrase } from "./interface";
 import { PORTUGUESE, KOKAMA } from "../../config/constants";
@@ -35,24 +34,40 @@ const Translation = () => {
     setTranslation(translation + "ɨ");
   }
 
+  function getKokamaElement(userInput: string){ 
+    let kokamaElement: Array<Dictionary> = [];
+    for (let element of dictionary) {
+      if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
+        kokamaElement.push(element);
+        break;
+      }
+    }
+
+    return kokamaElement;
+  }
+
+  function getPortugueseElement(userInput: string) {
+    let portugueseElements: Array<Dictionary> = [];
+    for (let element of dictionary) {
+      for (let word of element.translations) {
+        if (userInput.toLowerCase() == word.toLowerCase()) {
+          portugueseElements.push(element);
+        }
+      }
+    }
+0
+    return portugueseElements;
+  }
+
   function getDictionaryElements(language: string, userInput: string) {
     let dictionaryElements: Array<Dictionary> = [];
 
     if (language == KOKAMA) {
-      for (let element of dictionary) {
-        if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
-          dictionaryElements.push(element);
-          break;
-        }
-      }
+      let kokamaElement = getKokamaElement(userInput);
+      dictionaryElements = dictionaryElements.concat(kokamaElement);
     } else {
-      for (let element of dictionary) {
-        for (let word of element.translations) {
-          if (userInput.toLowerCase() == word.toLowerCase()) {
-            dictionaryElements.push(element);
-          }
-        }
-      }
+      let portugueseElements = getPortugueseElement(userInput);
+      dictionaryElements = dictionaryElements.concat(portugueseElements);
     }
 
     return dictionaryElements;
@@ -172,7 +187,7 @@ const Translation = () => {
           <TextInput
             style={translationStyle.textBox}
             placeholder="Toque para digitar"
-            onChangeText={(translation) => setTranslation(translation)}
+            onChangeText={(userInput) => setTranslation(userInput)}
             defaultValue={translation}
           />
 
