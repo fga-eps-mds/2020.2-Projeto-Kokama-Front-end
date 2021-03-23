@@ -15,14 +15,30 @@ import Icon from "react-native-vector-icons/AntDesign";
 import { Dictionary, Phrase } from "./interface";
 import { PORTUGUESE, KOKAMA } from "../../config/constants";
 
+
+let history: Array<string> = [];
+
+function addHistoryWord(word:string){
+  if(history.length >= 4) {
+    history.pop();
+  }
+  if (history.includes(word)) {  
+    let indexToRemove:number = history.indexOf(word);
+    delete (history[indexToRemove]);
+  }
+  history.unshift(word);
+}
+
 const Translation = () => {
   const [translation, setTranslation] = useState("");
   const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
   const [destLanguage, setDestLanguage] = useState(KOKAMA);
+  const [historyIsEnabled, setHistoryIsEnabled] = useState(false);
+  const toggleHistory = () => setHistoryIsEnabled(previousState => !previousState);
+
   let dictionary: Array<Dictionary> = JSON.parse(
     JSON.stringify(dictionaryJSON)
   );
-  let wordObject: Dictionary;
 
   function changeLanguage() {
     let temp = originLanguage;
@@ -34,10 +50,11 @@ const Translation = () => {
     setTranslation(translation + "ɨ");
   }
 
-  function getKokamaElement(userInput: string){ 
+  function getKokamaElement(userInput: string) {
     let kokamaElement: Array<Dictionary> = [];
     for (let element of dictionary) {
       if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
+        addHistoryWord(element.word_kokama);
         kokamaElement.push(element);
         break;
       }
@@ -51,6 +68,7 @@ const Translation = () => {
     for (let element of dictionary) {
       for (let word of element.translations) {
         if (userInput.toLowerCase() == word.toLowerCase()) {
+          addHistoryWord(element.translations[0]);
           portugueseElements.push(element);
         }
       }
@@ -81,10 +99,7 @@ const Translation = () => {
     }
   }
 
-  function getTranslations(
-    language: string,
-    dictionaryElements: Array<Dictionary>
-  ) {
+  function getTranslations(language: string, dictionaryElements: Array<Dictionary>) {
     let translatedWords: string = "";
 
     for (let element of dictionaryElements) {
@@ -178,7 +193,8 @@ const Translation = () => {
 
           {/* Second Language */}
           <View style={[translationStyle.destLanguageArea]}>
-            <Text style={translationStyle.destLanguage}>{destLanguage}</Text>
+            <Text style={translationStyle.destLanguage}>
+              {destLanguage}</Text>
           </View>
         </View>
 
@@ -203,8 +219,19 @@ const Translation = () => {
 
         {/* Historic */}
         <View style={translationStyle.historyArea}>
-          <Text style={translationStyle.historyText}>Histórico</Text>
+          <TouchableWithoutFeedback onPress={toggleHistory}>
+            <Text style={translationStyle.historyText}>Histórico</Text>
+          </TouchableWithoutFeedback>
         </View>
+        {history.length > 0 && historyIsEnabled && (
+          <View style={translationStyle.historyWordsArea}>
+            {history.map(word =>
+              <Text style={translationStyle.historyWords}>
+                {word}
+                </Text>
+            )}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
