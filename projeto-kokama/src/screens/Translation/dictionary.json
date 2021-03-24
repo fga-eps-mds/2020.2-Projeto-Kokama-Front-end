@@ -1,0 +1,98 @@
+[
+  {
+    "word_kokama": "pacha",
+    "pronunciation_type": "geral",
+    "phrases": [
+      {
+        "phrase_kokama": "Emete ipiranu <pachakatika> iruataka chiranu.",
+        "phrase_portuguese": "Há <centenas> de peixes de toda classe de nomes."
+      }
+    ],
+    "translations": ["cem"]
+  },
+  {
+    "word_kokama": "pachata",
+    "pronunciation_type": "geral",
+    "phrases": [
+      {
+        "phrase_kokama": "Nós <esmagamos> a massa para fazer um assento de jarro.",
+        "phrase_portuguese": "Nós <esmagamos> a massa para fazer um assento de jarro."
+      }
+    ],
+    "translations": ["aderir", "fixar", "colar"]
+  },
+  {
+    "word_kokama": "pachuri",
+    "pronunciation_type": "geral",
+    "phrases": [
+      {
+        "phrase_kokama": "<Pachuri> eyu watsatsa iya.",
+        "phrase_portuguese": "O <pía pía> come semente de abiu."
+      }
+    ],
+    "translations": ["pía pía"]
+  },
+  {
+    "word_kokama": "pai",
+    "pronunciation_type": "geral",
+    "phrases": [
+      {
+        "phrase_kokama": "Tsa <pai> papa imua",
+        "phrase_portuguese": "Meu <tio> é irmão de papai"
+      }
+    ],
+    "translations": ["tio"]
+  },
+  {
+    "word_kokama": "pain",
+    "pronunciation_type": "geral",
+    "phrases": [
+      {
+        "phrase_kokama": "Yawiri <pain>pura tsa papa erura.",
+        "phrase_portuguese": "<Só> a mandioca traz meu pai."
+      }
+    ],
+    "translations": ["apenas", "puro", "não misturado"]
+  },
+  {
+    "word_kokama": "pararaka",
+    "pronunciation_type": "geral",
+    "phrases": [
+      {
+        "phrase_kokama": "<Pararaka> yute kuarachika ya ikanatsen.",
+        "phrase_portuguese": "<Espalhe> essa juta em direção ao sol (não na sombra) para secar."
+      },
+      {
+        "phrase_kokama": "Ipira na ikanata <pararaka>.",
+        "phrase_portuguese": "Seque o peixe <espalhando-o>. "
+      },
+      {
+        "phrase_kokama": "Tsetsa na tɨata unipu <pararaka>.",
+        "phrase_portuguese": "Umedeça as flores <regando-as>."
+      }
+    ],
+    "translations": ["dispersar", "regar", "distribuir"]
+  },
+  {
+    "word_kokama": "penu",
+    "pronunciation_type": "feminino",
+    "phrases": [
+      {
+        "phrase_kokama": "<Penu> kumitsa",
+        "phrase_portuguese": "<Nós> falamos."
+      }
+    ],
+    "translations": ["nós"]
+  },
+  {
+    "word_kokama": "ini",
+    "pronunciation_type": "geral",
+    "phrases": [
+      {
+        "phrase_kokama": "<Ini> kumitsa",
+        "phrase_portuguese": "<Nós> falamos."
+      }
+    ],
+    "translations": ["nós"]
+  }
+]
