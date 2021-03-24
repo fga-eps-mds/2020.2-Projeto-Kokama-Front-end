@@ -19,7 +19,7 @@ import { PORTUGUESE, KOKAMA } from "../../config/constants";
 let history: Array<string> = [];
 
 function addHistoryWord(word:string){
-  if(history.length >= 4) {
+  if(history.length >= 10) {
     history.pop();
   }
   if (history.includes(word)) {  
@@ -54,7 +54,7 @@ const Translation = () => {
     let kokamaElement: Array<Dictionary> = [];
     for (let element of dictionary) {
       if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
-        addHistoryWord(element.word_kokama);
+        addHistoryWord(element.translations[0] + '\n' + element.word_kokama);
         kokamaElement.push(element);
         break;
       }
@@ -68,7 +68,7 @@ const Translation = () => {
     for (let element of dictionary) {
       for (let word of element.translations) {
         if (userInput.toLowerCase() == word.toLowerCase()) {
-          addHistoryWord(element.translations[0]);
+          addHistoryWord(element.translations[0] + '\n' + element.word_kokama);
           portugueseElements.push(element);
         }
       }
@@ -159,6 +159,19 @@ const Translation = () => {
     );
   }
 
+
+  function translateHistoryWord(words:Array<string>, language:string) {
+    let word:string = '';
+
+    if (language === KOKAMA) {
+      word = words[1];
+    } else {
+      word = words[0];
+    }
+    
+    setTranslation(word);
+  }
+
   return (
     <SafeAreaView>
       <ScrollView
@@ -226,9 +239,11 @@ const Translation = () => {
         {history.length > 0 && historyIsEnabled && (
           <View style={translationStyle.historyWordsArea}>
             {history.map(word =>
-              <Text style={translationStyle.historyWords}>
-                {word}
+              <TouchableWithoutFeedback onPress={() => translateHistoryWord(word.split('\n',2), originLanguage)}>
+                <Text style={translationStyle.historyWords}>
+                  {word}
                 </Text>
+              </TouchableWithoutFeedback>
             )}
           </View>
         )}

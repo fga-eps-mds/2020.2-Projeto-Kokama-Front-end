@@ -170,7 +170,10 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     textAlign: "left",
     fontSize: 18,
-    paddingLeft: 15,
+    borderBottomWidth: 0.5,
+    borderColor: "#BBB",
+    paddingLeft: 23,
+    paddingVertical: 7,
     color: "#555",
   },
 });
