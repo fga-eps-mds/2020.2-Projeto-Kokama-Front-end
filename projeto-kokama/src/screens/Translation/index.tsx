@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import dictionaryJSON from "./dictionary.json";
 import Icon from "react-native-vector-icons/AntDesign";
 import { Dictionary, Phrase } from "./interface";
-import { PORTUGUESE, KOKAMA } from "../../config/constants";
+import { PORTUGUESE, KOKAMA, HISTORYSIZE } from "../../config/constants";
 import SyncStorage from "sync-storage";
 import { capitalizeFirstLetter } from "../../utils/translation";
 
@@ -55,7 +55,7 @@ const Translation = () => {
           kokamaWord = kokamaWord.concat(' (Feminino)');
         }
 
-        SyncStorage.set(kokamaWord, portugueseWords);
+        addHistoryWord(kokamaWord, portugueseWords);
         kokamaElement.push(element);
         break;
       }
@@ -69,10 +69,10 @@ const Translation = () => {
     for (let element of dictionary) {
       for (let word of element.translations) {
         if (userInput.toLowerCase() == word.toLowerCase()) {
-          let portugeseWords: string = element.translations[0];
+          let portugueseWords: string = element.translations[0];
           element.translations.map((word: string, index: number) => {
             if (index > 0) {
-              portugeseWords = portugeseWords.concat(", ", word);
+              portugueseWords = portugueseWords.concat(", ", word);
             }
           });
 
@@ -81,7 +81,7 @@ const Translation = () => {
             kokamaWord = kokamaWord.concat(' (Feminino)');
           }
 
-          SyncStorage.set(kokamaWord, portugeseWords);
+          addHistoryWord(kokamaWord, portugueseWords);
           portugueseElements.push(element);
         }
       }
@@ -177,16 +177,11 @@ const Translation = () => {
     );
   }
 
-  function translateHistoryWord(words: Array<string>, language: string) {
-    let word: string = "";
-
-    if (language === KOKAMA) {
-      word = words[1];
-    } else {
-      word = words[0];
+  function addHistoryWord(wordKokama: string, wordsPortuguese: string) {
+    if(SyncStorage.getAllKeys().length >= HISTORYSIZE){
+      SyncStorage.remove(SyncStorage.getAllKeys()[0]);
     }
-
-    setTranslation(word);
+    SyncStorage.set(wordKokama, wordsPortuguese);
   }
 
   return (
