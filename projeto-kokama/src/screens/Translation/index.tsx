@@ -13,7 +13,12 @@ import React, { useState } from "react";
 import dictionaryJSON from "./dictionary.json";
 import Icon from "react-native-vector-icons/AntDesign";
 import { Dictionary, Phrase } from "./interface";
-import { PORTUGUESE, KOKAMA, HISTORYSIZE } from "../../config/constants";
+import {
+  PORTUGUESE,
+  KOKAMA,
+  HISTORYSIZE,
+  FEMININO,
+} from "../../config/constants";
 import SyncStorage from "sync-storage";
 import { capitalizeFirstLetter } from "../../utils/translation";
 
@@ -43,19 +48,7 @@ const Translation = () => {
     let kokamaElement: Array<Dictionary> = [];
     for (let element of dictionary) {
       if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
-        let portugueseWords: string = element.translations[0];
-        element.translations.map((word: string, index: number) => {
-          if (index > 0) {
-            portugueseWords = portugueseWords.concat(", ", word);
-          }
-        });
-
-        let kokamaWord: string = element.word_kokama;
-        if (element.pronunciation_type === "feminino") {
-          kokamaWord = kokamaWord.concat(" (Feminino)");
-        }
-
-        addHistoryWord(kokamaWord, portugueseWords);
+        addHistoryWord(element.word_kokama, element.translations, element.pronunciation_type);
         kokamaElement.push(element);
         break;
       }
@@ -69,19 +62,7 @@ const Translation = () => {
     for (let element of dictionary) {
       for (let word of element.translations) {
         if (userInput.toLowerCase() == word.toLowerCase()) {
-          let portugueseWords: string = element.translations[0];
-          element.translations.map((word: string, index: number) => {
-            if (index > 0) {
-              portugueseWords = portugueseWords.concat(", ", word);
-            }
-          });
-
-          let kokamaWord: string = element.word_kokama;
-          if (element.pronunciation_type === "feminino") {
-            kokamaWord = kokamaWord.concat(" (Feminino)");
-          }
-
-          addHistoryWord(kokamaWord, portugueseWords);
+          addHistoryWord(element.word_kokama, element.translations, element.pronunciation_type);
           portugueseElements.push(element);
         }
       }
@@ -177,22 +158,37 @@ const Translation = () => {
     );
   }
 
-  function addHistoryWord(wordKokama: string, wordsPortuguese: string) {
+  function addHistoryWord(kokamaWord:string, portugueseWords: Array<string>, pronunciationType: string) {
+    let concatPortuguese: string = portugueseWords[0];
+    portugueseWords.map((word: string, index: number) => {
+      if (index > 0) {
+        concatPortuguese = concatPortuguese.concat(", ", word);
+      }
+    });
+    let concatKokama: string = kokamaWord; 
+    if (pronunciationType === FEMININO) {
+      concatKokama = concatKokama.concat(
+        " (",
+        capitalizeFirstLetter(FEMININO),
+        ")"
+      );
+    }
+
     if (SyncStorage.getAllKeys().length >= HISTORYSIZE) {
       SyncStorage.remove(SyncStorage.getAllKeys()[0]);
     }
-    if (SyncStorage.get(wordKokama) != undefined) {
-      SyncStorage.remove(wordKokama);
+    if (SyncStorage.get(concatKokama) != undefined) {
+      SyncStorage.remove(concatKokama);
     }
 
-    SyncStorage.set(wordKokama, wordsPortuguese);
+    SyncStorage.set(concatKokama, concatPortuguese);
   }
 
-  function translateHistoryWord(word:string, language:string) {
-    let kokamaWord:string = word.split(" ").toString();
+  function translateHistoryWord(word: string, language: string) {
+    let kokamaWord: string = word.split(" ").toString();
     setTranslation(capitalizeFirstLetter(kokamaWord));
-    if(language !== KOKAMA){
-      changeLanguage()
+    if (language !== KOKAMA) {
+      changeLanguage();
     }
   }
 
@@ -261,9 +257,13 @@ const Translation = () => {
         </View>
         {SyncStorage.getAllKeys().length > 0 && historyIsEnabled && (
           <View style={translationStyle.historyWordsArea}>
-            {SyncStorage.getAllKeys().reverse().map((word: string, index: number) => (
-                <TouchableWithoutFeedback onPress={() => translateHistoryWord(word, originLanguage)}>
-                  <View key={index} style={translationStyle.historyWords}>
+            {SyncStorage.getAllKeys()
+              .reverse()
+              .map((word: string, index: number) => (
+                <TouchableWithoutFeedback key={index}
+                  onPress={() => translateHistoryWord(word, originLanguage)}
+                >
+                  <View style={translationStyle.historyWords}>
                     <Text
                       style={[
                         translationStyle.historyWord,
