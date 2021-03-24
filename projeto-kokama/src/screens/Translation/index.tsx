@@ -50,9 +50,9 @@ const Translation = () => {
           }
         });
 
-        let kokamaWord:string = element.word_kokama;
+        let kokamaWord: string = element.word_kokama;
         if (element.pronunciation_type === "feminino") {
-          kokamaWord = kokamaWord.concat(' (Feminino)');
+          kokamaWord = kokamaWord.concat(" (Feminino)");
         }
 
         addHistoryWord(kokamaWord, portugueseWords);
@@ -76,9 +76,9 @@ const Translation = () => {
             }
           });
 
-          let kokamaWord:string = element.word_kokama;
+          let kokamaWord: string = element.word_kokama;
           if (element.pronunciation_type === "feminino") {
-            kokamaWord = kokamaWord.concat(' (Feminino)');
+            kokamaWord = kokamaWord.concat(" (Feminino)");
           }
 
           addHistoryWord(kokamaWord, portugueseWords);
@@ -178,10 +178,22 @@ const Translation = () => {
   }
 
   function addHistoryWord(wordKokama: string, wordsPortuguese: string) {
-    if(SyncStorage.getAllKeys().length >= HISTORYSIZE){
+    if (SyncStorage.getAllKeys().length >= HISTORYSIZE) {
       SyncStorage.remove(SyncStorage.getAllKeys()[0]);
     }
+    if (SyncStorage.get(wordKokama) != undefined) {
+      SyncStorage.remove(wordKokama);
+    }
+
     SyncStorage.set(wordKokama, wordsPortuguese);
+  }
+
+  function translateHistoryWord(word:string, language:string) {
+    let kokamaWord:string = word.split(" ").toString();
+    setTranslation(capitalizeFirstLetter(kokamaWord));
+    if(language !== KOKAMA){
+      changeLanguage()
+    }
   }
 
   return (
@@ -250,20 +262,22 @@ const Translation = () => {
         {SyncStorage.getAllKeys().length > 0 && historyIsEnabled && (
           <View style={translationStyle.historyWordsArea}>
             {SyncStorage.getAllKeys().reverse().map((word: string, index: number) => (
-              <View key={index} style={translationStyle.historyWords}>
-                <Text
-                  style={[
-                    translationStyle.historyWord,
-                    { fontWeight: "bold", fontSize: 20 },
-                  ]}
-                >
-                  {capitalizeFirstLetter(word)}
-                </Text>
-                <Text style={translationStyle.historyWord}>
-                  {capitalizeFirstLetter(SyncStorage.get(word))}
-                </Text>
-              </View>
-            ))}
+                <TouchableWithoutFeedback onPress={() => translateHistoryWord(word, originLanguage)}>
+                  <View key={index} style={translationStyle.historyWords}>
+                    <Text
+                      style={[
+                        translationStyle.historyWord,
+                        { fontWeight: "bold", fontSize: 20 },
+                      ]}
+                    >
+                      {capitalizeFirstLetter(word)}
+                    </Text>
+                    <Text style={translationStyle.historyWord}>
+                      {capitalizeFirstLetter(SyncStorage.get(word))}
+                    </Text>
+                  </View>
+                </TouchableWithoutFeedback>
+              ))}
           </View>
         )}
       </ScrollView>
