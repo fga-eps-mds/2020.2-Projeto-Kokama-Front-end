@@ -176,6 +176,13 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     color: "#555",
   },
+  historyWord: {
+    width: "100%",
+    textAlignVertical: "center",
+    textAlign: "left",
+    fontSize: 18,
+    color: "#555",
+  },
 });
 
 export default styles;

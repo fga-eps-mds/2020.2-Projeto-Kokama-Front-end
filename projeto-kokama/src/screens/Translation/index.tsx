@@ -14,27 +14,16 @@ import dictionaryJSON from "./dictionary.json";
 import Icon from "react-native-vector-icons/AntDesign";
 import { Dictionary, Phrase } from "./interface";
 import { PORTUGUESE, KOKAMA } from "../../config/constants";
-
-
-let history: Array<string> = [];
-
-function addHistoryWord(word:string){
-  if(history.length >= 10) {
-    history.pop();
-  }
-  if (history.includes(word)) {  
-    let indexToRemove:number = history.indexOf(word);
-    history.splice(indexToRemove, 1);
-  }
-  history.unshift(word);
-}
+import SyncStorage from "sync-storage";
+import { capitalizeFirstLetter } from "../../utils/translation";
 
 const Translation = () => {
   const [translation, setTranslation] = useState("");
   const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
   const [destLanguage, setDestLanguage] = useState(KOKAMA);
   const [historyIsEnabled, setHistoryIsEnabled] = useState(false);
-  const toggleHistory = () => setHistoryIsEnabled(previousState => !previousState);
+  const toggleHistory = () =>
+    setHistoryIsEnabled((previousState) => !previousState);
 
   let dictionary: Array<Dictionary> = JSON.parse(
     JSON.stringify(dictionaryJSON)
@@ -54,7 +43,19 @@ const Translation = () => {
     let kokamaElement: Array<Dictionary> = [];
     for (let element of dictionary) {
       if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
-        addHistoryWord(element.translations[0] + '\n' + element.word_kokama);
+        let portugueseWords: string = element.translations[0];
+        element.translations.map((word: string, index: number) => {
+          if (index > 0) {
+            portugueseWords = portugueseWords.concat(", ", word);
+          }
+        });
+
+        let kokamaWord:string = element.word_kokama;
+        if (element.pronunciation_type === "feminino") {
+          kokamaWord = kokamaWord.concat(' (Feminino)');
+        }
+
+        SyncStorage.set(kokamaWord, portugueseWords);
         kokamaElement.push(element);
         break;
       }
@@ -68,7 +69,19 @@ const Translation = () => {
     for (let element of dictionary) {
       for (let word of element.translations) {
         if (userInput.toLowerCase() == word.toLowerCase()) {
-          addHistoryWord(element.translations[0] + '\n' + element.word_kokama);
+          let portugeseWords: string = element.translations[0];
+          element.translations.map((word: string, index: number) => {
+            if (index > 0) {
+              portugeseWords = portugeseWords.concat(", ", word);
+            }
+          });
+
+          let kokamaWord:string = element.word_kokama;
+          if (element.pronunciation_type === "feminino") {
+            kokamaWord = kokamaWord.concat(' (Feminino)');
+          }
+
+          SyncStorage.set(kokamaWord, portugeseWords);
           portugueseElements.push(element);
         }
       }
@@ -99,7 +112,10 @@ const Translation = () => {
     }
   }
 
-  function getTranslations(language: string, dictionaryElements: Array<Dictionary>) {
+  function getTranslations(
+    language: string,
+    dictionaryElements: Array<Dictionary>
+  ) {
     let translatedWords: string = "";
 
     for (let element of dictionaryElements) {
@@ -144,7 +160,9 @@ const Translation = () => {
         )}
         {phrases.length > 0 && (
           <View style={translationStyle.translationArea}>
-            <Text style={translationStyle.translatedWord}>{words}</Text>
+            <Text style={translationStyle.translatedWord}>
+              {capitalizeFirstLetter(words)}
+            </Text>
             <View style={translationStyle.exampleArea}>
               {phrases.map((phrase, index) => (
                 <View key={index}>
@@ -159,9 +177,8 @@ const Translation = () => {
     );
   }
 
-
-  function translateHistoryWord(words:Array<string>, language:string) {
-    let word:string = '';
+  function translateHistoryWord(words: Array<string>, language: string) {
+    let word: string = "";
 
     if (language === KOKAMA) {
       word = words[1];
@@ -206,8 +223,7 @@ const Translation = () => {
 
           {/* Second Language */}
           <View style={[translationStyle.destLanguageArea]}>
-            <Text style={translationStyle.destLanguage}>
-              {destLanguage}</Text>
+            <Text style={translationStyle.destLanguage}>{destLanguage}</Text>
           </View>
         </View>
 
@@ -236,15 +252,23 @@ const Translation = () => {
             <Text style={translationStyle.historyText}>Histórico</Text>
           </TouchableWithoutFeedback>
         </View>
-        {history.length > 0 && historyIsEnabled && (
+        {SyncStorage.getAllKeys().length > 0 && historyIsEnabled && (
           <View style={translationStyle.historyWordsArea}>
-            {history.map(word =>
-              <TouchableWithoutFeedback onPress={() => translateHistoryWord(word.split('\n',2), originLanguage)}>
-                <Text style={translationStyle.historyWords}>
-                  {word}
+            {SyncStorage.getAllKeys().reverse().map((word: string, index: number) => (
+              <View key={index} style={translationStyle.historyWords}>
+                <Text
+                  style={[
+                    translationStyle.historyWord,
+                    { fontWeight: "bold", fontSize: 20 },
+                  ]}
+                >
+                  {capitalizeFirstLetter(word)}
                 </Text>
-              </TouchableWithoutFeedback>
-            )}
+                <Text style={translationStyle.historyWord}>
+                  {capitalizeFirstLetter(SyncStorage.get(word))}
+                </Text>
+              </View>
+            ))}
           </View>
         )}
       </ScrollView>
