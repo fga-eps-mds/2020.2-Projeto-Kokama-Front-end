@@ -160,7 +160,7 @@ const Translation = () => {
 
   function addHistoryWord(kokamaWord:string, portugueseWords: Array<string>, pronunciationType: string) {
     let concatPortuguese: string = portugueseWords[0];
-    portugueseWords.map((word: string, index: number) => {
+    portugueseWords.forEach((word:string, index:number) => {
       if (index > 0) {
         concatPortuguese = concatPortuguese.concat(", ", word);
       }
