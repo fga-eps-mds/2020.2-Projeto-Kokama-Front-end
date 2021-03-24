@@ -24,7 +24,7 @@ function addHistoryWord(word:string){
   }
   if (history.includes(word)) {  
     let indexToRemove:number = history.indexOf(word);
-    delete (history[indexToRemove]);
+    history.splice(indexToRemove, 1);
   }
   history.unshift(word);
 }
@@ -146,8 +146,8 @@ const Translation = () => {
           <View style={translationStyle.translationArea}>
             <Text style={translationStyle.translatedWord}>{words}</Text>
             <View style={translationStyle.exampleArea}>
-              {phrases.map((phrase) => (
-                <View>
+              {phrases.map((phrase, index) => (
+                <View key={index}>
                   <Text>{phrase.phrase_kokama}</Text>
                   <Text>{phrase.phrase_portuguese}</Text>
                 </View>
@@ -168,7 +168,7 @@ const Translation = () => {
     } else {
       word = words[0];
     }
-    
+
     setTranslation(word);
   }
 
