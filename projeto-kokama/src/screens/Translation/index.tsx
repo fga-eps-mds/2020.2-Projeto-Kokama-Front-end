@@ -163,14 +163,17 @@ const Translation = () => {
             <Text style={translationStyle.translatedWord}>
               {capitalizeFirstLetter(words)}
             </Text>
-            <View style={translationStyle.exampleArea}>
               {phrases.map((phrase, index) => (
-                <View key={index}>
-                  <Text>{phrase.phrase_kokama}</Text>
-                  <Text>{phrase.phrase_portuguese}</Text>
+                <View  style={translationStyle.exampleArea} key={index}>
+                  <Text style={translationStyle.examplesText}>
+                    
+                    {phrase.phrase_kokama.replace('<', '').replace('>', '')}
+                  </Text>
+                  <Text style={translationStyle.examplesText}>
+                    {phrase.phrase_portuguese.replace('<', '').replace('>', '')}
+                  </Text>
                 </View>
               ))}
-            </View>
           </View>
         )}
       </View>
