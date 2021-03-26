@@ -11,7 +11,7 @@ import {
 import translationStyle from "./styles";
 import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/AntDesign";
-import { Dictionary, Phrase } from "./interface";
+import { Dictionary, Phrase, HistoryTuple } from "./interface";
 import {
   PORTUGUESE,
   KOKAMA,
@@ -22,7 +22,10 @@ import SyncStorage from "sync-storage";
 import Api from "../../api/Api";
 import { capitalizeFirstLetter } from "../../utils/translation";
 
+
 let dictionary: Array<Dictionary> = [];
+let historyArray:Array<HistoryTuple>  = SyncStorage.get('history') || [];
+
 const Translation = () => {
   const [translation, setTranslation] = useState("");
   const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
@@ -30,6 +33,7 @@ const Translation = () => {
   const [historyIsEnabled, setHistoryIsEnabled] = useState(false);
   const toggleHistory = () =>
     setHistoryIsEnabled((previousState) => !previousState);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -194,14 +198,19 @@ const Translation = () => {
       );
     }
 
-    if (SyncStorage.getAllKeys().length >= HISTORYSIZE) {
-      SyncStorage.remove(SyncStorage.getAllKeys()[0]);
-    }
-    if (SyncStorage.get(concatKokama) != undefined) {
-      SyncStorage.remove(concatKokama);
-    }
+    let historyWord: HistoryTuple = {kokama: concatKokama, portuguese: concatPortuguese};
+    historyArray.forEach((word, index) => {
+      if (word.kokama == historyWord.kokama) {
+        historyArray.splice(index, 1);
+      }
+    });
+    
+    historyArray.unshift(historyWord);
 
-    SyncStorage.set(concatKokama, concatPortuguese);
+    if (historyArray.length > HISTORYSIZE) {
+      historyArray.pop();
+    }
+    SyncStorage.set('history', historyArray);
   }
 
   function translateHistoryWord(word: string, language: string) {
@@ -275,14 +284,13 @@ const Translation = () => {
             <Text style={translationStyle.historyText}>Histórico</Text>
           </TouchableWithoutFeedback>
         </View>
-        {SyncStorage.getAllKeys().length > 0 && historyIsEnabled && (
+        {historyArray.length > 0 && historyIsEnabled && (
           <View style={translationStyle.historyWordsArea}>
-            {SyncStorage.getAllKeys()
-              .reverse()
-              .map((word: string, index: number) => (
+            {historyArray
+              .map((word: HistoryTuple, index: number) => (
                 <TouchableWithoutFeedback
                   key={index}
-                  onPress={() => translateHistoryWord(word, originLanguage)}
+                  onPress={() => translateHistoryWord(word.kokama, originLanguage)}
                 >
                   <View style={translationStyle.historyWords}>
                     <Text
@@ -291,10 +299,10 @@ const Translation = () => {
                         { fontWeight: "bold", fontSize: 20 },
                       ]}
                     >
-                      {capitalizeFirstLetter(word)}
+                      {capitalizeFirstLetter(word.kokama)}
                     </Text>
                     <Text style={translationStyle.historyWord}>
-                      {capitalizeFirstLetter(SyncStorage.get(word))}
+                      {capitalizeFirstLetter(word.portuguese)}
                     </Text>
                   </View>
                 </TouchableWithoutFeedback>
