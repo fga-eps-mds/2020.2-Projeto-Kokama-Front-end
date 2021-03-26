@@ -9,8 +9,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import translationStyle from "./styles";
-import React, { useState } from "react";
-import dictionaryJSON from "./dictionary.json";
+import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import { Dictionary, Phrase } from "./interface";
 import {
@@ -20,8 +19,10 @@ import {
   FEMININO,
 } from "../../config/constants";
 import SyncStorage from "sync-storage";
+import Api from "../../api/Api";
 import { capitalizeFirstLetter } from "../../utils/translation";
 
+let dictionary: Array<Dictionary> = [];
 const Translation = () => {
   const [translation, setTranslation] = useState("");
   const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
@@ -30,9 +31,16 @@ const Translation = () => {
   const toggleHistory = () =>
     setHistoryIsEnabled((previousState) => !previousState);
 
-  let dictionary: Array<Dictionary> = JSON.parse(
-    JSON.stringify(dictionaryJSON)
-  );
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await Api(
+        "https://projeto-kokama-traducao.herokuapp.com/dicionario/?format=json"
+      );
+      dictionary = result.data;
+    };
+
+    fetchData();
+  }, []);
 
   function changeLanguage() {
     let temp = originLanguage;
@@ -48,7 +56,11 @@ const Translation = () => {
     let kokamaElement: Array<Dictionary> = [];
     for (let element of dictionary) {
       if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
-        addHistoryWord(element.word_kokama, element.translations, element.pronunciation_type);
+        addHistoryWord(
+          element.word_kokama,
+          element.translations,
+          element.pronunciation_type
+        );
         kokamaElement.push(element);
         break;
       }
@@ -62,7 +74,11 @@ const Translation = () => {
     for (let element of dictionary) {
       for (let word of element.translations) {
         if (userInput.toLowerCase() == word.toLowerCase()) {
-          addHistoryWord(element.word_kokama, element.translations, element.pronunciation_type);
+          addHistoryWord(
+            element.word_kokama,
+            element.translations,
+            element.pronunciation_type
+          );
           portugueseElements.push(element);
         }
       }
@@ -158,14 +174,18 @@ const Translation = () => {
     );
   }
 
-  function addHistoryWord(kokamaWord:string, portugueseWords: Array<string>, pronunciationType: string) {
+  function addHistoryWord(
+    kokamaWord: string,
+    portugueseWords: Array<string>,
+    pronunciationType: string
+  ) {
     let concatPortuguese: string = portugueseWords[0];
-    portugueseWords.forEach((word:string, index:number) => {
+    portugueseWords.forEach((word: string, index: number) => {
       if (index > 0) {
         concatPortuguese = concatPortuguese.concat(", ", word);
       }
     });
-    let concatKokama: string = kokamaWord; 
+    let concatKokama: string = kokamaWord;
     if (pronunciationType === FEMININO) {
       concatKokama = concatKokama.concat(
         " (",
@@ -260,7 +280,8 @@ const Translation = () => {
             {SyncStorage.getAllKeys()
               .reverse()
               .map((word: string, index: number) => (
-                <TouchableWithoutFeedback key={index}
+                <TouchableWithoutFeedback
+                  key={index}
                   onPress={() => translateHistoryWord(word, originLanguage)}
                 >
                   <View style={translationStyle.historyWords}>
