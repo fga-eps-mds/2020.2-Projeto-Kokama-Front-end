@@ -22,8 +22,6 @@ import SyncStorage from "sync-storage";
 import Api from "../../api/Api";
 import { capitalizeFirstLetter } from "../../utils/translation";
 
-
-let dictionary: Array<Dictionary> = [];
 let historyArray:Array<HistoryTuple>  = SyncStorage.get('history') || [];
 
 const Translation = () => {
@@ -40,7 +38,7 @@ const Translation = () => {
       const result = await Api(
         "https://projeto-kokama-traducao.herokuapp.com/dicionario/?format=json"
       );
-      dictionary = result.data;
+      SyncStorage.set('dictionary', result.data);
     };
 
     fetchData();
@@ -58,7 +56,7 @@ const Translation = () => {
 
   function getKokamaElement(userInput: string) {
     let kokamaElement: Array<Dictionary> = [];
-    for (let element of dictionary) {
+    SyncStorage.get('dictionary').map((element:Dictionary) => {
       if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
         addHistoryWord(
           element.word_kokama,
@@ -66,16 +64,17 @@ const Translation = () => {
           element.pronunciation_type
         );
         kokamaElement.push(element);
-        break;
+        return;
       }
-    }
+    })
 
     return kokamaElement;
   }
 
   function getPortugueseElement(userInput: string) {
     let portugueseElements: Array<Dictionary> = [];
-    for (let element of dictionary) {
+
+    SyncStorage.get('dictionary').map((element:Dictionary) => {
       for (let word of element.translations) {
         if (userInput.toLowerCase() == word.toLowerCase()) {
           addHistoryWord(
@@ -86,7 +85,7 @@ const Translation = () => {
           portugueseElements.push(element);
         }
       }
-    }
+    });
 
     return portugueseElements;
   }
@@ -276,7 +275,11 @@ const Translation = () => {
         </View>
 
         {/* Translate answer */}
-        {Translate(originLanguage, translation)}
+        {SyncStorage.get('dictionary') !== undefined && (
+          <View>
+            {Translate(originLanguage, translation)}
+          </View>
+        )}
 
         {/* Historic */}
         <View style={translationStyle.historyArea}>
