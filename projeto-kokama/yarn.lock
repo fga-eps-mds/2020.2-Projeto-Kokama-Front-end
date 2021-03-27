@@ -1781,7 +1781,7 @@
 
 "@sanar/react-native-highlight-text@^1.0.2":
   version "1.0.2"
-  resolved "https://registry.npmjs.org/@sanar/react-native-highlight-text/-/react-native-highlight-text-1.0.2.tgz"
+  resolved "https://registry.yarnpkg.com/@sanar/react-native-highlight-text/-/react-native-highlight-text-1.0.2.tgz#3109442e610095efa647ef49a094d6e143d4b30a"
   integrity sha512-+mhWujE0YcagtTWHIipSSTAz4ROCmDTLl5MwIL1WtO9ohnMVWPRuZTeqwrJ5kQbSjHZ+/sdZfg1gGU7enNPB4g==
   dependencies:
     highlight-words-core "^1.2.0"

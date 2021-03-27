@@ -11,6 +11,7 @@ import {
 import React, { useState, useEffect } from "react";
 import SyncStorage from "sync-storage";
 import Icon from "react-native-vector-icons/AntDesign";
+import HighlightText from "@sanar/react-native-highlight-text";
 import { Dictionary, Phrase, HistoryTuple } from "./interface";
 import {
   PORTUGUESE,
@@ -20,7 +21,7 @@ import {
 } from "../../config/constants";
 import translationStyle from "./styles";
 import Api from "../../api/Api";
-import { capitalizeFirstLetter } from "../../utils/translation";
+import { capitalizeFirstLetter, removeStringFromMarkers } from "../../utils/translation";
 
 let historyArray: Array<HistoryTuple> = SyncStorage.get("history") || [];
 
@@ -32,7 +33,6 @@ const Translation = () => {
   const toggleHistory = () =>
     setHistoryIsEnabled((previousState) => !previousState);
 
-
   // Updates dictionary
   // Executes one time on the inicialization
   useEffect(() => {
@@ -40,7 +40,6 @@ const Translation = () => {
       const result = await Api(
         "https://projeto-kokama-traducao.herokuapp.com/dicionario/?format=json"
       );
-      console.log("Dicionário pronto");
       SyncStorage.set("dictionary", result.data);
     };
 
@@ -148,7 +147,7 @@ const Translation = () => {
             element.word_kokama,
             element.translations,
             element.pronunciation_type
-          ); 
+          );
         }
       }
     });
@@ -181,7 +180,10 @@ const Translation = () => {
   }
 
   // For a given dictionary element array, return its respective translation for presentation
-  function getTranslations(language: string, dictionaryElements: Array<Dictionary>) {
+  function getTranslations(
+    language: string,
+    dictionaryElements: Array<Dictionary>
+  ) {
     let translatedWords: string = "";
 
     for (let element of dictionaryElements) {
@@ -237,13 +239,23 @@ const Translation = () => {
             {phrases.map((phrase, index) => (
               <View style={translationStyle.exampleArea} key={index}>
                 {/* Phrase kokama */}
-                <Text style={translationStyle.examplesText}>
-                  {phrase.phrase_kokama.replace("<", "").replace(">", "")}
-                </Text>
+                <HighlightText
+                  style={translationStyle.examplesText}
+                  highlightStyle={{ color: "red" }}
+                  searchWords={[removeStringFromMarkers(phrase.phrase_kokama, "<", ">")]}
+                  textToHighlight={phrase.phrase_kokama
+                    .replace("<", "")
+                    .replace(">", "")}
+                />
                 {/* Phrase portuguese */}
-                <Text style={translationStyle.examplesText}>
-                  {phrase.phrase_portuguese.replace("<", "").replace(">", "")}
-                </Text>
+                <HighlightText
+                  style={translationStyle.examplesText}
+                  highlightStyle={{ color: "red" }}
+                  searchWords={[removeStringFromMarkers(phrase.phrase_portuguese, "<", ">")]}
+                  textToHighlight={phrase.phrase_portuguese
+                    .replace("<", "")
+                    .replace(">", "")}
+                />
               </View>
             ))}
           </View>
@@ -251,7 +263,6 @@ const Translation = () => {
       </View>
     );
   }
-
 
   return (
     <SafeAreaView>
