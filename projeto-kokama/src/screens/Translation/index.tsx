@@ -8,8 +8,8 @@ import {
   StatusBar,
   SafeAreaView,
 } from "react-native";
-import translationStyle from "./styles";
 import React, { useState, useEffect } from "react";
+import SyncStorage from "sync-storage";
 import Icon from "react-native-vector-icons/AntDesign";
 import { Dictionary, Phrase, HistoryTuple } from "./interface";
 import {
@@ -18,7 +18,7 @@ import {
   HISTORYSIZE,
   FEMININO,
 } from "../../config/constants";
-import SyncStorage from "sync-storage";
+import translationStyle from "./styles";
 import Api from "../../api/Api";
 import { capitalizeFirstLetter } from "../../utils/translation";
 
@@ -32,6 +32,9 @@ const Translation = () => {
   const toggleHistory = () =>
     setHistoryIsEnabled((previousState) => !previousState);
 
+
+  // Updates dictionary
+  // Executes one time on the inicialization
   useEffect(() => {
     const fetchData = async () => {
       const result = await Api(
@@ -44,27 +47,86 @@ const Translation = () => {
     fetchData();
   }, []);
 
-  function changeLanguage() {
+  // Switch the direction of the translation
+  function exchangeLanguage() {
     let temp = originLanguage;
     setOriginLanguage(destLanguage);
     setDestLanguage(temp);
   }
 
+  // Add the special character to the actual position in the TextInput
+  // Called by pressing the "i cortado" Icon
   function insertSymbol() {
     setTranslation(translation + "ɨ");
   }
 
+  // When a word with translation is found, store it in history
+  // An Array Object is saved in storage with a "history" key
+  function addHistoryWord(
+    kokamaWord: string,
+    portugueseWords: Array<string>,
+    pronunciationType: string
+  ) {
+    // Format portuguese words string for presentation
+    let concatPortuguese: string = portugueseWords.join(", ");
+
+    let concatKokama: string = kokamaWord;
+    // Add a marker to the kokama word if its pronunciation type is feminine
+    // Allowing user to identify this in presentation
+    if (pronunciationType === FEMININO) {
+      concatKokama = concatKokama.concat(
+        " (",
+        capitalizeFirstLetter(FEMININO),
+        ")"
+      );
+    }
+
+    // Create new history element to add to the history array and storage
+    let historyWord: HistoryTuple = {
+      kokama: concatKokama,
+      portuguese: concatPortuguese,
+    };
+    // If the element to be added is already in history, delete the old one
+    historyArray.forEach((word, index) => {
+      if (word.kokama == historyWord.kokama) {
+        historyArray.splice(index, 1);
+      }
+    });
+    // Add the new history element at the beginning of the history array
+    historyArray.unshift(historyWord);
+    // Remove the oldest element if history reach max size
+    if (historyArray.length > HISTORYSIZE) {
+      historyArray.pop();
+    }
+    // Add the updated history array as an object to storage
+    SyncStorage.set("history", historyArray);
+  }
+
+  // Set the text input equal to the kokama word the user pressed inside history
+  function translateHistoryWord(word: string, language: string) {
+    // Get the presentation kokama word and align its format to the one in the dictionary
+    // ex. remove the " (Feminino)" after word with feminine pronunciations
+    let kokamaWord: string = word.split(" (")[0];
+    setTranslation(capitalizeFirstLetter(kokamaWord));
+    // Automatically changes to kokama
+    if (language !== KOKAMA) {
+      exchangeLanguage();
+    }
+  }
+
+  // Check and return from dictionary word element that match the kokama user input
   function getKokamaElement(userInput: string) {
     let kokamaElement: Array<Dictionary> = [];
-
     for (let element of SyncStorage.get("dictionary")) {
       if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
+        // Add matching word to the return array
+        kokamaElement.push(element);
+        // Add matching word to history
         addHistoryWord(
           element.word_kokama,
           element.translations,
           element.pronunciation_type
         );
-        kokamaElement.push(element);
         break;
       }
     }
@@ -72,18 +134,21 @@ const Translation = () => {
     return kokamaElement;
   }
 
+  // Check and return from dictionary word elements that match the portuguese user input
   function getPortugueseElement(userInput: string) {
     let portugueseElements: Array<Dictionary> = [];
 
     SyncStorage.get("dictionary").forEach((element: Dictionary) => {
       for (let word of element.translations) {
         if (userInput.toLowerCase() == word.toLowerCase()) {
+          // Add matching word to the return array
+          portugueseElements.push(element);
+          // Add matching word to history
           addHistoryWord(
             element.word_kokama,
             element.translations,
             element.pronunciation_type
-          );
-          portugueseElements.push(element);
+          ); 
         }
       }
     });
@@ -91,6 +156,7 @@ const Translation = () => {
     return portugueseElements;
   }
 
+  // Returns all dictionary elements that matches the user input, based on the language searched
   function getDictionaryElements(language: string, userInput: string) {
     let dictionaryElements: Array<Dictionary> = [];
 
@@ -105,6 +171,7 @@ const Translation = () => {
     return dictionaryElements;
   }
 
+  // For a given dictionary element(word), return its kokama and portuguese words for presentation
   function getWords(language: string, word: Dictionary) {
     if (language == KOKAMA) {
       return word.translations;
@@ -113,10 +180,8 @@ const Translation = () => {
     }
   }
 
-  function getTranslations(
-    language: string,
-    dictionaryElements: Array<Dictionary>
-  ) {
+  // For a given dictionary element array, return its respective translation for presentation
+  function getTranslations(language: string, dictionaryElements: Array<Dictionary>) {
     let translatedWords: string = "";
 
     for (let element of dictionaryElements) {
@@ -133,9 +198,9 @@ const Translation = () => {
     return translatedWords;
   }
 
+  // For a given dictionary element array, return its respective example phrases for presentation
   function getPhrases(dictionaryElements: Array<Dictionary>) {
     let phrases: Array<Phrase> = [];
-
     for (let element of dictionaryElements) {
       phrases = phrases.concat(element.phrases);
     }
@@ -143,6 +208,8 @@ const Translation = () => {
     return phrases;
   }
 
+  // Main translation function
+  // Return TSX visualization of the translation
   function Translate(language: string, userInput: string) {
     let translationList: Array<Dictionary> = getDictionaryElements(
       language,
@@ -154,21 +221,26 @@ const Translation = () => {
 
     return (
       <View>
+        {/* Warning if the user input does not match any word in dictionary */}
         {phrases.length === 0 && translation !== "" && (
           <View style={{ alignItems: "center" }}>
             <Text style={{ textAlign: "center" }}>Tradução não encontrada</Text>
           </View>
         )}
+        {/* If a translation is found, present the translations and phrases */}
         {phrases.length > 0 && (
           <View style={translationStyle.translationArea}>
+            {/* Presentation of the translations words */}
             <Text style={translationStyle.translatedWord}>
               {capitalizeFirstLetter(words)}
             </Text>
             {phrases.map((phrase, index) => (
               <View style={translationStyle.exampleArea} key={index}>
+                {/* Phrase kokama */}
                 <Text style={translationStyle.examplesText}>
                   {phrase.phrase_kokama.replace("<", "").replace(">", "")}
                 </Text>
+                {/* Phrase portuguese */}
                 <Text style={translationStyle.examplesText}>
                   {phrase.phrase_portuguese.replace("<", "").replace(">", "")}
                 </Text>
@@ -180,51 +252,6 @@ const Translation = () => {
     );
   }
 
-  function addHistoryWord(
-    kokamaWord: string,
-    portugueseWords: Array<string>,
-    pronunciationType: string
-  ) {
-    let concatPortuguese: string = portugueseWords[0];
-    portugueseWords.forEach((word: string, index: number) => {
-      if (index > 0) {
-        concatPortuguese = concatPortuguese.concat(", ", word);
-      }
-    });
-    let concatKokama: string = kokamaWord;
-    if (pronunciationType === FEMININO) {
-      concatKokama = concatKokama.concat(
-        " (",
-        capitalizeFirstLetter(FEMININO),
-        ")"
-      );
-    }
-
-    let historyWord: HistoryTuple = {
-      kokama: concatKokama,
-      portuguese: concatPortuguese,
-    };
-    historyArray.forEach((word, index) => {
-      if (word.kokama == historyWord.kokama) {
-        historyArray.splice(index, 1);
-      }
-    });
-
-    historyArray.unshift(historyWord);
-
-    if (historyArray.length > HISTORYSIZE) {
-      historyArray.pop();
-    }
-    SyncStorage.set("history", historyArray);
-  }
-
-  function translateHistoryWord(word: string, language: string) {
-    let kokamaWord: string = word.split(" (")[0];
-    setTranslation(capitalizeFirstLetter(kokamaWord));
-    if (language !== KOKAMA) {
-      changeLanguage();
-    }
-  }
 
   return (
     <SafeAreaView>
@@ -253,7 +280,7 @@ const Translation = () => {
 
           {/* Change language icon */}
           <View style={translationStyle.languageExchangeArea}>
-            <TouchableWithoutFeedback onPress={changeLanguage}>
+            <TouchableWithoutFeedback onPress={exchangeLanguage}>
               <Icon name="swap" size={40} color="#333" />
             </TouchableWithoutFeedback>
           </View>
