@@ -8,9 +8,9 @@ const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
 const CONTAINER_BACKGROUND = "#F0F0F0";
 const BORDER_STANDARD = "#BBBBBB";
 const WHITE_BACKGROUND = "#FFFFFF";
-const KOKAMA_RED = "#ff6363";
-const TEXT = "#333333";
-const HISTORY_TEXT = "#A5A5A5";
+export const KOKAMA_RED = "#ff6363";
+export const TEXT = "#333333";
+export const HISTORY_TEXT = "#A5A5A5";
 const HISTORY_WORD_TEXT = "#555555";
 
 const styles = StyleSheet.create({
@@ -149,14 +149,17 @@ const styles = StyleSheet.create({
     marginTop: 5,
     borderColor: BORDER_STANDARD,
     backgroundColor: WHITE_BACKGROUND,
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   historyText: {
-    width: "100%",
     textAlign: "left",
     fontSize: 20,
     paddingLeft: 23,
     color: HISTORY_TEXT,
+  },
+  historyIcon: {
+    marginRight: 25,
   },
   historyWordsArea: {
     flexDirection: "column",

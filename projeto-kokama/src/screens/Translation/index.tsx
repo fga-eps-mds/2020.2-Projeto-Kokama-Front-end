@@ -21,7 +21,11 @@ import {
 } from "../../config/constants";
 import translationStyle from "./styles";
 import Api from "../../api/Api";
-import { capitalizeFirstLetter, removeStringFromMarkers } from "../../utils/translation";
+import {
+  capitalizeFirstLetter,
+  removeStringFromMarkers,
+} from "../../utils/translation";
+import { TEXT ,HISTORY_TEXT, KOKAMA_RED } from "../../screens/Translation/styles";
 
 let historyArray: Array<HistoryTuple> = SyncStorage.get("history") || [];
 
@@ -188,7 +192,7 @@ const Translation = () => {
 
     for (let element of dictionaryElements) {
       let words: Array<string> = getWords(language, element);
-      translatedWords = words.join(', ');
+      translatedWords = words.join(", ");
     }
 
     return translatedWords;
@@ -236,7 +240,9 @@ const Translation = () => {
                 <HighlightText
                   style={translationStyle.examplesText}
                   highlightStyle={{ color: "red" }}
-                  searchWords={[removeStringFromMarkers(phrase.phrase_kokama, "<", ">")]}
+                  searchWords={[
+                    removeStringFromMarkers(phrase.phrase_kokama, "<", ">"),
+                  ]}
                   textToHighlight={phrase.phrase_kokama
                     .replace("<", "")
                     .replace(">", "")}
@@ -245,7 +251,9 @@ const Translation = () => {
                 <HighlightText
                   style={translationStyle.examplesText}
                   highlightStyle={{ color: "red" }}
-                  searchWords={[removeStringFromMarkers(phrase.phrase_portuguese, "<", ">")]}
+                  searchWords={[
+                    removeStringFromMarkers(phrase.phrase_portuguese, "<", ">"),
+                  ]}
                   textToHighlight={phrase.phrase_portuguese
                     .replace("<", "")
                     .replace(">", "")}
@@ -264,7 +272,7 @@ const Translation = () => {
         style={translationStyle.container}
         keyboardShouldPersistTaps={"always"}
       >
-        <StatusBar translucent backgroundColor={"#f23232"} />
+        <StatusBar translucent backgroundColor={ KOKAMA_RED } />
         {/* Logo area */}
         <View style={translationStyle.logoArea}>
           <Image
@@ -286,7 +294,7 @@ const Translation = () => {
           {/* Change language icon */}
           <View style={translationStyle.languageExchangeArea}>
             <TouchableWithoutFeedback onPress={exchangeLanguage}>
-              <Icon name="swap" size={40} color="#333" />
+              <Icon name="swap" size={40} color = { TEXT } />
             </TouchableWithoutFeedback>
           </View>
 
@@ -318,11 +326,20 @@ const Translation = () => {
         )}
 
         {/* Historic */}
-        <View style={translationStyle.historyArea}>
-          <TouchableWithoutFeedback onPress={toggleHistory}>
-            <Text style={translationStyle.historyText}>Histórico</Text>
-          </TouchableWithoutFeedback>
-        </View>
+        <TouchableWithoutFeedback onPress={toggleHistory}>
+          <View style={translationStyle.historyArea}>
+              <Text style={translationStyle.historyText}>Histórico</Text>
+              {(!historyIsEnabled && (
+              <View style={translationStyle.historyIcon}>
+                <Icon name="down" size={22} color={HISTORY_TEXT} />
+              </View>
+              )) || (
+              <View style={translationStyle.historyIcon}>
+                <Icon name="up" size={22} color={HISTORY_TEXT} />
+              </View>
+              )}
+          </View>
+        </TouchableWithoutFeedback>
         {historyArray.length > 0 && historyIsEnabled && (
           <View style={translationStyle.historyWordsArea}>
             {historyArray.map((word: HistoryTuple, index: number) => (
