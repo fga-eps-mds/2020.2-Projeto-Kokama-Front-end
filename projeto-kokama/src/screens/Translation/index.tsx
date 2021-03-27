@@ -56,19 +56,18 @@ const Translation = () => {
 
   function getKokamaElement(userInput: string) {
     let kokamaElement: Array<Dictionary> = [];
-    try {
-      SyncStorage.get("dictionary").forEach((element: Dictionary) => {
-        if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
-          addHistoryWord(
-            element.word_kokama,
-            element.translations,
-            element.pronunciation_type
-          );
-          kokamaElement.push(element);
-          return;
-        }
-      });
-    } catch (e) {}
+
+    for (let element of SyncStorage.get("dictionary")) {
+      if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
+        addHistoryWord(
+          element.word_kokama,
+          element.translations,
+          element.pronunciation_type
+        );
+        kokamaElement.push(element);
+        break;
+      }
+    }
 
     return kokamaElement;
   }
@@ -76,7 +75,7 @@ const Translation = () => {
   function getPortugueseElement(userInput: string) {
     let portugueseElements: Array<Dictionary> = [];
 
-    SyncStorage.get("dictionary").map((element: Dictionary) => {
+    SyncStorage.get("dictionary").forEach((element: Dictionary) => {
       for (let word of element.translations) {
         if (userInput.toLowerCase() == word.toLowerCase()) {
           addHistoryWord(
