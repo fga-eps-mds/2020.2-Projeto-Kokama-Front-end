@@ -5,25 +5,32 @@ const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
 
+const CONTAINER_BACKGROUND = "#F0F0F0";
+const BORDER_STANDARD = "#BBBBBB";
+const WHITE_BACKGROUND = "#FFFFFF";
+const KOKAMA_RED = "#ff6363";
+const TEXT = "#333333";
+const HISTORY_TEXT = "#A5A5A5";
+const HISTORY_WORD_TEXT = "#555555";
+
 const styles = StyleSheet.create({
   container: {
     maxWidth: screen.width,
     height: window.height,
-    backgroundColor: "#F0F0F0",
+    backgroundColor: CONTAINER_BACKGROUND,
   },
 
   logoArea: {
     flexDirection: "column",
     marginTop: STATUSBAR_HEIGHT + 5,
     borderBottomWidth: 1,
-    borderColor: "#BBB",
+    borderColor: BORDER_STANDARD,
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#F0F0F0",
+    backgroundColor: CONTAINER_BACKGROUND,
   },
   logo: {
-    backgroundColor: "#fff",
     borderRadius: 100,
     height: 50,
     width: 50,
@@ -36,8 +43,8 @@ const styles = StyleSheet.create({
     height: 55,
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderColor: "#BBB",
-    backgroundColor: "#F0F0F0",
+    borderColor: BORDER_STANDARD,
+    backgroundColor: CONTAINER_BACKGROUND,
     justifyContent: "space-between",
     alignItems: "center",
   },
@@ -68,8 +75,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: "#BBB",
-    backgroundColor: "#FFF",
+    borderColor: BORDER_STANDARD,
+    backgroundColor: WHITE_BACKGROUND,
     alignItems: "center",
     justifyContent: "space-between",
   },
@@ -84,7 +91,7 @@ const styles = StyleSheet.create({
     height: "65%",
     marginRight: 15,
     borderWidth: 2.5,
-    borderColor: "#ff6363",
+    borderColor: KOKAMA_RED,
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "center",
@@ -94,12 +101,12 @@ const styles = StyleSheet.create({
   },
   translationArea: {
     width: "100%",
-    backgroundColor: "#FFF",
+    backgroundColor: WHITE_BACKGROUND,
     borderBottomWidth: 1.5,
     borderTopWidth: 1,
     marginTop: 5,
     paddingBottom: 10,
-    borderColor: "#BBB",
+    borderColor: BORDER_STANDARD,
     alignItems: "flex-start",
   },
   translatedWord: {
@@ -109,11 +116,11 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
     textAlign: "left",
     fontSize: 28,
-    color: "#333",
+    color: TEXT,
     paddingLeft: 23,
     marginBottom: 15,
     borderBottomWidth: 1.5,
-    borderColor: "#BBB",
+    borderColor: BORDER_STANDARD,
   },
   exampleArea: {
     width: "100%",
@@ -123,14 +130,14 @@ const styles = StyleSheet.create({
   examplesText: {
     width: "100%",
     fontSize: 15,
-    color: "#333",
+    color: TEXT,
     marginBottom: 5,
     paddingHorizontal: 20,
     flexWrap: "wrap",
   },
   examplesWord: {
     fontSize: 20,
-    color: "#FF6363",
+    color: KOKAMA_RED,
     height: "100%",
     flexWrap: "wrap",
   },
@@ -140,8 +147,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1.5,
     borderTopWidth: 1.5,
     marginTop: 5,
-    borderColor: "#BBB",
-    backgroundColor: "#FFF",
+    borderColor: BORDER_STANDARD,
+    backgroundColor: WHITE_BACKGROUND,
     alignItems: 'center'
   },
   historyText: {
@@ -149,13 +156,13 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 20,
     paddingLeft: 23,
-    color: "#a5a5a5",
+    color: HISTORY_TEXT,
   },
   historyWordsArea: {
     flexDirection: "column",
-    backgroundColor: "#FFF",
+    backgroundColor: WHITE_BACKGROUND,
     borderBottomWidth: 1.5,
-    borderColor: "#BBB",
+    borderColor: BORDER_STANDARD,
   },
   historyWords: {
     width: "100%",
@@ -163,17 +170,17 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 18,
     borderBottomWidth: 0.5,
-    borderColor: "#BBB",
+    borderColor: BORDER_STANDARD,
     paddingLeft: 23,
     paddingVertical: 7,
-    color: "#555",
+    color: HISTORY_WORD_TEXT,
   },
   historyWord: {
     width: "100%",
     textAlignVertical: "center",
     textAlign: "left",
     fontSize: 18,
-    color: "#555",
+    color: HISTORY_WORD_TEXT,
   },
 });
 

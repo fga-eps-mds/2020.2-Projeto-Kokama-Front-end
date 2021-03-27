@@ -188,13 +188,7 @@ const Translation = () => {
 
     for (let element of dictionaryElements) {
       let words: Array<string> = getWords(language, element);
-      for (let word of words) {
-        if (translatedWords.length == 0) {
-          translatedWords = translatedWords.concat(word);
-        } else {
-          translatedWords = translatedWords.concat(", ", word);
-        }
-      }
+      translatedWords = words.join(', ');
     }
 
     return translatedWords;
