@@ -22,7 +22,7 @@ import SyncStorage from "sync-storage";
 import Api from "../../api/Api";
 import { capitalizeFirstLetter } from "../../utils/translation";
 
-let historyArray:Array<HistoryTuple>  = SyncStorage.get('history') || [];
+let historyArray: Array<HistoryTuple> = SyncStorage.get("history") || [];
 
 const Translation = () => {
   const [translation, setTranslation] = useState("");
@@ -32,13 +32,13 @@ const Translation = () => {
   const toggleHistory = () =>
     setHistoryIsEnabled((previousState) => !previousState);
 
-
   useEffect(() => {
     const fetchData = async () => {
       const result = await Api(
         "https://projeto-kokama-traducao.herokuapp.com/dicionario/?format=json"
       );
-      SyncStorage.set('dictionary', result.data);
+      console.log("Dicionário pronto");
+      SyncStorage.set("dictionary", result.data);
     };
 
     fetchData();
@@ -56,17 +56,19 @@ const Translation = () => {
 
   function getKokamaElement(userInput: string) {
     let kokamaElement: Array<Dictionary> = [];
-    SyncStorage.get('dictionary').map((element:Dictionary) => {
-      if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
-        addHistoryWord(
-          element.word_kokama,
-          element.translations,
-          element.pronunciation_type
-        );
-        kokamaElement.push(element);
-        return;
-      }
-    })
+    try {
+      SyncStorage.get("dictionary").forEach((element: Dictionary) => {
+        if (userInput.toLowerCase() == element.word_kokama.toLowerCase()) {
+          addHistoryWord(
+            element.word_kokama,
+            element.translations,
+            element.pronunciation_type
+          );
+          kokamaElement.push(element);
+          return;
+        }
+      });
+    } catch (e) {}
 
     return kokamaElement;
   }
@@ -74,7 +76,7 @@ const Translation = () => {
   function getPortugueseElement(userInput: string) {
     let portugueseElements: Array<Dictionary> = [];
 
-    SyncStorage.get('dictionary').map((element:Dictionary) => {
+    SyncStorage.get("dictionary").map((element: Dictionary) => {
       for (let word of element.translations) {
         if (userInput.toLowerCase() == word.toLowerCase()) {
           addHistoryWord(
@@ -163,17 +165,16 @@ const Translation = () => {
             <Text style={translationStyle.translatedWord}>
               {capitalizeFirstLetter(words)}
             </Text>
-              {phrases.map((phrase, index) => (
-                <View  style={translationStyle.exampleArea} key={index}>
-                  <Text style={translationStyle.examplesText}>
-                    
-                    {phrase.phrase_kokama.replace('<', '').replace('>', '')}
-                  </Text>
-                  <Text style={translationStyle.examplesText}>
-                    {phrase.phrase_portuguese.replace('<', '').replace('>', '')}
-                  </Text>
-                </View>
-              ))}
+            {phrases.map((phrase, index) => (
+              <View style={translationStyle.exampleArea} key={index}>
+                <Text style={translationStyle.examplesText}>
+                  {phrase.phrase_kokama.replace("<", "").replace(">", "")}
+                </Text>
+                <Text style={translationStyle.examplesText}>
+                  {phrase.phrase_portuguese.replace("<", "").replace(">", "")}
+                </Text>
+              </View>
+            ))}
           </View>
         )}
       </View>
@@ -200,23 +201,26 @@ const Translation = () => {
       );
     }
 
-    let historyWord: HistoryTuple = {kokama: concatKokama, portuguese: concatPortuguese};
+    let historyWord: HistoryTuple = {
+      kokama: concatKokama,
+      portuguese: concatPortuguese,
+    };
     historyArray.forEach((word, index) => {
       if (word.kokama == historyWord.kokama) {
         historyArray.splice(index, 1);
       }
     });
-    
+
     historyArray.unshift(historyWord);
 
     if (historyArray.length > HISTORYSIZE) {
       historyArray.pop();
     }
-    SyncStorage.set('history', historyArray);
+    SyncStorage.set("history", historyArray);
   }
 
   function translateHistoryWord(word: string, language: string) {
-    let kokamaWord: string = word.split(" ").toString();
+    let kokamaWord: string = word.split(" (")[0];
     setTranslation(capitalizeFirstLetter(kokamaWord));
     if (language !== KOKAMA) {
       changeLanguage();
@@ -278,10 +282,8 @@ const Translation = () => {
         </View>
 
         {/* Translate answer */}
-        {SyncStorage.get('dictionary') !== undefined && (
-          <View>
-            {Translate(originLanguage, translation)}
-          </View>
+        {SyncStorage.get("dictionary") !== undefined && (
+          <View>{Translate(originLanguage, translation)}</View>
         )}
 
         {/* Historic */}
@@ -292,27 +294,28 @@ const Translation = () => {
         </View>
         {historyArray.length > 0 && historyIsEnabled && (
           <View style={translationStyle.historyWordsArea}>
-            {historyArray
-              .map((word: HistoryTuple, index: number) => (
-                <TouchableWithoutFeedback
-                  key={index}
-                  onPress={() => translateHistoryWord(word.kokama, originLanguage)}
-                >
-                  <View style={translationStyle.historyWords}>
-                    <Text
-                      style={[
-                        translationStyle.historyWord,
-                        { fontWeight: "bold", fontSize: 20 },
-                      ]}
-                    >
-                      {capitalizeFirstLetter(word.kokama)}
-                    </Text>
-                    <Text style={translationStyle.historyWord}>
-                      {capitalizeFirstLetter(word.portuguese)}
-                    </Text>
-                  </View>
-                </TouchableWithoutFeedback>
-              ))}
+            {historyArray.map((word: HistoryTuple, index: number) => (
+              <TouchableWithoutFeedback
+                key={index}
+                onPress={() =>
+                  translateHistoryWord(word.kokama, originLanguage)
+                }
+              >
+                <View style={translationStyle.historyWords}>
+                  <Text
+                    style={[
+                      translationStyle.historyWord,
+                      { fontWeight: "bold", fontSize: 20 },
+                    ]}
+                  >
+                    {capitalizeFirstLetter(word.kokama)}
+                  </Text>
+                  <Text style={translationStyle.historyWord}>
+                    {capitalizeFirstLetter(word.portuguese)}
+                  </Text>
+                </View>
+              </TouchableWithoutFeedback>
+            ))}
           </View>
         )}
       </ScrollView>
