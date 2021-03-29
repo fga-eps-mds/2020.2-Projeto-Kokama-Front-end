@@ -1645,10 +1645,10 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
-"@react-native-async-storage/async-storage@^1.14.1":
-  version "1.14.1"
-  resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-1.14.1.tgz"
-  integrity sha512-UkLUox2q5DKNYB6IMUzsuwrTJeXGLySvtQlnrqd3fd+96JErCT4X3xD+W1cvQjes0nm0LbaELbwObKc+Tea7wA==
+"@react-native-community/async-storage@^1.6.3":
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.12.1.tgz#25f821b4f6b13abe005ad67e47c6f1cee9f27b24"
+  integrity sha512-70WGaH3PKYASi4BThuEEKMkyAgE9k7VytBqmgPRx3MzJx9/MkspwqJGmn3QLCgHLIFUgF1pit2mWICbRJ3T3lg==
   dependencies:
     deep-assign "^3.0.0"
 
@@ -1774,7 +1774,7 @@
 
 "@sanar/react-native-highlight-text@^1.0.2":
   version "1.0.2"
-  resolved "https://registry.npmjs.org/@sanar/react-native-highlight-text/-/react-native-highlight-text-1.0.2.tgz"
+  resolved "https://registry.yarnpkg.com/@sanar/react-native-highlight-text/-/react-native-highlight-text-1.0.2.tgz#3109442e610095efa647ef49a094d6e143d4b30a"
   integrity sha512-+mhWujE0YcagtTWHIipSSTAz4ROCmDTLl5MwIL1WtO9ohnMVWPRuZTeqwrJ5kQbSjHZ+/sdZfg1gGU7enNPB4g==
   dependencies:
     highlight-words-core "^1.2.0"
@@ -1828,6 +1828,11 @@
   integrity sha512-3UuR4MoWf5spNgrG6cwsmT9DdRghcR4IDFOzNZ6+wcmacxkFykcb5ji0nNVm9ckBT4BCxvCrJJbM4+EYsEEVIg==
   dependencies:
     "@types/react" "^16"
+
+"@types/react-native-dotenv@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@types/react-native-dotenv/-/react-native-dotenv-0.2.0.tgz#32c58422a422c1adf68acce363ed791314d5a8e7"
+  integrity sha512-ZxX+dU/yoQc0jTk+/NWttkiuXceJyN5FpOSqDl0WynN5GDzxwH7OMruQ47qcY8llo2RD3irjvzJ9BwC8gDiq0A==
 
 "@types/react-native-vector-icons@^6.4.6":
   version "6.4.6"
@@ -2284,6 +2289,13 @@ available-typed-arrays@^1.0.2:
   integrity sha512-XWX3OX8Onv97LMk/ftVyBibpGwY5a8SmuxZPzeOxqmuEqUCOM9ZE+uIaD1VNJ5QnvU2UQusvmKbuM1FR8QWGfQ==
   dependencies:
     array-filter "^1.0.0"
+
+axios@^0.21.1:
+  version "0.21.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+  integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
+  dependencies:
+    follow-redirects "^1.10.0"
 
 babel-plugin-dynamic-import-node@^2.3.3:
   version "2.3.3"
@@ -3082,6 +3094,11 @@ dom-walk@^0.1.0:
   resolved "https://registry.npmjs.org/dom-walk/-/dom-walk-0.1.2.tgz"
   integrity sha512-6QvTW9mrGeIegrFXdtQi9pk7O/nSK6lSdXW2eqUspN5LWD7UTji2Fqw5V2YLjBpHEoU9Xl/eUWNpDeZvoyOv2w==
 
+dotenv@^8.0.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
@@ -3822,6 +3839,11 @@ flatted@^3.1.0:
   version "3.1.1"
   resolved "https://registry.npmjs.org/flatted/-/flatted-3.1.1.tgz"
   integrity sha512-zAoAQiudy+r5SvnSw3KJy5os/oRJYHzrzja/tBDqrZtNhUw8bt6y8OBzMWcjWr+8liV8Eb6yOhw8WZ7VFZ5ZzA==
+
+follow-redirects@^1.10.0:
+  version "1.13.3"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.3.tgz#e5598ad50174c1bc4e872301e82ac2cd97f90267"
+  integrity sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==
 
 fontfaceobserver@^2.1.0:
   version "2.1.0"
@@ -5964,6 +5986,13 @@ react-is@^17.0.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.1.tgz"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
+react-native-dotenv@^2.5.3:
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/react-native-dotenv/-/react-native-dotenv-2.5.3.tgz#ec70186d2b1491b0519647c53bf91f34395377a3"
+  integrity sha512-Fibw5q6vy91aRwol7yO6U9Om+EyE7Vs4pO70AYGRkDuMkaQ4EIyYw9mmiPcKo6VFCwlpE8y1AZImxoKREFASXA==
+  dependencies:
+    dotenv "^8.0.0"
+
 react-native-safe-area-context@3.1.9:
   version "3.1.9"
   resolved "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-3.1.9.tgz"
@@ -6734,6 +6763,13 @@ supports-color@^7.1.0:
   integrity sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
   dependencies:
     has-flag "^4.0.0"
+
+sync-storage@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/sync-storage/-/sync-storage-0.4.2.tgz#5af55cdf12108535525b36aa77587d3db7a0b5fb"
+  integrity sha512-2vv1wjlMv8H3VaoPguScy3HNcE59MaVK4C/3LbKFGdgOqKUm8vfHB3VTqiN+jK4GvwkdS8X4RR4GppgWx14qAg==
+  dependencies:
+    "@react-native-community/async-storage" "^1.6.3"
 
 table@^6.0.4:
   version "6.0.7"

@@ -1,10 +1,11 @@
 import React from "react";
-import Translation from './screens/Translation/index';
+import Translation from "./screens/Translation/index";
+import { updateDictionary } from "./utils/dictionary";
 
 const Root = () => {
-    return (
-        <Translation/>
-    );
-}
+  updateDictionary();
+
+  return <Translation/>;
+};
 
 export default Root;

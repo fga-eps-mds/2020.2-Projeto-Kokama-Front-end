@@ -9,3 +9,8 @@ export interface Dictionary {
     phrases: Phrase[];
     translations: string[];
 }
+
+export interface HistoryTuple {
+    kokama: string;
+    portuguese: string;
+}
