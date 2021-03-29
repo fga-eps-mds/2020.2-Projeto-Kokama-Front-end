@@ -14,8 +14,7 @@ import { Dictionary, Phrase, HistoryTuple } from "./interface";
 import {
   PORTUGUESE,
   KOKAMA,
-  HISTORYSIZE,
-  FEMININO,
+  HISTORY_SIZE,
 } from "../../config/constants";
 import translationStyle from "./styles";
 import {
@@ -49,26 +48,14 @@ const Translation = () => {
   // An Array Object is saved in storage with a "history" key
   function addHistoryWord(
     kokamaWord: string,
-    portugueseWords: Array<string>,
-    pronunciationType: string
+    portugueseWords: Array<string>
   ) {
     // Format portuguese words string for presentation
     let concatPortuguese: string = portugueseWords.join(", ");
 
-    let concatKokama: string = kokamaWord;
-    // Add a marker to the kokama word if its pronunciation type is feminine
-    // Allowing user to identify this in presentation
-    if (pronunciationType === FEMININO) {
-      concatKokama = concatKokama.concat(
-        " (",
-        capitalizeFirstLetter(FEMININO),
-        ")"
-      );
-    }
-
     // Create new history element to add to the history array and storage
     let historyWord: HistoryTuple = {
-      kokama: concatKokama,
+      kokama: kokamaWord,
       portuguese: concatPortuguese,
     };
     // If the element to be added is already in history, delete the old one
@@ -80,7 +67,7 @@ const Translation = () => {
     // Add the new history element at the beginning of the history array
     historyArray.unshift(historyWord);
     // Remove the oldest element if history reach max size
-    if (historyArray.length > HISTORYSIZE) {
+    if (historyArray.length > HISTORY_SIZE) {
       historyArray.pop();
     }
     // Add the updated history array as an object to storage
@@ -89,10 +76,7 @@ const Translation = () => {
 
   // Set the text input equal to the kokama word the user pressed inside history
   function translateHistoryWord(word: string, language: string) {
-    // Get the presentation kokama word and align its format to the one in the dictionary
-    // ex. remove the " (Feminino)" after word with feminine pronunciations
-    let kokamaWord: string = word.split(" (")[0];
-    setTranslation(capitalizeFirstLetter(kokamaWord));
+    setTranslation(capitalizeFirstLetter(word));
     // Automatically changes to kokama
     if (language !== KOKAMA) {
       exchangeLanguage();
@@ -109,8 +93,7 @@ const Translation = () => {
         // Add matching word to history
         addHistoryWord(
           element.word_kokama,
-          element.translations,
-          element.pronunciation_type
+          element.translations
         );
         break;
       }
@@ -131,8 +114,7 @@ const Translation = () => {
           // Add matching word to history
           addHistoryWord(
             element.word_kokama,
-            element.translations,
-            element.pronunciation_type
+            element.translations
           );
         }
       }

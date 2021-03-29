@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-  isEnabled: Boolean,
+  isEnabled: boolean,
   data: HistoryTuple[],
   onPressTitle: () => void;
-};
+}
 
 const HistoryTitle = (props:Props) => {
   return (

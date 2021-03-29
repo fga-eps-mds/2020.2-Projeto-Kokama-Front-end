@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 });
 
 interface Props {
-  isEnabled: Boolean;
+  isEnabled: boolean;
   data: HistoryTuple[];
   onPressTitle: () => void;
   translateFrom: string;

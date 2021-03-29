@@ -1,5 +1,4 @@
 export const PORTUGUESE = "Português";
 export const KOKAMA = "Kokama";
 
-export const HISTORYSIZE = 10;
-export const FEMININO = "feminino";
+export const HISTORY_SIZE = 10;
