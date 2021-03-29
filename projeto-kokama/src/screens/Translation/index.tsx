@@ -25,7 +25,7 @@ import {
   capitalizeFirstLetter,
   removeStringFromMarkers,
 } from "../../utils/translation";
-import { TEXT ,HISTORY_TEXT, KOKAMA_RED } from "../../screens/Translation/styles";
+
 
 let historyArray: Array<HistoryTuple> = SyncStorage.get("history") || [];
 
@@ -272,7 +272,7 @@ const Translation = () => {
         style={translationStyle.container}
         keyboardShouldPersistTaps={"always"}
       >
-        <StatusBar translucent backgroundColor={ KOKAMA_RED } />
+        <StatusBar translucent backgroundColor={ "red" } />
         {/* Logo area */}
         <View style={translationStyle.logoArea}>
           <Image
@@ -294,7 +294,7 @@ const Translation = () => {
           {/* Change language icon */}
           <View style={translationStyle.languageExchangeArea}>
             <TouchableWithoutFeedback onPress={exchangeLanguage}>
-              <Icon name="swap" size={40} color = { TEXT } />
+              <Icon name="swap" size={40} />
             </TouchableWithoutFeedback>
           </View>
 
@@ -331,11 +331,11 @@ const Translation = () => {
               <Text style={translationStyle.historyText}>Histórico</Text>
               {(!historyIsEnabled && (
               <View style={translationStyle.historyIcon}>
-                <Icon name="down" size={22} color={HISTORY_TEXT} />
+                <Icon name="down" size={22}/>
               </View>
               )) || (
               <View style={translationStyle.historyIcon}>
-                <Icon name="up" size={22} color={HISTORY_TEXT} />
+                <Icon name="up" size={22}/>
               </View>
               )}
           </View>
