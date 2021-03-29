@@ -6,7 +6,7 @@ import {
   ScrollView,
   SafeAreaView,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SyncStorage from "sync-storage";
 import Icon from "react-native-vector-icons/AntDesign";
 import HighlightText from "@sanar/react-native-highlight-text";
@@ -18,7 +18,6 @@ import {
   FEMININO,
 } from "../../config/constants";
 import translationStyle from "./styles";
-import Api from "../../api/Api";
 import {
   capitalizeFirstLetter,
   removeStringFromMarkers,
@@ -36,28 +35,12 @@ const Translation = () => {
   const toggleHistory = () =>
     setHistoryIsEnabled((previousState) => !previousState);
 
-  // Updates dictionary
-  // Executes one time on the inicialization
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await Api(
-        "https://projeto-kokama-traducao.herokuapp.com/dicionario/?format=json"
-      );
-      SyncStorage.set("dictionary", result.data);
-    };
-
-    fetchData();
-  }, []);
-
-  // Switch the direction of the translation
   function exchangeLanguage() {
     let temp = originLanguage;
     setOriginLanguage(destLanguage);
     setDestLanguage(temp);
   }
 
-  // Add the special character to the actual position in the TextInput
-  // Called by pressing the "i cortado" Icon
   function insertSymbol() {
     setTranslation(translation + "ɨ");
   }
