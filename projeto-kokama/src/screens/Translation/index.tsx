@@ -24,10 +24,7 @@ import {
   removeStringFromMarkers,
 } from "../../utils/translation";
 import TopMenu from "../../components/TopMenu";
-import HistoryTitle from "../../components/HistoryTitle";
-
-
-
+import History from "../../components/History";
 
 let historyArray: Array<HistoryTuple> = SyncStorage.get("history") || [];
 
@@ -274,7 +271,7 @@ const Translation = () => {
         style={translationStyle.container}
         keyboardShouldPersistTaps={"always"}
       >
-        <TopMenu name="Tradução"/>
+        <TopMenu name="Tradução" />
 
         {/* Change language area */}
         <View style={translationStyle.changeLanguage}>
@@ -319,39 +316,13 @@ const Translation = () => {
           <View>{Translate(originLanguage, translation)}</View>
         )}
 
-        {/* Historic */}
-          <HistoryTitle
-            isEnabled={historyIsEnabled}
-            data={historyArray}
-            onPressTitle={toggleHistory}
-          />
-
-        {historyArray.length > 0 && historyIsEnabled && (
-          <View style={translationStyle.historyWordsArea}>
-            {historyArray.map((word: HistoryTuple, index: number) => (
-              <TouchableWithoutFeedback
-                key={index}
-                onPress={() =>
-                  translateHistoryWord(word.kokama, originLanguage)
-                }
-              >
-                <View style={translationStyle.historyWords}>
-                  <Text
-                    style={[
-                      translationStyle.historyWord,
-                      { fontWeight: "bold", fontSize: 20 },
-                    ]}
-                  >
-                    {capitalizeFirstLetter(word.kokama)}
-                  </Text>
-                  <Text style={translationStyle.historyWord}>
-                    {capitalizeFirstLetter(word.portuguese)}
-                  </Text>
-                </View>
-              </TouchableWithoutFeedback>
-            ))}
-          </View>
-        )}
+        <History
+          isEnabled={historyIsEnabled}
+          data={historyArray}
+          onPressTitle={toggleHistory}
+          onPressWord={translateHistoryWord}
+          translateFrom={originLanguage}
+        />
       </ScrollView>
     </SafeAreaView>
   );
