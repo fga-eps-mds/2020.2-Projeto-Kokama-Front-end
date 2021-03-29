@@ -2,10 +2,8 @@ import {
   View,
   Text,
   TextInput,
-  Image,
   TouchableWithoutFeedback,
   ScrollView,
-  StatusBar,
   SafeAreaView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
@@ -25,8 +23,10 @@ import {
   capitalizeFirstLetter,
   removeStringFromMarkers,
 } from "../../utils/translation";
+import TopMenu from "../../components/TopMenu";
+import HistoryTitle from "../../components/HistoryTitle";
 
-import TopMenu from "../../components/TopMenu"
+
 
 
 let historyArray: Array<HistoryTuple> = SyncStorage.get("history") || [];
@@ -320,20 +320,12 @@ const Translation = () => {
         )}
 
         {/* Historic */}
-        <TouchableWithoutFeedback onPress={toggleHistory}>
-          <View style={translationStyle.historyArea}>
-              <Text style={translationStyle.historyText}>Histórico</Text>
-              {(!historyIsEnabled && (
-              <View style={translationStyle.historyIcon}>
-                <Icon name="down" size={22}/>
-              </View>
-              )) || (
-              <View style={translationStyle.historyIcon}>
-                <Icon name="up" size={22}/>
-              </View>
-              )}
-          </View>
-        </TouchableWithoutFeedback>
+          <HistoryTitle
+            isEnabled={historyIsEnabled}
+            data={historyArray}
+            onPressTitle={toggleHistory}
+          />
+
         {historyArray.length > 0 && historyIsEnabled && (
           <View style={translationStyle.historyWordsArea}>
             {historyArray.map((word: HistoryTuple, index: number) => (
