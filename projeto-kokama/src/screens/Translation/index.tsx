@@ -21,6 +21,7 @@ import {
   capitalizeFirstLetter,
   removeStringFromMarkers,
 } from "../../utils/translation";
+import Colors from "../../assets/Colors";
 import TopMenu from "../../components/TopMenu";
 import History from "../../components/History";
 
@@ -31,8 +32,11 @@ const Translation = () => {
   const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
   const [destLanguage, setDestLanguage] = useState(KOKAMA);
   const [historyIsEnabled, setHistoryIsEnabled] = useState(false);
-  const toggleHistory = () =>
-    setHistoryIsEnabled((previousState) => !previousState);
+  const toggleHistory = () => {
+    if (historyArray.length > 0) {
+      setHistoryIsEnabled((previousState) => !previousState);
+    }
+  }
 
   function exchangeLanguage() {
     let temp = originLanguage;
@@ -203,7 +207,7 @@ const Translation = () => {
                 {/* Phrase kokama */}
                 <HighlightText
                   style={translationStyle.examplesText}
-                  highlightStyle={{ color: "red" }}
+                  highlightStyle={{ color: Colors.RED }}
                   searchWords={[
                     removeStringFromMarkers(phrase.phrase_kokama, "<", ">"),
                   ]}
@@ -214,7 +218,7 @@ const Translation = () => {
                 {/* Phrase portuguese */}
                 <HighlightText
                   style={translationStyle.examplesText}
-                  highlightStyle={{ color: "red" }}
+                  highlightStyle={{ color: Colors.RED }}
                   searchWords={[
                     removeStringFromMarkers(phrase.phrase_portuguese, "<", ">"),
                   ]}
@@ -265,7 +269,7 @@ const Translation = () => {
           <TextInput
             style={translationStyle.textBox}
             placeholder="Toque para digitar"
-            onChangeText={(userInput) => setTranslation(userInput)}
+            onChangeText={(input) => setTranslation(input)}
             defaultValue={translation}
           />
 
