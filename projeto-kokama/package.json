@@ -27,6 +27,7 @@
     "react-native-screens": "^2.18.1",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
+    "react-navigation": "^4.4.4",
     "sync-storage": "^0.4.2"
   },
   "devDependencies": {

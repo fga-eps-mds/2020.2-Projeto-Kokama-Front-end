@@ -1,30 +1,20 @@
-import {View, Text, TextInput, TouchableWithoutFeedback, ScrollView, SafeAreaView,} from "react-native";
+import {View, Text, TextInput, TouchableWithoutFeedback, ScrollView, SafeAreaView, Button,} from "react-native";
 import React, { useState } from "react";
 import storyStyle from "./styles";
 import TopMenu from "../../components/TopMenu";
 
-const Stories = () => {
 
-    function StoryScreen(){
-
-
-
-    }
-
+export default function StoryScreen({ navigation }){
     return(
-        <SafeAreaView>    
-            <ScrollView
-                style={storyStyle.container}
-                keyboardShouldPersistTaps={"always"}
-            >
-
-                <TopMenu name="Histórias do Povo Kokama" />
-
-                <View style={{ alignItems: "center" }}>
-                    <Text style={{ textAlign: "center" }}>Historia do Povo Kokama</Text>
-                </View>
-            </ScrollView>    
-        </SafeAreaView>
-    )
+        <View>
+            <TopMenu name="Histórias do Povo Kokama" />
+            <View style={{ alignItems: "center" }}>
+                <Text style={{ textAlign: "center" }}>Historia do Povo Kokama</Text>
+                <Button 
+                title="KokamaStories" 
+                onPress={ () => navigation.navigate('KokamaStories')} >
+                </Button>
+            </View>
+        </View>
+    );
 }
-export default Stories;
