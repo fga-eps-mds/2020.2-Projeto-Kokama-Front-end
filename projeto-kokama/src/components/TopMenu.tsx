@@ -23,15 +23,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: Colors.LIGHT_GRAY,
   },
+  
   logo: {
     borderRadius: 100,
     height: 50,
     width: 50,
   },
+
   windowName: {
     fontSize: 20,
     marginBottom: 5,
   },
+
 });
 
 interface Props {
