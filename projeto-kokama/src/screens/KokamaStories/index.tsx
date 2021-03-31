@@ -4,15 +4,13 @@ import storyStyle from "./styles";
 import TopMenu from "../../components/TopMenu";
 
 
-export default function StoryScreen({ navigation }){
+export default function StoryScreen(){
     return(
         <View>
-            <TopMenu name="Histórias do Povo Kokama" />
+            <TopMenu/>
             <View style={{ alignItems: "center" }}>
-                <Text style={{ textAlign: "center" }}>Historia do Povo Kokama</Text>
                 <Button 
-                title="KokamaStories" 
-                onPress={ () => navigation.navigate('KokamaStories')} >
+                title="Adicionar Nova História" >
                 </Button>
             </View>
         </View>
