@@ -240,7 +240,7 @@ const Translation = () => {
         style={translationStyle.container}
         keyboardShouldPersistTaps={"always"}
       >
-        <TopMenu name="Tradução" />
+        {/* <TopMenu name="Tradução" /> */}
 
         {/* Change language area */}
         <View style={translationStyle.changeLanguage}>

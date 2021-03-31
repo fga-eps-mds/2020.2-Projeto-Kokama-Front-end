@@ -13,12 +13,11 @@ import TopMenu from "../../components/TopMenu";
 export default function storyCard({ navigation }){
     return (
         <SafeAreaView>
-            <ScrollView>  
+            <ScrollView>
                 <View style={{ alignItems: "flex-start" }}>
-                    <TopMenu/>
                     <Text style={cardsStyle.historyText}>História</Text>
                     <TouchableWithoutFeedback 
-                    onPress={() => navigation.navigate('Histórias do Povo Kokama')}>
+                    onPress={() => navigation.push('Histórias do Povo Kokama')}>
                         <Image style={cardsStyle.historyCard} source={require("../../assets/img/floresta.jpg")} />
                     </TouchableWithoutFeedback>
                 </View>
