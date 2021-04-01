@@ -22,9 +22,7 @@ import {
   removeStringFromMarkers,
 } from "../../utils/translation";
 import Colors from "../../assets/Colors";
-import TopMenu from "../../components/TopMenu";
 import History from "../../components/History";
-import styles from "./styles";
 
 let historyArray: Array<HistoryTuple> = SyncStorage.get("history") || [];
 
