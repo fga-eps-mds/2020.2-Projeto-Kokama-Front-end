@@ -12,16 +12,11 @@ import Colors from "../assets/Colors";
 const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
 
 const styles = StyleSheet.create({
-  logoArea: {
-    flexDirection: "column",
-    marginTop: STATUSBAR_HEIGHT,
-    paddingTop: 5,
-    borderBottomWidth: 1,
+
+  logoArea: {    
     borderColor: Colors.DARK_GRAY,
-    width: "100%",
     alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: Colors.LIGHT_GRAY,
+    backgroundColor: "transparent",
   },
   
   logo: {
@@ -32,7 +27,7 @@ const styles = StyleSheet.create({
 
   windowName: {
     fontSize: 20,
-    marginBottom: 5,
+    marginBottom: 50,
   },
 
 });

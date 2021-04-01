@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; 
 import Icon5 from"react-native-vector-icons/FontAwesome5";
 import { View, Image, Text, Platform, StatusBar } from "react-native";
-
+import TopMenu from "./src/components/TopMenu";
 
 import Translation from "./src/screens/Translation";
 import CardsMenu from "./src/screens/CardsMenu";
@@ -16,18 +16,6 @@ const Tab = createBottomTabNavigator();
 const TranslateStack = createStackNavigator();
 const CardStack = createStackNavigator();
 
-const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
-
-// Function to import image
-function Logo(){
-  return(
-    <Image
-      style={{ width: 50, height: 50, borderRadius: 100 }}
-      source={require("./src/assets/img/logo.png")}
-    />
-  );
-}
-
 // Page Translate Relation
 const TranslateStackScreen = () => (
   <TranslateStack.Navigator>
@@ -35,13 +23,11 @@ const TranslateStackScreen = () => (
       name="Tradução"
       component={Translation}
       options={{
-        title: "Tradução",
-        headerTitle: props => <Logo {...props}/>,
+        headerTitle: props => <TopMenu name="Tradução" />,
         headerTitleAlign: 'center',
-        headerStatusBarHeight: STATUSBAR_HEIGHT,
+        headerStatusBarHeight: 75,
         headerStyle: {
           backgroundColor: "#f23232",
-          borderBottomWidth: 0,
         },
       }} 
     />
@@ -55,13 +41,11 @@ const CardStackScreen = () => (
       name="Menu dos Cards" 
       component={CardsMenu}
       options={{
-        title: "Tradução",
-        headerTitle: props => <Logo {...props}/>,
+        headerTitle: props => <TopMenu name="Cards Menu" />,
         headerTitleAlign: 'center',
-        headerStatusBarHeight: STATUSBAR_HEIGHT,
+        headerStatusBarHeight: 75,
         headerStyle: {
           backgroundColor: "#f23232",
-          borderBottomWidth: 0,
         },
       }} 
     />
@@ -70,13 +54,11 @@ const CardStackScreen = () => (
       name="Histórias do Povo Kokama" 
       component={Stories}
       options={{
-        title: "Tradução",
-        headerTitle: props => <Logo {...props}/>,
+        headerTitle: props => <TopMenu name="Histórias do povo Kokama" />,
         headerTitleAlign: 'center',
-        headerStatusBarHeight: STATUSBAR_HEIGHT,
+        headerStatusBarHeight: 75,
         headerStyle: {
           backgroundColor: "#f23232",
-          borderBottomWidth: 0,
         },
       }} 
     />
