@@ -7,7 +7,6 @@ import TopMenu from "../../components/TopMenu";
 export default function StoryScreen(){
     return(
         <View>
-            <TopMenu/>
             <View style={{ alignItems: "center" }}>
                 <Button 
                 title="Adicionar Nova História" >

@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; 
 import Icon5 from"react-native-vector-icons/FontAwesome5";
-
+import { View, Image, Text, Platform, StatusBar } from "react-native";
 
 
 import Translation from "./src/screens/Translation";
@@ -16,19 +16,74 @@ const Tab = createBottomTabNavigator();
 const TranslateStack = createStackNavigator();
 const CardStack = createStackNavigator();
 
+const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
+
+// Function to import image
+function Logo(){
+  return(
+    <Image
+      style={{ width: 50, height: 50, borderRadius: 100 }}
+      source={require("./src/assets/img/logo.png")}
+    />
+  );
+}
+
+// Page Translate Relation
 const TranslateStackScreen = () => (
   <TranslateStack.Navigator>
-    <TranslateStack.Screen name="Tradução" component={Translation} />
+    <TranslateStack.Screen 
+      name="Tradução"
+      component={Translation}
+      options={{
+        title: "Tradução",
+        headerTitle: props => <Logo {...props}/>,
+        headerTitleAlign: 'center',
+        headerStatusBarHeight: STATUSBAR_HEIGHT,
+        headerStyle: {
+          backgroundColor: "#f23232",
+          borderBottomWidth: 0,
+        },
+      }} 
+    />
   </TranslateStack.Navigator>
 )
 
+// Page Cards Relation
 const CardStackScreen = () => (
   <CardStack.Navigator>
-    <CardStack.Screen name="Menu dos Cards" component={CardsMenu}/>
-    <CardStack.Screen name="Histórias do Povo Kokama" component={Stories}/>
+    <CardStack.Screen 
+      name="Menu dos Cards" 
+      component={CardsMenu}
+      options={{
+        title: "Tradução",
+        headerTitle: props => <Logo {...props}/>,
+        headerTitleAlign: 'center',
+        headerStatusBarHeight: STATUSBAR_HEIGHT,
+        headerStyle: {
+          backgroundColor: "#f23232",
+          borderBottomWidth: 0,
+        },
+      }} 
+    />
+
+    <CardStack.Screen 
+      name="Histórias do Povo Kokama" 
+      component={Stories}
+      options={{
+        title: "Tradução",
+        headerTitle: props => <Logo {...props}/>,
+        headerTitleAlign: 'center',
+        headerStatusBarHeight: STATUSBAR_HEIGHT,
+        headerStyle: {
+          backgroundColor: "#f23232",
+          borderBottomWidth: 0,
+        },
+      }} 
+    />
   </CardStack.Navigator>
 )
 
+// Tabbar
 export default function App () {
   return (
     <NavigationContainer>
