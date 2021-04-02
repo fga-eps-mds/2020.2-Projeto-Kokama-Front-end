@@ -7,7 +7,6 @@ jobs:
   publish:
     name: Install and publish
     runs-on: ubuntu-latest
-    working-directory: projeto-kokama
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -18,7 +17,9 @@ jobs:
           expo-version: 4.3.x
           expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
           expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
-      - run: npm install
-      - run: npm install -g react-native-cli
-      - run: npm install -g expo expo-cli --loglevel=error
-      - run: expo publish --release-channel homolog
+      - run: |
+          cd projeto-kokama
+          npm install
+          npm install -g react-native-cli
+          npm install -g expo expo-cli --loglevel=error
+          expo publish --release-channel homolog
