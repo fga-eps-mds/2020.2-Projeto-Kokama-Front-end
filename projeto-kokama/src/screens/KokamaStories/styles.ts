@@ -13,22 +13,55 @@ const storyStyle = StyleSheet.create({
         backgroundColor: Colors.LIGHT_GRAY,
     },
     textBox: {
+        display: "flex",
         flex: 6,
         textAlign: "left",
         fontSize: 20,
         paddingLeft: 23,
+        paddingVertical: 7,
     },
     userInput: {
+        display: "flex",
         width: "100%",
         height: 60,
         flexDirection: "row",
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
+        borderTopWidth: 1.5,
+        borderBottomWidth: 1.5,
         borderColor: Colors.DARK_GRAY,
         backgroundColor: Colors.WHITE,
         alignItems: "center",
+        
+    },
+    Area: {
+        display: "flex",
+        flexDirection: "column",
         justifyContent: "space-between",
-      },
+        backgroundColor: Colors.WHITE,
+        borderBottomWidth: 1.5,
+        borderColor: Colors.DARK_GRAY,
+    },
+    titleArea: {
+        display: "flex",
+        width: "100%",
+        textAlignVertical: "center",
+        textAlign: "left",
+        fontSize: 18,
+        marginTop: 5,
+        borderTopWidth: 1.5,
+        borderBottomWidth: 1.5,
+        borderColor: Colors.DARK_GRAY,
+        paddingLeft: 23,
+        paddingVertical: 7,
+        
+    },
+    Title: {
+        display: "flex",
+        width: "100%",
+        textAlignVertical: "center",
+        textAlign: "left",
+        fontSize: 18,
+        color: Colors.HISTORY_WORD_TEXT,
+    },
 
 });
 export default storyStyle;
