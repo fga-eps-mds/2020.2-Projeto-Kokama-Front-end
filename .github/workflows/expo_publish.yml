@@ -7,6 +7,7 @@ jobs:
   publish:
     name: Install and publish
     runs-on: ubuntu-latest
+    working-directory: projeto-kokama
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -20,4 +21,4 @@ jobs:
       - run: npm install
       - run: npm install -g react-native-cli
       - run: npm install -g expo expo-cli --loglevel=error
-      - run: cd projeto-kokama/ && expo publish --release-channel homolog
+      - run: expo publish --release-channel homolog
