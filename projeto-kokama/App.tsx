@@ -8,8 +8,8 @@ import TopMenu from "./src/components/TopMenu";
 
 import Translation from "./src/screens/Translation";
 import CardsMenu from "./src/screens/CardsMenu";
-import Stories from "./src/screens/KokamaStories/index";
-import Story from "./src/screens/KokamaStories/story";
+import Stories from "./src/screens/KokamaStories";
+import Story from "./src/screens/Story";
 
 const Tab = createBottomTabNavigator();
 const TranslateStack = createStackNavigator();
@@ -50,8 +50,8 @@ const CardStackScreen = () => (
     />
 
     {/* Story list page */}
-    <CardStack.Screen 
-      name="Histórias do Povo Kokama" 
+    <CardStack.Screen
+      name="Histórias do Povo Kokama"
       component={Stories}
       options={{
         headerTitle: props => <TopMenu name="Histórias do povo Kokama" />,

@@ -1,7 +1,5 @@
 import {
     View,
-    TextInput, 
-    TouchableWithoutFeedback, 
     ScrollView, 
     SafeAreaView
 } from "react-native";
@@ -36,15 +34,9 @@ export default function StoryScreen({ navigation }){
             style={storyStyle.container}
             >
                 <View style={storyStyle.Area}>
-                    <View style={storyStyle.userInput}>
-                        <TextInput
-                            style={storyStyle.textBox}
-                            placeholder="Toque para pesquisar"
-                        />            
-                    </View>
                         
                     <Stories
-                        Story={kokamaStories}A
+                        Story={kokamaStories}
                         onPressTitle = {navigation.push}
                     />
                         

@@ -39,6 +39,7 @@ const storyStyle = StyleSheet.create({
         backgroundColor: Colors.WHITE,
         borderBottomWidth: 1.5,
         borderColor: Colors.DARK_GRAY,
+        fontSize: 18,
     },
     titleArea: {
         display: "flex",
