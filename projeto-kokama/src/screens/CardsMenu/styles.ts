@@ -22,8 +22,7 @@ const styles = StyleSheet.create({
     },
 
     historyCard: {
-        borderRadius: 15,
-        height: 100,
+        height: 150,
         width: screen.width,
     },
 

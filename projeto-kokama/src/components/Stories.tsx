@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions, View, Text, TouchableWithoutFeedback } from "react-native";
 import React from "react";
 import Colors from "../assets/Colors";
-import { kokamaStories } from "../screens/KokamaStories/interface"
+import { KokamaStories } from "../screens/KokamaStories/interface"
 
 // Constants and Global Variables
 const window = Dimensions.get("window");
@@ -33,16 +33,16 @@ const storyStyle = StyleSheet.create({
 
 interface Props {
     onPressTitle: (acessStory: string) => void;
-    Story: kokamaStories[];
+    Story: KokamaStories[];
 }
 
 const Stories = (props:Props) => {
     return(
         <View>
-            {props.Story.map((story: kokamaStories) => (
+            {props.Story.map((story: KokamaStories) => (
                 <TouchableWithoutFeedback onPress={() => props.onPressTitle('História')}>
                     <View style={storyStyle.titleArea}>
-                        <Text style={storyStyle.Title}> { story.title } </Text>
+                        <Text style={storyStyle.Title}> { story.titulo } </Text>
                     </View>
                 </TouchableWithoutFeedback>
             ))}

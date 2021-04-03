@@ -5,32 +5,31 @@ import {
     ScrollView, 
     SafeAreaView
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import storyStyle from "./styles";
 import Stories from "../../components/Stories"
-import { kokamaStories } from "./interface"
+import { KokamaStories } from "./interface"
+import Api from "../../api/Api";
 
-let storiesK: kokamaStories[] = [
-    {
-        title: "historia1",
-        text: "aleatória1",
-    },
-    {
-        title: "historia2",
-        text: "aleatória2",
-    },
-    {
-        title: "historia3",
-        text: "aleatória3",
-    }
-    
-];
-
-function viewStory (story: kokamaStories) {
-    
-}
 
 export default function StoryScreen({ navigation }){
+    const [kokamaStories, setKokamaStories] = useState<Array<KokamaStories>>([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await Api(
+                "https://run.mocky.io/v3/c9ae454d-b760-450f-9aef-4b4710a94504"
+            );
+            if (result.status === 200) {
+                setKokamaStories(result.data);
+                console.log("As histórias foram atualizadas corretamente!");
+            } else {
+                console.log("A requisição não pôde ser concluída.\n[Status: ", result.status, "]");
+            }
+        }
+    
+        fetchData();
+    }, []);
+    
     return(
         <SafeAreaView>
             <ScrollView
@@ -45,7 +44,7 @@ export default function StoryScreen({ navigation }){
                     </View>
                         
                     <Stories
-                        Story={storiesK}
+                        Story={kokamaStories}A
                         onPressTitle = {navigation.push}
                     />
                         

@@ -3,14 +3,14 @@ import SyncStorage from "sync-storage";
 import Api from "../api/Api";
 
 function getCurrentDate() {
-    let newDate = new Date()
-    let date = newDate.getDate();
-    let month = newDate.getMonth() + 1;
-    let year = newDate.getFullYear();
+  let newDate = new Date()
+  let date = newDate.getDate();
+  let month = newDate.getMonth() + 1;
+  let year = newDate.getFullYear();
 
-    let monthPresentation = month < 10 ? `0${month}` : `${month}`
+  let monthPresentation = month < 10 ? `0${month}` : `${month}`
 
-    return `${year}${monthPresentation}${date}`
+  return `${year}${monthPresentation}${date}`
 }
 
 export function updateDictionary() {

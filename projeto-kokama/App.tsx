@@ -40,7 +40,7 @@ const CardStackScreen = () => (
       name="Menu dos Cards" 
       component={CardsMenu}
       options={{
-        headerTitle: props => <TopMenu name="Cards Menu" />,
+        headerTitle: props => <TopMenu name="Ensino" />,
         headerTitleAlign: 'center',
         headerStatusBarHeight: 75,
         headerStyle: {
@@ -83,7 +83,7 @@ const CardStackScreen = () => (
 export default function App () {
   return (
     <NavigationContainer>
-      <Tab.Navigator tabBarOptions={{ activeTintColor: "red" }} >
+      <Tab.Navigator tabBarOptions={{ activeTintColor: "red", showLabel:false }} >
         <Tab.Screen name="Tradução" component={TranslateStackScreen} 
           options={{
             tabBarIcon: props => (
@@ -91,7 +91,7 @@ export default function App () {
             )
           }}
         />
-        <Tab.Screen name="Menu dos Cards" component={CardStackScreen}
+        <Tab.Screen name="Ensino" component={CardStackScreen}
           options={{
             tabBarIcon: props => (
               <Icon5 name="book" size={30} color={props.color} />

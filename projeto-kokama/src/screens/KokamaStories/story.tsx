@@ -4,18 +4,18 @@ import {
     ScrollView, 
     SafeAreaView
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import storyStyle from "./styles";
-import { kokamaStories } from "./interface"
+import { KokamaStories } from "./interface"
 
-export default function Story(props:kokamaStories){
+export default function Story(props:KokamaStories){
     return(
         <SafeAreaView>
             <ScrollView
             style={storyStyle.container}
             >
                 <Text>
-                    {props.text}
+                    {props.texto}
                 </Text>
             </ScrollView>
         </SafeAreaView>

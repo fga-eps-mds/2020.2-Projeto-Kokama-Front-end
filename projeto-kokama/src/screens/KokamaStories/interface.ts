@@ -1,4 +1,5 @@
-export interface kokamaStories {
-    title: string;
-    text: string;
+export interface KokamaStories {
+    id: number;
+    titulo: string;
+    texto: string;
 }
