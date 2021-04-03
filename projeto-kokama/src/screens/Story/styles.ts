@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, Platform, StatusBar } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import Colors from "../../assets/Colors";
 
 // Constants and Global Variables
@@ -6,7 +6,6 @@ const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 
 const styles = StyleSheet.create({
-
     container: {
         maxWidth: screen.width,
         height: window.height,
@@ -24,6 +23,6 @@ const styles = StyleSheet.create({
         borderColor: Colors.DARK_GRAY,
         fontSize: 20,
     },
-
 });
+
 export default styles;

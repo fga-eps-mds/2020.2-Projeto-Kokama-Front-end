@@ -7,7 +7,7 @@ import Icon5 from"react-native-vector-icons/FontAwesome5";
 import TopMenu from "./src/components/TopMenu";
 
 import Translation from "./src/screens/Translation";
-import CardsMenu from "./src/screens/CardsMenu";
+import Learning from "./src/screens/Learning";
 import Stories from "./src/screens/KokamaStories";
 import Story from "./src/screens/Story";
 
@@ -38,7 +38,7 @@ const CardStackScreen = () => (
   <CardStack.Navigator>
     <CardStack.Screen 
       name="Menu dos Cards" 
-      component={CardsMenu}
+      component={Learning}
       options={{
         headerTitle: props => <TopMenu name="Ensino" />,
         headerTitleAlign: 'center',

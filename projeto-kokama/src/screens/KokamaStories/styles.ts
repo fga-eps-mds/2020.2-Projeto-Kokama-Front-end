@@ -1,12 +1,11 @@
-import { StyleSheet, Dimensions, Platform, StatusBar } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import Colors from "../../assets/Colors";
 
 // Constants and Global Variables
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 
-const storyStyle = StyleSheet.create({
-
+const styles = StyleSheet.create({
     container: {
         maxWidth: screen.width,
         height: window.height,
@@ -30,7 +29,6 @@ const storyStyle = StyleSheet.create({
         borderColor: Colors.DARK_GRAY,
         backgroundColor: Colors.WHITE,
         alignItems: "center",
-        
     },
     Area: {
         display: "flex",
@@ -53,7 +51,6 @@ const storyStyle = StyleSheet.create({
         borderColor: Colors.DARK_GRAY,
         paddingLeft: 23,
         paddingVertical: 7,
-        
     },
     Title: {
         display: "flex",
@@ -68,4 +65,5 @@ const storyStyle = StyleSheet.create({
         backgroundColor: "#f23232",
     },
 });
-export default storyStyle;
+
+export default styles;

@@ -8,7 +8,7 @@ import React from "react";
 import cardsStyle from "./styles";
 
 
-export default function storyCard({ navigation }){
+export default function Learning({ navigation }){
     return (
         <SafeAreaView>
             <ScrollView>

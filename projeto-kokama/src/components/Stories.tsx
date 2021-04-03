@@ -21,7 +21,7 @@ const storyStyle = StyleSheet.create({
         paddingLeft: 23,
         paddingVertical: 7,
     },
-    Title: {
+    title: {
         display: "flex",
         width: "100%",
         textAlignVertical: "center",
@@ -42,11 +42,10 @@ const Stories = (props:Props) => {
             {props.Story.map((story: KokamaStories) => (
                 <TouchableWithoutFeedback onPress={() => props.onPressTitle('História')}>
                     <View style={storyStyle.titleArea}>
-                        <Text style={storyStyle.Title}> { story.titulo } </Text>
+                        <Text style={storyStyle.title}> { story.titulo } </Text>
                     </View>
                 </TouchableWithoutFeedback>
             ))}
-
         </View>
     );
 }

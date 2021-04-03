@@ -4,7 +4,7 @@ import {
     SafeAreaView
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import storyStyle from "./styles";
+import styles from "./styles";
 import Stories from "../../components/Stories"
 import { KokamaStories } from "./interface"
 import Api from "../../api/Api";
@@ -24,24 +24,19 @@ export default function StoryScreen({ navigation }){
                 console.log("A requisição não pôde ser concluída.\n[Status: ", result.status, "]");
             }
         }
-    
+
         fetchData();
     }, []);
     
     return(
         <SafeAreaView>
-            <ScrollView
-            style={storyStyle.container}
-            >
-                <View style={storyStyle.Area}>
-                        
+            <ScrollView style={styles.container}>
+                <View style={styles.Area}>  
                     <Stories
                         Story={kokamaStories}
                         onPressTitle = {navigation.push}
-                    />
-                        
+                    /> 
                 </View>
-
             </ScrollView>
         </SafeAreaView>
     );
