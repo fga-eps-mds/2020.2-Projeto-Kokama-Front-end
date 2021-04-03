@@ -62,6 +62,9 @@ const storyStyle = StyleSheet.create({
         fontSize: 18,
         color: Colors.HISTORY_WORD_TEXT,
     },
-
+    storyCardTitle: {
+        borderWidth: 5,
+        backgroundColor: "#f23232",
+    },
 });
 export default storyStyle;

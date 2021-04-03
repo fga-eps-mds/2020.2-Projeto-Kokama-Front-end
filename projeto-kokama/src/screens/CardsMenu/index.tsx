@@ -1,13 +1,11 @@
-import {View, 
-    Button,
+import {View,
     Text,  
     Image, 
     ScrollView, 
     SafeAreaView,
     TouchableWithoutFeedback,} from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import cardsStyle from "./styles";
-import TopMenu from "../../components/TopMenu";
 
 
 export default function storyCard({ navigation }){
@@ -15,9 +13,10 @@ export default function storyCard({ navigation }){
         <SafeAreaView>
             <ScrollView>
                 <View style={{ alignItems: "flex-start" }}>
-                    <Text style={cardsStyle.historyText}>História</Text>
+                    <Text style={cardsStyle.historyText}>Histórias</Text>
                     <TouchableWithoutFeedback 
-                    onPress={() => navigation.push('Histórias do Povo Kokama')}>
+                    onPress={() => navigation.push('Histórias do Povo Kokama')}
+                    >
                         <Image style={cardsStyle.historyCard} source={require("../../assets/img/floresta.jpg")} />
                     </TouchableWithoutFeedback>
                 </View>

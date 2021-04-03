@@ -1,5 +1,11 @@
-import {View, Text, TextInput, TouchableWithoutFeedback, ScrollView, SafeAreaView, Button,} from "react-native";
-import React, { useState } from "react";
+import {
+    View,
+    TextInput, 
+    TouchableWithoutFeedback, 
+    ScrollView, 
+    SafeAreaView
+} from "react-native";
+import React from "react";
 import storyStyle from "./styles";
 import Stories from "../../components/Stories"
 import { kokamaStories } from "./interface"
@@ -7,15 +13,15 @@ import { kokamaStories } from "./interface"
 let storiesK: kokamaStories[] = [
     {
         title: "historia1",
-        text: "luiz e umchato",
+        text: "aleatória1",
     },
     {
         title: "historia2",
-        text: "luiz e umchato",
+        text: "aleatória2",
     },
     {
         title: "historia3",
-        text: "luiz e umchato",
+        text: "aleatória3",
     }
     
 ];
@@ -24,7 +30,7 @@ function viewStory (story: kokamaStories) {
     
 }
 
-export default function StoryScreen(){
+export default function StoryScreen({ navigation }){
     return(
         <SafeAreaView>
             <ScrollView
@@ -37,17 +43,15 @@ export default function StoryScreen(){
                             placeholder="Toque para pesquisar"
                         />            
                     </View>
+                        
                     <Stories
                         Story={storiesK}
-                        onPressTitle = {viewStory}
+                        onPressTitle = {navigation.push}
                     />
-                    {/* <View style={storyStyle.titleArea}>
-                        <Text style={storyStyle.Title}> Exemplo...</Text>
-                    </View> */}
+                        
                 </View>
 
             </ScrollView>
         </SafeAreaView>
-
     );
 }

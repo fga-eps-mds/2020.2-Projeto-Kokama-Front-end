@@ -32,7 +32,7 @@ const storyStyle = StyleSheet.create({
 });
 
 interface Props {
-    onPressTitle: (story: kokamaStories) => void;
+    onPressTitle: (acessStory: string) => void;
     Story: kokamaStories[];
 }
 
@@ -40,7 +40,7 @@ const Stories = (props:Props) => {
     return(
         <View>
             {props.Story.map((story: kokamaStories) => (
-                <TouchableWithoutFeedback onPress={() => props.onPressTitle(story)}>
+                <TouchableWithoutFeedback onPress={() => props.onPressTitle('História')}>
                     <View style={storyStyle.titleArea}>
                         <Text style={storyStyle.Title}> { story.title } </Text>
                     </View>

@@ -4,13 +4,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; 
 import Icon5 from"react-native-vector-icons/FontAwesome5";
-import { View, Image, Text, Platform, StatusBar } from "react-native";
 import TopMenu from "./src/components/TopMenu";
 
 import Translation from "./src/screens/Translation";
 import CardsMenu from "./src/screens/CardsMenu";
-import Stories from "./src/screens/KokamaStories";
-import { baseProps } from "react-native-gesture-handler/lib/typescript/handlers/gestureHandlers";
+import Stories from "./src/screens/KokamaStories/index";
+import Story from "./src/screens/KokamaStories/story";
 
 const Tab = createBottomTabNavigator();
 const TranslateStack = createStackNavigator();
@@ -27,7 +26,7 @@ const TranslateStackScreen = () => (
         headerTitleAlign: 'center',
         headerStatusBarHeight: 75,
         headerStyle: {
-          backgroundColor: "#f23232",
+          backgroundColor: "#FFFFFF",
         },
       }} 
     />
@@ -45,11 +44,12 @@ const CardStackScreen = () => (
         headerTitleAlign: 'center',
         headerStatusBarHeight: 75,
         headerStyle: {
-          backgroundColor: "#f23232",
+          backgroundColor: "#FFFFFF",
         },
       }} 
     />
 
+    {/* Story list page */}
     <CardStack.Screen 
       name="Histórias do Povo Kokama" 
       component={Stories}
@@ -58,9 +58,23 @@ const CardStackScreen = () => (
         headerTitleAlign: 'center',
         headerStatusBarHeight: 75,
         headerStyle: {
-          backgroundColor: "#f23232",
+          backgroundColor: "#FFFFFF",
         },
       }} 
+    />
+
+    {/* Story Page */}
+    <CardStack.Screen
+      name="História"
+      component={Story}
+      options={{
+        headerTitle: props => <TopMenu name="História" />,
+        headerTitleAlign: 'center',
+        headerStatusBarHeight: 75,
+        headerStyle: {
+          backgroundColor: "#FFFFFF",
+        },
+      }}
     />
   </CardStack.Navigator>
 )
