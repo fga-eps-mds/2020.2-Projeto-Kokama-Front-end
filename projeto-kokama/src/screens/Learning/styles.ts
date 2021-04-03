@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, Platform, StatusBar } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import Colors from "../../assets/Colors";
 
 // Constants and Global Variables
