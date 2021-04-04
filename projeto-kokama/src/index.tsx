@@ -1,11 +1,19 @@
 import React from "react";
-import Translation from "./screens/Translation/index";
-import { updateDictionary } from "./utils/dictionary";
+import Learning from "./screens/Learning/index";
+import Stories from "./screens/KokamaStories/index";
+import { NavigationContainer} from "@react-navigation/native";
+import { createStackNavigator } from '@react-navigation/stack';
 
-const Root = () => {
-  updateDictionary();
+const Stack = createStackNavigator();
 
-  return <Translation/>;
-};
+export default function  () {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="CardMenu" component={Learning} />
+        <Stack.Screen name="Story" component={Stories} />
+      </Stack.Navigator>
+    </NavigationContainer>
 
-export default Root;
+  );
+}

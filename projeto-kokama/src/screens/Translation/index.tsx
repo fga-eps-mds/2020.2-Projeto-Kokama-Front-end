@@ -22,7 +22,6 @@ import {
   removeStringFromMarkers,
 } from "../../utils/translation";
 import Colors from "../../assets/Colors";
-import TopMenu from "../../components/TopMenu";
 import History from "../../components/History";
 
 let historyArray: Array<HistoryTuple> = SyncStorage.get("history") || [];
@@ -240,7 +239,6 @@ const Translation = () => {
         style={translationStyle.container}
         keyboardShouldPersistTaps={"always"}
       >
-        <TopMenu name="Tradução" />
 
         {/* Change language area */}
         <View style={translationStyle.changeLanguage}>

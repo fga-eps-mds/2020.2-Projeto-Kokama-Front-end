@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     height: window.height,
     backgroundColor: Colors.LIGHT_GRAY,
   },
-
   logoArea: {
     flexDirection: "column",
     marginTop: STATUSBAR_HEIGHT + 5,
