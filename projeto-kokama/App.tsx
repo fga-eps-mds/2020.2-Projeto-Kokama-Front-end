@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"; 
 import Icon5 from"react-native-vector-icons/FontAwesome5";
 import TopMenu from "./src/components/TopMenu";
+import { updateDictionary } from "./src/utils/dictionary";
 
 import Translation from "./src/screens/Translation";
 import Learning from "./src/screens/Learning";
@@ -14,6 +15,34 @@ import Story from "./src/screens/Story";
 const Tab = createBottomTabNavigator();
 const TranslateStack = createStackNavigator();
 const CardStack = createStackNavigator();
+
+
+// Tabbar
+export default function App () {
+  updateDictionary();
+  return (
+    <NavigationContainer>
+      <Tab.Navigator tabBarOptions={{ activeTintColor: "red", showLabel:false }} >
+        <Tab.Screen name="Tradução" component={TranslateStackScreen} 
+          options={{
+            tabBarIcon: props => (
+              <Icon name="translate" size={35} color={props.color} />
+            )
+          }}
+        />
+        <Tab.Screen name="Ensino" component={CardStackScreen}
+          options={{
+            tabBarIcon: props => (
+              <Icon5 name="book" size={30} color={props.color} />
+            )
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
+
 
 // Page Translate Relation
 const TranslateStackScreen = () => (
@@ -78,27 +107,3 @@ const CardStackScreen = () => (
     />
   </CardStack.Navigator>
 )
-
-// Tabbar
-export default function App () {
-  return (
-    <NavigationContainer>
-      <Tab.Navigator tabBarOptions={{ activeTintColor: "red", showLabel:false }} >
-        <Tab.Screen name="Tradução" component={TranslateStackScreen} 
-          options={{
-            tabBarIcon: props => (
-              <Icon name="translate" size={35} color={props.color} />
-            )
-          }}
-        />
-        <Tab.Screen name="Ensino" component={CardStackScreen}
-          options={{
-            tabBarIcon: props => (
-              <Icon5 name="book" size={30} color={props.color} />
-            )
-          }}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
-}

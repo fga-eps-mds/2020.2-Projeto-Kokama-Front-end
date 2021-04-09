@@ -39,8 +39,8 @@ interface Props {
 const Stories = (props:Props) => {
     return(
         <View>
-            {props.Story.map((story: KokamaStories) => (
-                <TouchableWithoutFeedback onPress={() => props.onPressTitle('História')}>
+            {props.Story.map((story: KokamaStories, index:number) => (
+                <TouchableWithoutFeedback key={index} onPress={() => props.onPressTitle('História')}>
                     <View style={storyStyle.titleArea}>
                         <Text style={storyStyle.title}> { story.titulo } </Text>
                     </View>
