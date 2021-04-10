@@ -1,3 +1,5 @@
 .env
 .expo
 .expo-shared
+yarn-error.log
+yarn-debug.log

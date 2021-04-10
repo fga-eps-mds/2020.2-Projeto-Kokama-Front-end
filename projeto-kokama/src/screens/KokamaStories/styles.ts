@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.WHITE,
         alignItems: "center",
     },
-    Area: {
+    area: {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         paddingLeft: 23,
         paddingVertical: 7,
     },
-    Title: {
+    title: {
         display: "flex",
         width: "100%",
         textAlignVertical: "center",

@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   exampleArea: {
     width: "100%",
     marginTop: 15,
-    flexDirection:'column',
+    flexDirection: 'column',
   },
   examplesText: {
     width: "100%",
