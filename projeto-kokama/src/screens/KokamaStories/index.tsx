@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./styles";
 import { KokamaStories } from "./interface";
 import Api from "../../api/Api";
-import SpinnerLoading from "../../components/Spinner";
+import SpinnerLoading from "../../components/SpinnerLoading";
 
 export default function Stories({ navigation }) {
     const [kokamaStories, setKokamaStories] = useState<Array<KokamaStories>>([]);
