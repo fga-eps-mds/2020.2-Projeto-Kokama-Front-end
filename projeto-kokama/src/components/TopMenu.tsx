@@ -26,8 +26,9 @@ const styles = StyleSheet.create({
   },
 
   windowName: {
-    fontSize: 20,
+    fontSize: 15,
     marginBottom: 50,
+    
   },
 
 });
