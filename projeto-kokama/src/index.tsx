@@ -14,6 +14,5 @@ export default function  () {
         <Stack.Screen name="Story" component={Stories} />
       </Stack.Navigator>
     </NavigationContainer>
-
   );
 }

@@ -1,17 +1,19 @@
 import {
     View,
-    ScrollView, 
-    SafeAreaView
+    Text,
+    ScrollView,
+    SafeAreaView,
+    TouchableWithoutFeedback
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
-import Stories from "../../components/Stories"
-import { KokamaStories } from "./interface"
+import { KokamaStories } from "./interface";
 import Api from "../../api/Api";
+import SpinnerLoading from "../../components/SpinnerLoading";
 
-
-export default function StoryScreen({ navigation }){
+export default function Stories({ navigation }) {
     const [kokamaStories, setKokamaStories] = useState<Array<KokamaStories>>([]);
+
     useEffect(() => {
         const fetchData = async () => {
             const result = await Api(
@@ -24,20 +26,29 @@ export default function StoryScreen({ navigation }){
                 console.log("A requisição não pôde ser concluída.\n[Status: ", result.status, "]");
             }
         }
-
         fetchData();
     }, []);
-    
-    return(
+
+    return (
         <SafeAreaView>
-            <ScrollView style={styles.container}>
-                <View style={styles.Area}>  
-                    <Stories
-                        Story={kokamaStories}
-                        onPressTitle = {navigation.push}
-                    /> 
-                </View>
-            </ScrollView>
+            {kokamaStories.length == 0 && (
+                <SpinnerLoading />
+            )}
+            {kokamaStories.length > 0 && (
+                <ScrollView style={styles.container}>
+                    <View style={styles.area}>
+                        <View>
+                            {kokamaStories.map((story: KokamaStories, index: number) => (
+                                <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}>
+                                    <View style={styles.titleArea}>
+                                        <Text style={styles.title}>{story.titulo} </Text>
+                                    </View>
+                                </TouchableWithoutFeedback>
+                            ))}
+                        </View>
+                    </View>
+                </ScrollView>
+            )}
         </SafeAreaView>
     );
 }

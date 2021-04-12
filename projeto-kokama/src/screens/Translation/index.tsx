@@ -30,6 +30,7 @@ const Translation = () => {
 	const [destLanguage, setDestLanguage] = useState(KOKAMA);
 	const [dictionary, setDictionary] = useState<Dictionary[]>([]);
 	const [history, setHistory] = useState<HistoryTuple[]>([]);
+
 	useEffect(() => {
 		const getDictionary = async () => {
 			try {

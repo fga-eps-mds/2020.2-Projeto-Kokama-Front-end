@@ -37,7 +37,6 @@ export function updateDictionary() {
 				console.log("Ocorreu um erro:\n", e);
 			}
 		};
-
 		fetchData();
 	}, []);
 }
