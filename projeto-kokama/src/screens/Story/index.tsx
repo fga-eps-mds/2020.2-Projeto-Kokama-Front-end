@@ -14,7 +14,6 @@ export default function Story({ route, navigation }) {
         <SafeAreaView>
             <ScrollView style={styles.container}>
                 <View style={styles.container}>
-
                     <Text style={styles.textField}>
                         {story.titulo}
                     </Text>

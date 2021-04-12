@@ -185,7 +185,6 @@ const Translation = () => {
 		if (language == KOKAMA) {
 			return word.translations;
 		} else {
-
 			return [word.word_kokama];
 		}
 	}

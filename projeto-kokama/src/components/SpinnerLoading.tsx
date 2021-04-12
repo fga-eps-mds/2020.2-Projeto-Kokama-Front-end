@@ -4,7 +4,6 @@ import { Spinner } from "native-base";
 import Colors from "../assets/Colors"
 
 const spinnerStyle = StyleSheet.create({
-
     message: {
         fontSize: 18,
         color: Colors.BLACK,
@@ -24,7 +23,8 @@ export default class SpinnerLoading extends Component {
             <View style={spinnerStyle.loading}>
                 <Spinner color={Colors.RED} />
                 <Text style={spinnerStyle.message}>
-                    Carregando...</Text>
+                    Carregando...
+                </Text>
             </View>
         );
     }
