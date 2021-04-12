@@ -1,11 +1,8 @@
-import { StyleSheet, Dimensions, View, Text, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
 import React from "react";
 import Colors from "../assets/Colors";
 import { KokamaStories } from "../screens/KokamaStories/interface"
 
-// Constants and Global Variables
-const window = Dimensions.get("window");
-const screen = Dimensions.get("screen");
 
 const storyStyle = StyleSheet.create({
     titleArea: {
