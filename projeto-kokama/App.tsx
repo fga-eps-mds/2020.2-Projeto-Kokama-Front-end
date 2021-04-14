@@ -1,8 +1,9 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import IconA from "react-native-vector-icons/FontAwesome";
 import Icon5 from "react-native-vector-icons/FontAwesome5";
 import TopMenu from "./src/components/TopMenu";
 import { updateDictionary } from "./src/utils/dictionary";
@@ -11,10 +12,12 @@ import Translation from "./src/screens/Translation";
 import Learning from "./src/screens/Learning";
 import Stories from "./src/screens/KokamaStories";
 import Story from "./src/screens/Story";
+import User from "./src/screens/About";
 
 const Tab = createBottomTabNavigator();
 const TranslateStack = createStackNavigator();
 const CardStack = createStackNavigator();
+const UserStack = createStackNavigator();
 
 
 // Tabbar
@@ -34,6 +37,13 @@ export default function App() {
           options={{
             tabBarIcon: props => (
               <Icon5 name="book" size={30} color={props.color} />
+            )
+          }}
+        />
+        <Tab.Screen name="Usuário" component={UserStackScreen}
+          options={{
+            tabBarIcon: props => (
+              <IconA name="user" size={30} color={props.color}/>
             )
           }}
         />
@@ -104,4 +114,22 @@ const CardStackScreen = () => (
       }}
     />
   </CardStack.Navigator>
+)
+
+// User screens relation
+const UserStackScreen = () => (
+  <UserStack.Navigator>
+    <UserStack.Screen
+      name="Informações"
+      component={User}
+      options={{
+        headerTitle: () => <TopMenu name="Informações" />,
+        headerTitleAlign: 'center',
+        headerStatusBarHeight: 75,
+        headerStyle: {
+          backgroundColor: "#FFFFFF",
+        },
+      }}
+    />
+  </UserStack.Navigator>
 )
