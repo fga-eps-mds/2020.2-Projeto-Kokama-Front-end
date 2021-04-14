@@ -11,6 +11,7 @@ import Translation from "./src/screens/Translation";
 import Learning from "./src/screens/Learning";
 import Stories from "./src/screens/KokamaStories";
 import Story from "./src/screens/Story";
+import Activity from "./src/screens/Activity";
 
 const Tab = createBottomTabNavigator();
 const TranslateStack = createStackNavigator();
@@ -96,6 +97,20 @@ const CardStackScreen = () => (
       component={Story}
       options={{
         headerTitle: () => <TopMenu name="História" />,
+        headerTitleAlign: 'center',
+        headerStatusBarHeight: 75,
+        headerStyle: {
+          backgroundColor: "#FFFFFF",
+        },
+      }}
+    />
+
+    {/* Activity Page */}
+    <CardStack.Screen
+      name="Atividades"
+      component={Activity}
+      options={{
+        headerTitle: () => <TopMenu name="Atividades" />,
         headerTitleAlign: 'center',
         headerStatusBarHeight: 75,
         headerStyle: {

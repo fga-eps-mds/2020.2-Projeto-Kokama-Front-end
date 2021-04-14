@@ -11,11 +11,12 @@ const styles = StyleSheet.create({
         height: window.height,
         backgroundColor: Colors.LIGHT_GRAY,
     },
-    historyText: {
+    cardTitle: {
         textAlign: "left",
         fontSize: 20,
         paddingLeft: 23,
         color: Colors.TEXT,
+        marginTop: 10,
     },
     historyCard: {
         height: 150,
