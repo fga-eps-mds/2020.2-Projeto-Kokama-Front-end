@@ -6,21 +6,36 @@ import {
     TouchableWithoutFeedback
 } from "react-native";
 import React, { useEffect, useState } from "react";
-// import styles from "./styles";
+import styles from "./styles";
 import { Exercise } from "./interface";
 import Api from "../../api/Api";
 import SpinnerLoading from "../../components/SpinnerLoading";
+import {createBlankSpace} from "../../utils/activity";
+
+function shuffle(activities:Array<Exercise>) {
+    var currentIndex = activities.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = activities[currentIndex];
+      activities[currentIndex] = activities[randomIndex];
+      activities[randomIndex] = temporaryValue;
+    }
+    return activities;
+  }
+
 
 export default function Activity({ navigation }) {
     const [activities, setActivities] = useState<Array<Exercise>>([]);
+    let index:number = 0
 
     useEffect(() => {
         const fetchData = async () => {
             const result = await Api(
-                "https://run.mocky.io/v3/b8a86f51-047c-4c66-9302-7f1ddae52dff"
+                "https://run.mocky.io/v3/1c69142c-1816-4915-846b-dfc0eb6346d7"
             );
             if (result.status === 200) {
-                setActivities(result.data);
+                setActivities(shuffle(result.data));
                 console.log("Os exercícios foram atualizados corretamente!");
             } else {
                 console.log("A requisição não pôde ser concluída.\n[Status: ", result.status, "]");
@@ -30,28 +45,36 @@ export default function Activity({ navigation }) {
     }, []);
 
     return (
-        <SafeAreaView>
-            <Text>
-                Bem vindo
-            </Text>
-            {/* {activities.length == 0 && (
+        <SafeAreaView style={styles.contentArea}>
+            {activities.length == 0 && (
                 <SpinnerLoading />
             )}
             {activities.length > 0 && (
-                <ScrollView style={styles.container}>
-                    <View style={styles.area}>
-                        <View>
-                            {activities.map((story:Activity, index: number) => (
-                                <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}>
-                                    <View style={styles.titleArea}>
-                                        <Text style={styles.title}>{story.titulo} </Text>
-                                    </View>
-                                </TouchableWithoutFeedback>
-                            ))}
-                        </View>
+                <ScrollView
+                    keyboardShouldPersistTaps={"always"} 
+                >
+                    <View style={styles.activityTitleArea}>
+                        <Text style={styles.activityTitle}>
+                            Exercício { activities[index].id }
+                        </Text>
                     </View>
+
+                    <View style={styles.activityPhraseArea}>
+                        <Text style={styles.activityPhrasePortuguese}>
+                            {activities[index].phrase_portuguese}
+                        </Text>
+                        <Text style={styles.activityPhraseKokama}>
+                            {activities[index].phrase_kokama
+                            /* {createBlankSpace(
+                                activities[index].phrase_kokama,
+                                activities[index].options[0],
+                                "kokama"
+                            )} */}
+                        </Text>
+                    </View>
+                    
                 </ScrollView>
-            )} */}
+            )}
         </SafeAreaView>
     );
 }
