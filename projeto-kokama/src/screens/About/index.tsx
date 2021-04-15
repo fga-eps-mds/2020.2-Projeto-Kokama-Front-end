@@ -13,9 +13,14 @@ export default function About({ navigation }) {
         <SafeAreaView>
             <ScrollView>
                 <View style={aboutStyle.container}>
-
-                    <View style={aboutStyle.apoiadores}>
-                        <Text style={aboutStyle.texts}>Apoiadores</Text>
+                    <Text style={aboutStyle.texts}>Equipe de Geréncia:</Text>
+                    <View style={aboutStyle.equipes}>
+                        <Image source={require('../../assets/img/Wale.jpeg')}
+                            style={aboutStyle.integrantes}
+                        />
+                    </View>
+                    <Text style={aboutStyle.texts}>Apoiadores</Text>
+                    <View style={aboutStyle.equipes}>
                         <Image source={require('../../assets/img/UnB.jpg')} 
                             style={aboutStyle.UnB}
                         />

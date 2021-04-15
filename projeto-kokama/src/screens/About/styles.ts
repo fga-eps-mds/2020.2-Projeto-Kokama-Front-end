@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
         fontSize: 18,
         alignSelf: 'center',
     },
-    apoiadores: {
+    equipes: {
         display: 'flex',
-        padding: 20,
         alignItems: 'flex-start',
-        // justifyContent: 'space-between',
+        flexDirection: 'row', 
+        justifyContent: "space-around",
     },
     UnB: {
         display: 'flex',
@@ -30,6 +30,11 @@ const styles = StyleSheet.create({
         display: 'flex',
         maxHeight: 100,
         maxWidth: 200,
+    },
+    integrantes: { 
+        maxHeight: 80,
+        maxWidth: 80,
+        borderRadius: 250,
     }
 });
 
