@@ -15,11 +15,23 @@ const styles = StyleSheet.create({
         fontSize: 18,
         alignSelf: 'center',
     },
-    equipes: {
+    teams: {
         display: 'flex',
-        alignItems: 'flex-start',
-        flexDirection: 'row', 
+        minHeight: 50,
+        maxHeight: 200,
         justifyContent: "space-around",
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        borderWidth: 10,
+        borderColor: Colors.LIGHT_GRAY,
+    },
+    photo: {
+        display: 'flex',
+    },
+    photos: {
+        maxHeight: 80,
+        maxWidth: 80,
+        borderRadius: 250,
     },
     UnB: {
         display: 'flex',
@@ -31,11 +43,7 @@ const styles = StyleSheet.create({
         maxHeight: 100,
         maxWidth: 200,
     },
-    integrantes: { 
-        maxHeight: 80,
-        maxWidth: 80,
-        borderRadius: 250,
-    }
+
 });
 
 export default styles;
