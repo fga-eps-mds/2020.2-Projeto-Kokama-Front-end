@@ -15,7 +15,7 @@ export default function About({ navigation }) {
                 <View style={aboutStyle.container}>
                     
                     <Text style={aboutStyle.texts}>Equipe de Gerência-UnB:</Text>
-                    <View style={aboutStyle.teams}>
+                    <View style={aboutStyle.EPS}>
                         <View style={aboutStyle.photo}>
                             <Image source={require('../../assets/img/team-UnB/Andre.png')}
                                 style={aboutStyle.photos}
@@ -39,7 +39,7 @@ export default function About({ navigation }) {
                     </View>
 
                     <Text style={aboutStyle.texts}>Equipe de Desenvolvimento UnB:</Text>
-                    <View style={aboutStyle.teams}>
+                    <View style={aboutStyle.MDS}>
                         <View style={aboutStyle.photo}>
                             <Image source={require('../../assets/img/team-UnB/Ana.png')}
                                 style={aboutStyle.photos}
@@ -71,7 +71,6 @@ export default function About({ navigation }) {
                             />
                         </View>
                     </View>
-
 
                     <Text style={aboutStyle.texts}>Apoiadores</Text>
                     <View style={aboutStyle.teams}>

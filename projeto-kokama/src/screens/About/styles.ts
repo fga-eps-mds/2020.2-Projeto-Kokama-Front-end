@@ -15,9 +15,17 @@ const styles = StyleSheet.create({
         fontSize: 18,
         alignSelf: 'center',
     },
-    teams: {
+    EPS: {
         display: 'flex',
-        minHeight: 50,
+        maxHeight: 150,
+        justifyContent: "space-around",
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        borderWidth: 10,
+        borderColor: Colors.LIGHT_GRAY,
+    },
+    MDS: {
+        display: 'flex',
         maxHeight: 200,
         justifyContent: "space-around",
         flexDirection: 'row',
