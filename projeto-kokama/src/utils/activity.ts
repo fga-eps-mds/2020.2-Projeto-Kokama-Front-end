@@ -1,12 +1,26 @@
-import {removeStringFromMarkers} from "./translation"
+import {capitalizeFirstLetter} from "./translation"
 
-// let remove_chars: Array<string> = ([',', '.', '<' ,'>'])
+let undesiredChars:Array<string> = [",", ".", "!", "?"," ", "", "\0", "\n"]
 
-export function createBlankSpace(text: string, word:string="", language:string="portugues"){
-            
-    let phrase:string =  text.replace("<", "").replace(">", "");
-    if (language == "kokama") {
-        phrase = phrase.replace(word, " _______ ");
+export function createBlankSpace(text: string, word:string="", language:string="portuguese"){ 
+    let phrase:string = text.replace("<", "").replace(">", "");
+    if (language == "portuguese") {
+        return phrase;
     }
-    return phrase
+
+    for (let index1 in undesiredChars) {
+        for (let index2 in undesiredChars) {
+
+            phrase = phrase.replace(
+                undesiredChars[index1] + word + undesiredChars[index2],
+                undesiredChars[index1] + "_______" + undesiredChars[index2]
+            )
+
+            if (phrase.indexOf("_______") != -1) {
+                return phrase;
+            }
+        }
+    }
+
+    return "Error 404: Frase não encontrada";
 }

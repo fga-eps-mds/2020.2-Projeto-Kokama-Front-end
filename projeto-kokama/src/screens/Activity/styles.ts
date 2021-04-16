@@ -14,9 +14,10 @@ const styles = StyleSheet.create({
     activityTitleArea: {
         maxWidth: screen.width,
         height: 80,
-        marginTop: 55,
+        marginTop: 30,
         justifyContent: 'center',
-        borderWidth: 2, 
+        borderBottomWidth: 2,
+        borderTopWidth: 2,
         borderColor: Colors.DARK_GRAY,
         backgroundColor: Colors.LIGHT_GRAY,
     },
@@ -27,13 +28,13 @@ const styles = StyleSheet.create({
     },
     activityPhraseArea: {
         maxWidth: screen.width,
-        height: 250,
+        marginTop: 15,
+        paddingVertical: 10
     },
     activityPhrasePortuguese: {
         textAlign: "center",
         textAlignVertical: "top",
         fontSize: 18,
-        marginTop: 40,
         marginLeft: 20,
         marginRight: 20,
         color: Colors.TEXT,
@@ -46,6 +47,46 @@ const styles = StyleSheet.create({
         marginTop: 5,
         color: Colors.BLACK,
     },
+    optionsArea: {
+        flexDirection: "row",
+        padding: 20,
+        marginTop: 10,
+        justifyContent: "space-around",
+        alignItems: "center"
+    },
+    optionsRow: {
+        marginBottom: 10,
+    },
+    option: {
+        borderWidth: 1,
+        borderColor: Colors.RED,
+        borderRadius: 10,
+        width: 135,
+        padding: 5,
+        marginBottom: 20,
+        alignItems: "center",
+    },
+    
+    optionText: {
+        fontSize: 20,
+    },
+
+    buttonArea: {
+        alignItems: "center",
+    },
+
+    button: {
+        backgroundColor: Colors.RED,
+        width: 200,
+        padding: 10,
+        // borderRadius: 20,
+    },
+    
+    buttonText: {
+        textAlign: "center",
+        color: Colors.WHITE,
+        fontSize: 20,
+    }
 });
 
 export default styles;

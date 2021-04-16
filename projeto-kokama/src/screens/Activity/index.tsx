@@ -3,7 +3,7 @@ import {
     Text,
     ScrollView,
     SafeAreaView,
-    TouchableWithoutFeedback
+    Button,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
@@ -11,30 +11,33 @@ import { Exercise } from "./interface";
 import Api from "../../api/Api";
 import SpinnerLoading from "../../components/SpinnerLoading";
 import {createBlankSpace} from "../../utils/activity";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
-function shuffle(activities:Array<Exercise>) {
-    var currentIndex = activities.length, temporaryValue, randomIndex;
+function shuffle(list:Array<any>) {
+    var currentIndex = list.length, temporaryValue, randomIndex;
     while (0 !== currentIndex) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex -= 1;
-      temporaryValue = activities[currentIndex];
-      activities[currentIndex] = activities[randomIndex];
-      activities[randomIndex] = temporaryValue;
+      temporaryValue = list[currentIndex];
+      list[currentIndex] = list[randomIndex];
+      list[randomIndex] = temporaryValue;
     }
-    return activities;
-  }
+    return list;
+}
 
 
 export default function Activity({ navigation }) {
     const [activities, setActivities] = useState<Array<Exercise>>([]);
-    let index:number = 0
+    let index:number = 4;
+    let randomOptions:Array<number> = [0, 1, 2, 3];
 
     useEffect(() => {
         const fetchData = async () => {
             const result = await Api(
-                "https://run.mocky.io/v3/1c69142c-1816-4915-846b-dfc0eb6346d7"
+                "https://run.mocky.io/v3/913b3b38-fa2a-40d4-8f40-171563bb604a"
             );
             if (result.status === 200) {
+                // setActivities(result.data);
                 setActivities(shuffle(result.data));
                 console.log("Os exercícios foram atualizados corretamente!");
             } else {
@@ -42,6 +45,7 @@ export default function Activity({ navigation }) {
             }
         }
         fetchData();
+        randomOptions = shuffle(randomOptions)
     }, []);
 
     return (
@@ -61,19 +65,56 @@ export default function Activity({ navigation }) {
 
                     <View style={styles.activityPhraseArea}>
                         <Text style={styles.activityPhrasePortuguese}>
-                            {activities[index].phrase_portuguese}
+                            {createBlankSpace(
+                                activities[index].phrase_portuguese,
+                                "portuguese"
+                            )}
                         </Text>
+                        
                         <Text style={styles.activityPhraseKokama}>
-                            {activities[index].phrase_kokama
-                            /* {createBlankSpace(
+                            {createBlankSpace(
                                 activities[index].phrase_kokama,
                                 activities[index].options[0],
                                 "kokama"
-                            )} */}
+                            )}
                         </Text>
+
+                    </View>     
+ 
+                    <View style={styles.optionsArea}>
+
+                        <View style={styles.optionsRow}>
+
+                            <TouchableWithoutFeedback style={styles.option}>
+                                <Text style={styles.optionText}>{activities[index].options[randomOptions[0]]}</Text>
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback style={styles.option}>
+                                <Text style={styles.optionText}>{activities[index].options[randomOptions[1]]}</Text>
+                            </TouchableWithoutFeedback>
+
+                        </View>
+
+                        <View style={styles.optionsRow}>
+                            <TouchableWithoutFeedback style={styles.option}>
+                                <Text style={styles.optionText}>{activities[index].options[randomOptions[2]]}</Text>
+                            </TouchableWithoutFeedback>
+                            <TouchableWithoutFeedback style={styles.option}>
+                                <Text style={styles.optionText}>{activities[index].options[randomOptions[3]]}</Text>
+                            </TouchableWithoutFeedback>
+                        </View>
                     </View>
+
+                    <View style={styles.buttonArea}>
+                        <TouchableWithoutFeedback style={styles.button} onPress={() => {}}>
+                            <Text style={styles.buttonText}>
+                                Confirmar
+                            </Text>
+                        </TouchableWithoutFeedback>
+                        
+                    </View>             
                     
                 </ScrollView>
+
             )}
         </SafeAreaView>
     );
