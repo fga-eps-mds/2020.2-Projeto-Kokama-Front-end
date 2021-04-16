@@ -5,6 +5,8 @@ import Colors from "../../assets/Colors";
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 
+
+
 const styles = StyleSheet.create({
     container: {
         maxWidth: screen.width,
@@ -17,8 +19,8 @@ const styles = StyleSheet.create({
     },
     EPS: {
         display: 'flex',
-        maxHeight: 150,
-        justifyContent: "space-around",
+        maxHeight: 220,
+        justifyContent: "space-between",
         flexDirection: 'row',
         flexWrap: 'wrap',
         borderWidth: 10,
@@ -26,8 +28,8 @@ const styles = StyleSheet.create({
     },
     MDS: {
         display: 'flex',
-        maxHeight: 200,
-        justifyContent: "space-around",
+        maxHeight: 250,
+        justifyContent: "space-between",
         flexDirection: 'row',
         flexWrap: 'wrap',
         borderWidth: 10,
@@ -35,6 +37,8 @@ const styles = StyleSheet.create({
     },
     photo: {
         display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     photos: {
         maxHeight: 80,
@@ -51,7 +55,7 @@ const styles = StyleSheet.create({
         maxHeight: 100,
         maxWidth: 200,
     },
-
 });
 
 export default styles;
+
