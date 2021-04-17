@@ -1,5 +1,7 @@
 name: Jest tests pipeline
-on: pull_request
+on: 
+  pull_request:
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -10,3 +12,7 @@ jobs:
           cd projeto-kokama
           yarn
           yarn test
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
+        with:
+          eslint: true
