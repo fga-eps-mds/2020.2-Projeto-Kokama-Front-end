@@ -13,11 +13,10 @@ const styles = StyleSheet.create({
     },
     activityTitleArea: {
         maxWidth: screen.width,
-        height: 80,
-        marginTop: 30,
-        justifyContent: 'center',
+        paddingVertical: 15,
+        justifyContent: "space-around",
+        flexDirection: "row",
         borderBottomWidth: 2,
-        borderTopWidth: 2,
         borderColor: Colors.DARK_GRAY,
         backgroundColor: Colors.LIGHT_GRAY,
     },
@@ -25,6 +24,8 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 30,
         color: Colors.BLACK,
+    },
+    nextActivity: {
     },
     activityPhraseArea: {
         maxWidth: screen.width,

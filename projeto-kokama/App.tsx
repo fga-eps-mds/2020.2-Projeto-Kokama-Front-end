@@ -34,7 +34,7 @@ export default function App() {
         <Tab.Screen name="Ensino" component={CardStackScreen}
           options={{
             tabBarIcon: props => (
-              <Icon5 name="book" size={30} color={props.color} />
+              <Icon name="book" size={30} color={props.color} />
             )
           }}
         />
