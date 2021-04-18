@@ -12,9 +12,3 @@ jobs:
           cd projeto-kokama
           yarn
           yarn test
-      - name: Run linters
-        uses: wearerequired/lint-action@v1
-        with:
-          eslint_command_prefix: cd projeto-kokama
-          eslint_extensions: js, ts
-          eslint: true
