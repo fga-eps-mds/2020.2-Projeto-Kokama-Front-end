@@ -1,5 +1,5 @@
 import {
-    View, Text, TouchableWithoutFeedback, Image, ScrollView, SafeAreaView, StyleSheet,
+    View, Text, TouchableWithoutFeedback, Image, ScrollView, SafeAreaView,
 } from "react-native";
 import React, {useState} from "react";
 import aboutStyle from "./styles";
