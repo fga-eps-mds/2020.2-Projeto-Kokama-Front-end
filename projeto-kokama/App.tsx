@@ -43,7 +43,7 @@ export default function App() {
         <Tab.Screen name="Usuário" component={UserStackScreen}
           options={{
             tabBarIcon: props => (
-              <IconA name="exclamation-circle" size={30} color={props.color}/>
+              <Icon5 name="info-circle" size={30} color={props.color}/>
             )
           }}
         />
