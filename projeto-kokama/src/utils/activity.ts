@@ -1,5 +1,3 @@
-import { capitalizeFirstLetter } from "./translation";
-
 let undesiredChars: Array<string> = [",", ".", "!", "?", " ", "", "\0", "\n"];
 
 export function createBlankSpace(

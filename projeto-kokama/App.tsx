@@ -5,16 +5,17 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import TopMenu from "./src/components/TopMenu";
 import { updateDictionary } from "./src/utils/dictionary";
-
 import Translation from "./src/screens/Translation";
 import Learning from "./src/screens/Learning";
 import Stories from "./src/screens/KokamaStories";
 import Story from "./src/screens/Story";
 import Activity from "./src/screens/Activity";
+import User from "./src/screens/About";
 
 const Tab = createBottomTabNavigator();
 const TranslateStack = createStackNavigator();
 const CardStack = createStackNavigator();
+const UserStack = createStackNavigator();
 
 // Tabbar
 export default function App() {
@@ -40,6 +41,13 @@ export default function App() {
             tabBarIcon: (props) => (
               <Icon name="book" size={30} color={props.color} />
             ),
+          }}
+        />
+        <Tab.Screen name="Usuário" component={UserStackScreen}
+          options={{
+            tabBarIcon: props => (
+              <Icon5 name="info-circle" size={30} color={props.color}/>
+            )
           }}
         />
       </Tab.Navigator>
@@ -124,3 +132,21 @@ const CardStackScreen = () => (
     />
   </CardStack.Navigator>
 );
+
+// User screens relation
+const UserStackScreen = () => (
+  <UserStack.Navigator>
+    <UserStack.Screen
+      name="Informações"
+      component={User}
+      options={{
+        headerTitle: () => <TopMenu name="Informações" />,
+        headerTitleAlign: 'center',
+        headerStatusBarHeight: 75,
+        headerStyle: {
+          backgroundColor: "#FFFFFF",
+        },
+      }}
+    />
+  </UserStack.Navigator>
+)
