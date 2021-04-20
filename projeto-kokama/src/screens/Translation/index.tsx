@@ -5,8 +5,10 @@ import {
 	TouchableWithoutFeedback,
 	ScrollView,
 	SafeAreaView,
+	Share,
 } from "react-native";
 import React, { useState, useEffect } from "react";
+// import Share from "react-native-share";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from "react-native-vector-icons/AntDesign";
 import HighlightText from "@sanar/react-native-highlight-text";
@@ -30,6 +32,19 @@ const Translation = () => {
 	const [destLanguage, setDestLanguage] = useState(KOKAMA);
 	const [dictionary, setDictionary] = useState<Dictionary[]>([]);
 	const [history, setHistory] = useState<HistoryTuple[]>([]);
+
+	const MyCustomShare = async () => {
+		try{
+			const ShareResponse = await Share.share({
+				title: 'Tadução Kokama',
+				message: 'teste mensagem',
+				
+			});
+
+		}catch (error) {
+			console.log('error => ', error);
+		}
+	};
 
 	useEffect(() => {
 		const getDictionary = async () => {
@@ -327,6 +342,13 @@ const Translation = () => {
 					onPressWord={translateHistoryWord}
 					translateFrom={originLanguage}
 				/>
+
+				<View style={translationStyle.textBox}>
+					<TouchableWithoutFeedback onPress={MyCustomShare}>
+						<Text style={translationStyle.historyText}>Compartilhar</Text>
+					</TouchableWithoutFeedback>
+				</View>
+
 			</ScrollView>
 		</SafeAreaView>
 	);
