@@ -1,9 +1,8 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon5 from "react-native-vector-icons/FontAwesome5";
 import TopMenu from "./src/components/TopMenu";
 import { updateDictionary } from "./src/utils/dictionary";
 
@@ -17,25 +16,30 @@ const Tab = createBottomTabNavigator();
 const TranslateStack = createStackNavigator();
 const CardStack = createStackNavigator();
 
-
 // Tabbar
 export default function App() {
   updateDictionary();
   return (
     <NavigationContainer>
-      <Tab.Navigator tabBarOptions={{ activeTintColor: "red", showLabel: false }} >
-        <Tab.Screen name="Tradução" component={TranslateStackScreen}
+      <Tab.Navigator
+        tabBarOptions={{ activeTintColor: "red", showLabel: false }}
+      >
+        <Tab.Screen
+          name="Tradução"
+          component={TranslateStackScreen}
           options={{
-            tabBarIcon: props => (
+            tabBarIcon: (props) => (
               <Icon name="translate" size={35} color={props.color} />
-            )
+            ),
           }}
         />
-        <Tab.Screen name="Ensino" component={CardStackScreen}
+        <Tab.Screen
+          name="Ensino"
+          component={CardStackScreen}
           options={{
-            tabBarIcon: props => (
+            tabBarIcon: (props) => (
               <Icon name="book" size={30} color={props.color} />
-            )
+            ),
           }}
         />
       </Tab.Navigator>
@@ -51,7 +55,7 @@ const TranslateStackScreen = () => (
       component={Translation}
       options={{
         headerTitle: () => <TopMenu name="Tradução" />,
-        headerTitleAlign: 'center',
+        headerTitleAlign: "center",
         headerStatusBarHeight: 75,
         headerStyle: {
           backgroundColor: "#FFFFFF",
@@ -59,7 +63,7 @@ const TranslateStackScreen = () => (
       }}
     />
   </TranslateStack.Navigator>
-)
+);
 
 // Page Cards Relation
 const CardStackScreen = () => (
@@ -69,7 +73,7 @@ const CardStackScreen = () => (
       component={Learning}
       options={{
         headerTitle: () => <TopMenu name="Ensino" />,
-        headerTitleAlign: 'center',
+        headerTitleAlign: "center",
         headerStatusBarHeight: 75,
         headerStyle: {
           backgroundColor: "#FFFFFF",
@@ -83,7 +87,7 @@ const CardStackScreen = () => (
       component={Stories}
       options={{
         headerTitle: () => <TopMenu name="Histórias do povo Kokama" />,
-        headerTitleAlign: 'center',
+        headerTitleAlign: "center",
         headerStatusBarHeight: 75,
         headerStyle: {
           backgroundColor: "#FFFFFF",
@@ -97,7 +101,7 @@ const CardStackScreen = () => (
       component={Story}
       options={{
         headerTitle: () => <TopMenu name="História" />,
-        headerTitleAlign: 'center',
+        headerTitleAlign: "center",
         headerStatusBarHeight: 75,
         headerStyle: {
           backgroundColor: "#FFFFFF",
@@ -111,7 +115,7 @@ const CardStackScreen = () => (
       component={Activity}
       options={{
         headerTitle: () => <TopMenu name="Atividades" />,
-        headerTitleAlign: 'center',
+        headerTitleAlign: "center",
         headerStatusBarHeight: 75,
         headerStyle: {
           backgroundColor: "#FFFFFF",
@@ -119,4 +123,4 @@ const CardStackScreen = () => (
       }}
     />
   </CardStack.Navigator>
-)
+);
