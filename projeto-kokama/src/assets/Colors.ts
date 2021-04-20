@@ -7,6 +7,7 @@ const Colors = {
     TEXT: "#333333",
     HISTORY_TEXT: "#A5A5A5",
     HISTORY_WORD_TEXT: "#555555",
+    GREEN: "#4BB543",
 };
 
 export default Colors;
