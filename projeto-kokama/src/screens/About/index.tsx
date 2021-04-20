@@ -1,10 +1,4 @@
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  SafeAreaView,
-} from "react-native";
+import { View, Text, Image, ScrollView, SafeAreaView } from "react-native";
 import React from "react";
 import aboutStyle from "./styles";
 import UserPhoto from "../../components/MemberPhoto";
@@ -12,40 +6,38 @@ import { membersEPS, membersMDS } from "./membersData";
 
 export default function About() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={aboutStyle.container}>
       <ScrollView>
-        <View style={aboutStyle.container}>
-          <Text style={aboutStyle.title}>Equipe de Gerência-UnB:</Text>
-          <View style={aboutStyle.EPS}>
-            {membersEPS.map((member) => (
-              <UserPhoto
-                key={member.name}
-                name={member.name}
-                photo={member.photo}
-              />
-            ))}
-          </View>
-          <Text style={aboutStyle.title}>Equipe de Desenvolvimento-UnB:</Text>
-          <View style={aboutStyle.MDS}>
-            {membersMDS.map((member) => (
-              <UserPhoto
-                key={member.name}
-                name={member.name}
-                photo={member.photo}
-              />
-            ))}
-          </View>
-          <Text style={aboutStyle.title}>Apoiadores</Text>
-          <View style={aboutStyle.apoiadores}>
-            <Image
-              source={require("../../assets/img/UnB-Logo.png")}
-              style={aboutStyle.UnB}
+        <Text style={aboutStyle.title}>Equipe de Gerência-UnB:</Text>
+        <View style={aboutStyle.photoSection}>
+          {membersEPS.map((memberEPS) => (
+            <UserPhoto
+              key={memberEPS.name}
+              name={memberEPS.name}
+              photo={memberEPS.photo}
             />
-            <Image
-              source={require("../../assets/img/Nova-Cartografia.png")}
-              style={aboutStyle.NovaCartografia}
+          ))}
+        </View>
+        <Text style={aboutStyle.title}>Equipe de Desenvolvimento-UnB:</Text>
+        <View style={aboutStyle.photoSection}>
+          {membersMDS.map((memberMDS) => (
+            <UserPhoto
+              key={memberMDS.name}
+              name={memberMDS.name}
+              photo={memberMDS.photo}
             />
-          </View>
+          ))}
+        </View>
+        <Text style={aboutStyle.title}>Apoiadores</Text>
+        <View style={aboutStyle.photoSection}>
+          <Image
+            source={require("../../assets/img/UnB-Logo.png")}
+            style={aboutStyle.UnB}
+          />
+          <Image
+            source={require("../../assets/img/Nova-Cartografia.png")}
+            style={aboutStyle.NovaCartografia}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

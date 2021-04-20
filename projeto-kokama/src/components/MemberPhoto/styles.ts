@@ -4,12 +4,13 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
   },
-  photo: {
+  container: {
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
+    height: 100,
+    margin: 8,
   },
-  photos: {
+  photo: {
     maxHeight: 80,
     maxWidth: 80,
     borderRadius: 250,
