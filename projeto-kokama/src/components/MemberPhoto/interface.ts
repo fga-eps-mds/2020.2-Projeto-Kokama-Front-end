@@ -1,4 +1,4 @@
 export interface MemberPhotoProps {
-    name: string;
-    photo: any;
+  name: string;
+  photo: any;
 }
