@@ -61,6 +61,7 @@ const Translation = () => {
 	}, [])
 
 	const [historyIsEnabled, setHistoryIsEnabled] = useState(false);
+
 	const toggleHistory = () => {
 		if (history.length > 0) {
 			setHistoryIsEnabled((previousState) => !previousState);
