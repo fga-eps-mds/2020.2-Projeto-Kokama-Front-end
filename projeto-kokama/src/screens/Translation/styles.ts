@@ -174,6 +174,27 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: Colors.HISTORY_WORD_TEXT,
   },
+  ShareTitle: {
+    flexDirection: "row",
+    height: 40,
+    borderBottomWidth: 1.5,
+    borderTopWidth: 1.5,
+    marginTop: 5,
+    borderColor: Colors.DARK_GRAY,
+    backgroundColor: Colors.WHITE,
+    alignItems: "center",
+    justifyContent: "space-between",
+    display: "flex",
+  },
+  Title: {
+    textAlign: "left",
+    fontSize: 20,
+    paddingLeft: 23,
+    color: Colors.HISTORY_TEXT,
+  },
+  ShareIcon: {
+    marginRight: 25,
+  },
 });
 
 export default styles;

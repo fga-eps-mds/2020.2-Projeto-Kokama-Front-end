@@ -11,6 +11,7 @@ import React, { useState, useEffect } from "react";
 // import Share from "react-native-share";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from "react-native-vector-icons/AntDesign";
+import Icon5 from "react-native-vector-icons/FontAwesome5";
 import HighlightText from "@sanar/react-native-highlight-text";
 import { Dictionary, Phrase, HistoryTuple } from "./interface";
 import {
@@ -32,13 +33,14 @@ const Translation = () => {
 	const [destLanguage, setDestLanguage] = useState(KOKAMA);
 	const [dictionary, setDictionary] = useState<Dictionary[]>([]);
 	const [history, setHistory] = useState<HistoryTuple[]>([]);
+	let shareTranslation: string = "";
 
 	const MyCustomShare = async () => {
+
 		try{
 			const ShareResponse = await Share.share({
 				title: 'Tadução Kokama',
-				message: 'teste mensagem',
-				
+				message: translation.concat(" - ", shareTranslation),				
 			});
 
 		}catch (error) {
@@ -197,9 +199,15 @@ const Translation = () => {
 
 	// For a given dictionary element(word), return its kokama and portuguese words for presentation
 	function getWords(language: string, word: Dictionary) {
+		let stringConcat: string = '';
+		// for (let translate in word.translations) {
+		// 	stringConcat = stringConcat.concat(translate)
+		// }
 		if (language == KOKAMA) {
+			shareTranslation = word.translations[0];
 			return word.translations;
 		} else {
+			shareTranslation = word.word_kokama;
 			return [word.word_kokama];
 		}
 	}
@@ -255,6 +263,12 @@ const Translation = () => {
 						<Text style={translationStyle.translatedWord}>
 							{capitalizeFirstLetter(words)}
 						</Text>
+						<TouchableWithoutFeedback onPress={MyCustomShare}>
+							<View style={translationStyle.ShareIcon}>
+								<Icon5 name="share-square" size={22} color={Colors.HISTORY_WORD_TEXT}/>
+							</View>					
+						</TouchableWithoutFeedback>
+	
 						{phrases.map((phrase, index) => (
 							<View style={translationStyle.exampleArea} key={index}>
 								{/* Phrase kokama */}
@@ -342,13 +356,6 @@ const Translation = () => {
 					onPressWord={translateHistoryWord}
 					translateFrom={originLanguage}
 				/>
-
-				<View style={translationStyle.textBox}>
-					<TouchableWithoutFeedback onPress={MyCustomShare}>
-						<Text style={translationStyle.historyText}>Compartilhar</Text>
-					</TouchableWithoutFeedback>
-				</View>
-
 			</ScrollView>
 		</SafeAreaView>
 	);
