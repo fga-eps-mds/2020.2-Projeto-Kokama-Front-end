@@ -37,10 +37,9 @@ const Translation = () => {
 	const MyCustomShare = async () => {
 
 		try{
-			const ShareResponse = await Share.share({
+			 await Share.share({
 				title: 'Tadução Kokama',
 				message: translation.concat(" - ", shareTranslation, "\nPara saber mais do aplicativo acesse esse link: \nhttps://fga-eps-mds.github.io/2020.2-Projeto-Kokama-Wiki/"),
-				// url: 'https://fga-eps-mds.github.io/2020.2-Projeto-Kokama-Wiki/',
 			});
 
 		}catch (error) {
