@@ -98,7 +98,7 @@ exports[`renders correctly 1`] = `
       >
         <TextInput
           allowFontScaling={true}
-          defaultValue=""
+          defaultValue="ɨ"
           onChangeText={[Function]}
           placeholder="Toque para digitar"
           rejectResponderTermination={true}
@@ -110,6 +110,7 @@ exports[`renders correctly 1`] = `
               "textAlign": "left",
             }
           }
+          testID="setTranslation"
           underlineColorAndroid="transparent"
         />
         <View
@@ -134,6 +135,7 @@ exports[`renders correctly 1`] = `
               "marginRight": 15,
             }
           }
+          testID="insertSymbol"
         >
           <Text
             style={
@@ -147,7 +149,25 @@ exports[`renders correctly 1`] = `
         </View>
       </View>
       <View>
-        <View />
+        <View>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+              }
+            }
+          >
+            <Text
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              Tradução não encontrada
+            </Text>
+          </View>
+        </View>
       </View>
       <View>
         <View

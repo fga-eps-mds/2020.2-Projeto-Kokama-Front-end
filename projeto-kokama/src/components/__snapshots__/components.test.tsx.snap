@@ -80,6 +80,7 @@ exports[`renders correctly 1`] = `
           "width": "100%",
         }
       }
+      testID="history"
     >
       <Text
         style={

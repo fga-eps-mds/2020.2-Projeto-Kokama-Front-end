@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import History from './History';
 import { HistoryTuple } from "../screens/Translation/interface";
-
+import {act}  from 'react-test-renderer';
 
 interface Props {
     isEnabled: boolean;
@@ -26,7 +26,14 @@ beforeEach(() => {
     };
   });
 
+
 test('renders correctly', () => {
   const tree = renderer.create(<History {... props}/>).toJSON();
   expect(tree).toMatchSnapshot();
+});
+
+test('renders correctly', () => {
+  let tree = renderer.create(<History {... props}/>);
+  const TouchableWithoutFeedback = tree.root.findByProps({testID:'history'}).props;
+  act(() => TouchableWithoutFeedback.onPress());
 });
