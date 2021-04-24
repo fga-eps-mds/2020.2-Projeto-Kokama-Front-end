@@ -107,9 +107,8 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 28,
     color: Colors.TEXT,
-    paddingLeft: 23,
+    paddingLeft: 15,
     marginBottom: 15,
-    borderBottomWidth: 1.5,
     borderColor: Colors.DARK_GRAY,
   },
   exampleArea: {
@@ -173,6 +172,27 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 18,
     color: Colors.HISTORY_WORD_TEXT,
+  },
+  ShareTitle: {
+    flexDirection: "row",
+    height: 40,
+    borderBottomWidth: 1.5,
+    marginTop: 10,
+    marginLeft: 40,
+    borderColor: Colors.DARK_GRAY,
+    backgroundColor: Colors.WHITE,
+    alignItems: "center",
+    justifyContent: "space-between",
+    display: "flex",
+  },
+  Title: {
+    textAlign: "left",
+    fontSize: 20,
+    paddingLeft: 23,
+    color: Colors.HISTORY_TEXT,
+  },
+  ShareIcon: {
+    marginBottom: 10,
   },
 });
 
