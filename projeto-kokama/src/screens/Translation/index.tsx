@@ -291,7 +291,7 @@ const Translation = () => {
 
 					{/* Change language icon */}
 					<View style={translationStyle.languageExchangeArea}>
-						<TouchableWithoutFeedback onPress={exchangeLanguage}>
+						<TouchableWithoutFeedback onPress={exchangeLanguage} testID='exchangeLanguage'>
 							<Icon name="swap" size={40} />
 						</TouchableWithoutFeedback>
 					</View>
