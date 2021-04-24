@@ -8,7 +8,6 @@ import {
 	Share,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-// import Share from "react-native-share";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from "react-native-vector-icons/AntDesign";
 import Icon5 from "react-native-vector-icons/FontAwesome5";
@@ -40,7 +39,8 @@ const Translation = () => {
 		try{
 			const ShareResponse = await Share.share({
 				title: 'Tadução Kokama',
-				message: translation.concat(" - ", shareTranslation),				
+				message: translation.concat(" - ", shareTranslation, "\nPara saber mais do aplicativo acesse esse link: \nhttps://fga-eps-mds.github.io/2020.2-Projeto-Kokama-Wiki/"),
+				// url: 'https://fga-eps-mds.github.io/2020.2-Projeto-Kokama-Wiki/',
 			});
 
 		}catch (error) {
@@ -200,9 +200,6 @@ const Translation = () => {
 	// For a given dictionary element(word), return its kokama and portuguese words for presentation
 	function getWords(language: string, word: Dictionary) {
 		let stringConcat: string = '';
-		// for (let translate in word.translations) {
-		// 	stringConcat = stringConcat.concat(translate)
-		// }
 		if (language == KOKAMA) {
 			shareTranslation = word.translations[0];
 			return word.translations;
@@ -260,14 +257,17 @@ const Translation = () => {
 				{words !== "" && (
 					<View style={translationStyle.translationArea}>
 						{/* Presentation of the translations words */}
-						<Text style={translationStyle.translatedWord}>
-							{capitalizeFirstLetter(words)}
-						</Text>
-						<TouchableWithoutFeedback onPress={MyCustomShare}>
-							<View style={translationStyle.ShareIcon}>
-								<Icon5 name="share-square" size={22} color={Colors.HISTORY_WORD_TEXT}/>
-							</View>					
-						</TouchableWithoutFeedback>
+						<View style={translationStyle.ShareTitle}>
+							<Text style={translationStyle.translatedWord}>
+								{capitalizeFirstLetter(words)}
+							</Text>
+							<TouchableWithoutFeedback onPress={MyCustomShare}>
+								<View style={translationStyle.ShareIcon}>
+									<Icon5 name="share-square" size={22} color={Colors.HISTORY_WORD_TEXT}/>
+								</View>					
+							</TouchableWithoutFeedback>
+						</View>
+						
 	
 						{phrases.map((phrase, index) => (
 							<View style={translationStyle.exampleArea} key={index}>

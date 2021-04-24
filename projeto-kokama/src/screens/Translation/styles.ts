@@ -107,9 +107,8 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 28,
     color: Colors.TEXT,
-    paddingLeft: 23,
+    paddingLeft: 15,
     marginBottom: 15,
-    borderBottomWidth: 1.5,
     borderColor: Colors.DARK_GRAY,
   },
   exampleArea: {
@@ -178,8 +177,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 40,
     borderBottomWidth: 1.5,
-    borderTopWidth: 1.5,
-    marginTop: 5,
+    marginTop: 10,
+    marginLeft: 40,
     borderColor: Colors.DARK_GRAY,
     backgroundColor: Colors.WHITE,
     alignItems: "center",
@@ -193,7 +192,7 @@ const styles = StyleSheet.create({
     color: Colors.HISTORY_TEXT,
   },
   ShareIcon: {
-    marginRight: 25,
+    marginBottom: 10,
   },
 });
 
