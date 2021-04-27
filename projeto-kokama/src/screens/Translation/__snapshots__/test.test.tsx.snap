@@ -57,7 +57,36 @@ exports[`renders correctly 1`] = `
             }
           }
         >
-          <Text />
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Array [
+                Object {
+                  "color": undefined,
+                  "fontSize": 40,
+                },
+                undefined,
+                Object {
+                  "fontFamily": "anticon",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+            testID="exchangeLanguage"
+          >
+            
+          </Text>
         </View>
         <View
           style={
@@ -213,7 +242,26 @@ exports[`renders correctly 1`] = `
               }
             }
           >
-            <Text />
+            <Text
+              allowFontScaling={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#555555",
+                    "fontSize": 22,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "anticon",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              
+            </Text>
           </View>
         </View>
       </View>
