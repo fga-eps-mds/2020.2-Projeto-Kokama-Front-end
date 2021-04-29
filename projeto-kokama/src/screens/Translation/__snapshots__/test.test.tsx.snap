@@ -45,7 +45,7 @@ exports[`renders correctly 1`] = `
               }
             }
           >
-            Português
+            Kokama
           </Text>
         </View>
         <View
@@ -106,7 +106,7 @@ exports[`renders correctly 1`] = `
               }
             }
           >
-            Kokama
+            Português
           </Text>
         </View>
       </View>
@@ -127,7 +127,7 @@ exports[`renders correctly 1`] = `
       >
         <TextInput
           allowFontScaling={true}
-          defaultValue="ɨ"
+          defaultValue="Pachata"
           onChangeText={[Function]}
           placeholder="Toque para digitar"
           rejectResponderTermination={true}

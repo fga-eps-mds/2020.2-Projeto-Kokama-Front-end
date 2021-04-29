@@ -24,6 +24,7 @@ import {
 import Colors from "../../assets/Colors";
 import History from "../../components/History";
 
+
 const Translation = () => {
 	const [translation, setTranslation] = useState("");
 	const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
@@ -192,7 +193,7 @@ const Translation = () => {
 	}
 
 	// For a given dictionary element array, return its respective translation for presentation
-	function getTranslations(
+	function getTranslations( 
 		language: string,
 		dictionaryElements: Array<Dictionary>
 	) {
