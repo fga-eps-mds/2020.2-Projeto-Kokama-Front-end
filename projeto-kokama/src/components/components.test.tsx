@@ -1,8 +1,7 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer, {act} from 'react-test-renderer';
 import History from './History';
 import { HistoryTuple } from "../screens/Translation/interface";
-import {act}  from 'react-test-renderer';
 
 interface Props {
     isEnabled: boolean;
@@ -20,9 +19,13 @@ beforeEach(() => {
             kokama: "pacha",
             portuguese: "cem",
           }],
-        onPressTitle: () => {},
+        onPressTitle: () => {
+          return;
+        },
         translateFrom: "portugues",
-        onPressWord:() =>{},
+        onPressWord:() => {
+          return;
+        }
     };
   });
 
@@ -37,3 +40,5 @@ test('renders correctly', () => {
   const TouchableWithoutFeedback = tree.root.findByProps({testID:'history'}).props;
   act(() => TouchableWithoutFeedback.onPress());
 });
+
+
