@@ -24,6 +24,7 @@ import {
 import Colors from "../../assets/Colors";
 import History from "../../components/History";
 
+
 const Translation = () => {
 	const [translation, setTranslation] = useState("");
 	const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
@@ -52,6 +53,7 @@ const Translation = () => {
 						setHistory(JSON.parse(jsonHistory));
 					}
 				}
+				
 			} catch (e) {
 				console.log("Ocorreu um erro:\n", e);
 			}
@@ -61,6 +63,7 @@ const Translation = () => {
 	}, [])
 
 	const [historyIsEnabled, setHistoryIsEnabled] = useState(false);
+
 	const toggleHistory = () => {
 		if (history.length > 0) {
 			setHistoryIsEnabled((previousState) => !previousState);
@@ -190,7 +193,7 @@ const Translation = () => {
 	}
 
 	// For a given dictionary element array, return its respective translation for presentation
-	function getTranslations(
+	function getTranslations( 
 		language: string,
 		dictionaryElements: Array<Dictionary>
 	) {
@@ -243,7 +246,7 @@ const Translation = () => {
 						{phrases.map((phrase, index) => (
 							<View style={translationStyle.exampleArea} key={index}>
 								{/* Phrase kokama */}
-								<HighlightText
+								<HighlightText testID='phraseKokama'
 									style={translationStyle.examplesText}
 									highlightStyle={{ color: Colors.RED }}
 									searchWords={[
@@ -290,7 +293,7 @@ const Translation = () => {
 
 					{/* Change language icon */}
 					<View style={translationStyle.languageExchangeArea}>
-						<TouchableWithoutFeedback onPress={exchangeLanguage}>
+						<TouchableWithoutFeedback onPress={exchangeLanguage} testID='exchangeLanguage'>
 							<Icon name="swap" size={40} />
 						</TouchableWithoutFeedback>
 					</View>
@@ -303,14 +306,14 @@ const Translation = () => {
 
 				{/* Text box for the user entry */}
 				<View style={translationStyle.userInput}>
-					<TextInput
+					<TextInput testID='setTranslation'
 						style={translationStyle.textBox}
 						placeholder="Toque para digitar"
-						onChangeText={(input) => setTranslation(input)}
+						onChangeText={(input) => setTranslation(input) }
 						defaultValue={translation}
 					/>
 
-					<TouchableWithoutFeedback onPress={insertSymbol}>
+					<TouchableWithoutFeedback onPress={insertSymbol} testID='insertSymbol'>
 						<View style={translationStyle.symbolArea}>
 							<Text style={translationStyle.symbol}>ɨ</Text>
 						</View>
