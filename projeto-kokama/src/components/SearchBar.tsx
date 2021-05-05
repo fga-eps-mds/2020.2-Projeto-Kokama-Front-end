@@ -18,7 +18,7 @@ export default class App extends React.Component {
                 placeholder="Pesquise aqui..."
                 onChangeText={this.updateSearch}
                 value={search}
-                platform="ios"
+                platform="android"
                 containerStyle={{ width:300}}
             />
         );

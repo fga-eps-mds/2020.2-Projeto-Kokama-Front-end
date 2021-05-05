@@ -41,7 +41,9 @@ export default function Stories({ navigation }) {
                     <View style={styles.area}>
                         <View style={styles.searchBarBox}>
                             <SearchBar/>
-                            <Icon name="swap" size={40} />
+                            <TouchableWithoutFeedback>
+                                <Icon name="swap" size={40} />
+                            </TouchableWithoutFeedback>
                         </View>
                         <View>
                             {kokamaStories.map((story: KokamaStories, index: number) => (
