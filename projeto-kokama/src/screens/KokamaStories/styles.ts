@@ -46,9 +46,9 @@ const styles = StyleSheet.create({
         textAlign: "left",
         fontSize: 18,
         marginTop: 5,
-        // borderTopWidth: 1.5,
-        // borderBottomWidth: 1.5,
-        // borderColor: Colors.DARK_GRAY,
+        borderTopWidth: 1.5,
+        borderBottomWidth: 1.5,
+        borderColor: Colors.DARK_GRAY,
         paddingLeft: 23,
         paddingVertical: 7,
     },
@@ -63,6 +63,12 @@ const styles = StyleSheet.create({
     storyCardTitle: {
         borderWidth: 5,
         backgroundColor: "#f23232",
+    },
+    searchBarBox: {
+        display: "flex",
+        width: "100%",
+        flexDirection: "row",
+        alignItems: "center",
     },
 });
 

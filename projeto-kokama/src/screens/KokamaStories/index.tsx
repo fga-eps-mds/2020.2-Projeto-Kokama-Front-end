@@ -10,6 +10,8 @@ import styles from "./styles";
 import { KokamaStories } from "./interface";
 import Api from "../../api/Api";
 import SpinnerLoading from "../../components/SpinnerLoading";
+import SearchBar from "../../components/SearchBar";
+import Icon from "react-native-vector-icons/AntDesign";
 
 export default function Stories({ navigation }) {
     const [kokamaStories, setKokamaStories] = useState<Array<KokamaStories>>([]);
@@ -37,6 +39,10 @@ export default function Stories({ navigation }) {
             {kokamaStories.length > 0 && (
                 <ScrollView style={styles.container}>
                     <View style={styles.area}>
+                        <View style={styles.searchBarBox}>
+                            <SearchBar/>
+                            <Icon name="swap" size={40} />
+                        </View>
                         <View>
                             {kokamaStories.map((story: KokamaStories, index: number) => (
                                 <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}>
