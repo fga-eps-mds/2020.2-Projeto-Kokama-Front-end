@@ -19,7 +19,7 @@ export default class App extends React.Component {
                 onChangeText={this.updateSearch}
                 value={search}
                 platform="android"
-                containerStyle={{ width:300}}
+                containerStyle={{ width:290}}
             />
         );
     }

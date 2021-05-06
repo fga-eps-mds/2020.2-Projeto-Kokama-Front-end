@@ -1,5 +1,7 @@
 export interface KokamaStories {
     id: number;
-    titulo: string;
-    texto: string;
+    title_portuguese: string;
+    text_portuguese: string;
+    title_kokama: string;
+    text_kokama: string;
 }

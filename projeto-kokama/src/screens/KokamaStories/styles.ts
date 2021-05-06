@@ -70,6 +70,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
     },
+    swapButton: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+    },
 });
 
 export default styles;
