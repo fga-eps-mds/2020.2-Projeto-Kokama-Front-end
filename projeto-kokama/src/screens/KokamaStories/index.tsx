@@ -13,14 +13,15 @@ import SpinnerLoading from "../../components/SpinnerLoading";
 import SearchBar from "../../components/SearchBar";
 import Icon from "react-native-vector-icons/AntDesign";
 import {
-	PORTUGUESE,
-	KOKAMA,
-} from "../../config/constants"; 
+    PORTUGUESE,
+    KOKAMA,
+} from "../../config/constants";
 
 export default function Stories({ navigation }) {
     const [kokamaStories, setKokamaStories] = useState<Array<KokamaStories>>([]);
     const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
-	const [destLanguage, setDestLanguage] = useState(KOKAMA);
+    const [destLanguage, setDestLanguage] = useState(KOKAMA);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,14 +39,14 @@ export default function Stories({ navigation }) {
     }, []);
 
     function exchangeLanguage() {
-		if (originLanguage === PORTUGUESE) {
-			setOriginLanguage(KOKAMA)
-			setDestLanguage(PORTUGUESE);
-		} else {
-			setOriginLanguage(PORTUGUESE);
-			setDestLanguage(KOKAMA);
-		}
-	}
+        if (originLanguage === PORTUGUESE) {
+            setOriginLanguage(KOKAMA)
+            setDestLanguage(PORTUGUESE);
+        } else {
+            setOriginLanguage(PORTUGUESE);
+            setDestLanguage(KOKAMA);
+        }
+    }
 
     return (
         <SafeAreaView>
@@ -56,7 +57,7 @@ export default function Stories({ navigation }) {
                 <ScrollView style={styles.container}>
                     <View style={styles.area}>
                         <View style={styles.searchBarBox}>
-                            <SearchBar/>
+                            <SearchBar />
                             <View style={styles.swapButton}>
                                 <TouchableWithoutFeedback onPress={exchangeLanguage}>
                                     <Icon name="swap" size={40} />
@@ -64,16 +65,27 @@ export default function Stories({ navigation }) {
                                 <Text>{originLanguage}</Text>
                             </View>
                         </View>
-                        <View>
-                            {kokamaStories.map((story: KokamaStories, index: number) => (
-                                <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}>
-                                    <View style={styles.titleArea}>
-
-                                        <Text style={styles.title}>{story.title_kokama} </Text>
-                                    </View>
-                                </TouchableWithoutFeedback>
-                            ))}
-                        </View>
+                        {originLanguage == "Kokama" && (
+                            <View>
+                                {kokamaStories.map((story: KokamaStories, index: number) => (
+                                    <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}>
+                                        <View style={styles.titleArea}>
+                                            <Text style={styles.title}>{story.title_kokama}</Text>
+                                        </View>
+                                    </TouchableWithoutFeedback>
+                                ))}
+                            </View>
+                        ) || (
+                                <View>
+                                    {kokamaStories.map((story: KokamaStories, index: number) => (
+                                        <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}>
+                                            <View style={styles.titleArea}>
+                                                <Text style={styles.title}>{story.title_portuguese}</Text>
+                                            </View>
+                                        </TouchableWithoutFeedback>
+                                    ))}
+                                </View>
+                            )}
                     </View>
                 </ScrollView>
             )}
