@@ -24,3 +24,10 @@ export const membersMDS = [
   { name: "Luís", photo: photoLuis },
   { name: "Luiz", photo: photoLuiz },
 ];
+
+export const membersTranslation = [
+  { name: "André", photo: photoAndre },
+  { name: "Leonardo", photo: photoLeonardo },
+  { name: "Lieverton", photo: photoLieverton },
+  { name: "Welison", photo: photoWelison },
+];
