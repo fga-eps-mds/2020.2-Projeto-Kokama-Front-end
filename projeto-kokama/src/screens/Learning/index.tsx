@@ -22,7 +22,7 @@ export default function Learning({ navigation }) {
                     <Text style={cardsStyle.cardTitle}>Atividades</Text>
                     <TouchableWithoutFeedback
                         onPress={() => navigation.push('Atividades')}>
-                        <Image style={cardsStyle.historyCard} source={require("../../assets/img/floresta.jpg")} />
+                        <Image style={cardsStyle.historyCard} source={require("../../assets/img/study.jpg")} />
                     </TouchableWithoutFeedback>
                 </View>
             </ScrollView>
