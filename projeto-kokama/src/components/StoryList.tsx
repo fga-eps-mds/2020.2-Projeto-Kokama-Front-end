@@ -1,7 +1,7 @@
-import React from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
 import Colors from "../assets/Colors";
 import { KokamaStories } from "../screens/KokamaStories/interface";
+import React, { useEffect, useState } from "react";
 
 
 const styles = StyleSheet.create({
@@ -39,66 +39,57 @@ interface Props {
     language: string;
 }
 
-const StoryList = (props: Props) => {
 
-    let [newList, setNewList] = useState<Array<KokamaStories>>([]);
-
-    // interface Props {
-    //     list: KokamaStories[];
-    //     language: string;
-    // }
-
+const StoryList = (props: Props, navigation) => {
+    const [newList, setNewList] = useState<Array<KokamaStories>>([]);
 
     function getCorrectStories(oldlist: KokamaStories[]) {
-        // let list:Array<KokamaStories> = [];
-        if (originLanguage == "Kokama") {
+        let list: KokamaStories[] = [];
+        if (props.language == "Kokama") {
             for (let story of oldlist) {
-                console.log(1)
                 if (story.title_kokama != "") {
-                    console.log(2)
-                    newList = oldlist;
-                } else {
-                    console.log(3)
-                    newList = [];
+                    list.unshift(story);
                 }
             }
         } else {
             for (let story of oldlist) {
-                console.log(4)
                 if (story.title_portuguese != "") {
-                    console.log(5)
-                    newList = oldlist;
-                } else {
-                    console.log(6)
-                    newList = [];
+                    list.unshift(story);
                 }
             }
         }
-        return newList;
+        return list;
     }
+
+    if (newList != getCorrectStories(props.list)) {
+        setNewList(getCorrectStories(props.list));
+    }
+
     return (
-        {originLanguage == "Kokama" && (
-            <View>
-                {kokamaStories.map((story: KokamaStories, index: number) => (
-                    <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}>
-                        <View style={styles.titleArea}>
-                            <Text style={styles.title}>{story.title_kokama}</Text>
-                        </View>
-                    </TouchableWithoutFeedback>
-                ))}
-            </View>
-        )||(
-            <View>
-                {kokamaStories.map((story: KokamaStories, index: number) => (
-                    <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}>
-                        <View style={styles.titleArea}>
-                            <Text style={styles.title}>{story.title_portuguese}</Text>
-                        </View>
-                    </TouchableWithoutFeedback>
-                ))}
-            </View>
-        )}
+        <View>
+            {props.language == "Kokama" && (
+                <View>
+                    {newList.map((story: KokamaStories, index: number) => (
+                        <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}>
+                            <View style={styles.titleArea}>
+                                <Text style={styles.title}>{story.title_kokama}</Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    ))}
+                </View>
+            ) || (
+                <View>
+                    {newList.map((story: KokamaStories, index: number) => 
+                        <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}> 
+                            <View style={styles.titleArea}>
+                                <Text style={styles.title}>{story.title_portuguese}</Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    )}
+                </View>
+            )}
+        </View>
     );
-};
+}
 
 export default StoryList;
