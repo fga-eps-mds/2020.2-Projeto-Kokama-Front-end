@@ -7,7 +7,7 @@ import {
 import React from "react";
 import styles from "./styles";
 
-export default function Story({ route, navigation }) {
+export default function Story({ route }) {
     const { story } = route.params;
 
     return( 
@@ -15,10 +15,16 @@ export default function Story({ route, navigation }) {
             <ScrollView style={styles.container}>
                 <View style={styles.container}>
                     <Text style={styles.titleField}>
-                        {story.titulo}
+                        {story.title_portuguese}
                     </Text>
                     <Text style={styles.textField}>
-                        {story.texto}
+                        {story.text_portuguese}
+                    </Text>
+                    <Text style={styles.titleField}>
+                        {story.title_kokama}
+                    </Text>
+                    <Text style={styles.textField}>
+                        {story.text_kokama}
                     </Text>
                 </View>
             </ScrollView>

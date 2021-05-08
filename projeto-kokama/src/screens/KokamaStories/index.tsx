@@ -20,13 +20,14 @@ import StoryList from "../../components/StoryList";
 
 export default function Stories() {
     const [kokamaStories, setKokamaStories] = useState<Array<KokamaStories>>();
-    const [originLanguage, setOriginLanguage] = useState<string>();
+    const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
+    const [destLanguage, setDestLanguage] = useState(KOKAMA);
     if (originLanguage == "") {
         setOriginLanguage(PORTUGUESE);
     }    
     console.log("bonitinha")
 
-    let memorizedValue = useCallback(() => {setKokamaStories(kokamaStories)}, [] );
+    // let memorizedValue = useCallback(() => {setKokamaStories(kokamaStories)}, [] );
 
     useEffect(() => {
         const fetchData = async () => {
@@ -35,7 +36,7 @@ export default function Stories() {
             );
             if (result.status === 200 && kokamaStories != result.data) {
                 console.log("Chegou")
-                memorizedValue = result.data;
+                setKokamaStories(result.data);
                 console.log("As histórias foram atualizadas corretamente!");
             } else {
                 console.log("A requisição não pôde ser concluída.\n[Status: ", result.status, "]");
@@ -47,8 +48,10 @@ export default function Stories() {
     function exchangeLanguage() {
         if (originLanguage === PORTUGUESE) {
             setOriginLanguage(KOKAMA);
+            setDestLanguage(PORTUGUESE);
         } else {
             setOriginLanguage(PORTUGUESE);
+            setDestLanguage(KOKAMA);
         }
     }
     
@@ -63,7 +66,7 @@ export default function Stories() {
                         <View style={styles.searchBarBox}>
                             <SearchBar />
                             <View style={styles.swapButton}>
-                                <TouchableWithoutFeedback onPress={ () => exchangeLanguage}>
+                                <TouchableWithoutFeedback onPress={exchangeLanguage}>
                                     <Icon name="swap" size={40} />
                                 </TouchableWithoutFeedback>
                                 <Text>{originLanguage}</Text>

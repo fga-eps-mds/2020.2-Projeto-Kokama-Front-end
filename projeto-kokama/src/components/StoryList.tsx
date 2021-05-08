@@ -41,7 +41,7 @@ interface Props {
 
 
 const StoryList = (props: Props, navigation) => {
-    const [newList, setNewList] = useState<Array<KokamaStories>>([]);
+    let [newList, setNewList] = useState<Array<KokamaStories>>([]);
 
     function getCorrectStories(oldlist: KokamaStories[]) {
         let list: KokamaStories[] = [];
@@ -62,7 +62,7 @@ const StoryList = (props: Props, navigation) => {
     }
 
     if (newList != getCorrectStories(props.list)) {
-        setNewList(getCorrectStories(props.list));
+        newList=getCorrectStories(props.list);
     }
 
     return (
