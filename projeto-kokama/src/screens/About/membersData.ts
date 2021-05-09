@@ -8,6 +8,11 @@ import photoLais from "../../assets/img/team-UnB/Lais.png";
 import photoLucas from "../../assets/img/team-UnB/Lucas.png";
 import photoLuis from "../../assets/img/team-UnB/Luis.png";
 import photoLuiz from "../../assets/img/team-UnB/Luiz.png";
+import photoCelia from "../../assets/img/team-traduction/Celia.png";
+import photoEraldo from "../../assets/img/team-traduction/Eraldo.png";
+import photoMaria from "../../assets/img/team-traduction/Maria.png";
+import photoMariana from "../../assets/img/team-traduction/Mariana.png";
+import photoMatheus from "../../assets/img/team-traduction/Matheus.png";
 
 export const membersEPS = [
   { name: "André", photo: photoAndre },
@@ -23,4 +28,12 @@ export const membersMDS = [
   { name: "Lucas", photo: photoLucas },
   { name: "Luís", photo: photoLuis },
   { name: "Luiz", photo: photoLuiz },
+];
+
+export const membersTranslation = [
+  { name: "Célia", photo: photoCelia },
+  { name: "Eraldo", photo: photoEraldo },
+  { name: "Maria", photo: photoMaria },
+  { name: "Mariana", photo: photoMariana },
+  { name: "Matheus", photo: photoMatheus },
 ];

@@ -2,12 +2,46 @@ import { View, Text, Image, ScrollView, SafeAreaView } from "react-native";
 import React from "react";
 import aboutStyle from "./styles";
 import UserPhoto from "../../components/MemberPhoto";
-import { membersEPS, membersMDS } from "./membersData";
+import { membersEPS, membersMDS, membersTranslation } from "./membersData";
 
 export default function About() {
   return (
     <SafeAreaView style={aboutStyle.container}>
       <ScrollView>
+        <Text style={aboutStyle.title}>Sobre:</Text>
+        <View style={aboutStyle.about_view}>
+          <Text style={aboutStyle.about_text}>
+            O novo aplicativo Kokama é resultado das parcerias: do movimento de vitalização da língua Kokama,
+            coordenado por Altaci Corrêa Rubim, Kokama; da universidade de Brasília-UnB, por meio do Campus Gama
+            com os estudantes do curso Engenharia de Software; do campus Darcy Ribeiro, com os estudantes do curso
+            de licenciatura de Português do Brasil como Segunda Língua-PBSL; da Universidade do Estado do Amazonas-UEA,
+            por meio do Projeto Nova Cartografia Social da Amazônia e demais colaboradores.
+          </Text>
+          <Text style={aboutStyle.about_text}>
+            O App Kokama Kinkin-APKKK tem como referência: o dicionário Kukama-Kukamiria, elaborado por Rosa Vallejos e
+            Rosa Amias, do Peru, além de dados coletados nas oficinas de ensino e aprendizagem da língua Kokama.
+          </Text>
+          <Text style={aboutStyle.about_text}>
+            O APP Kokama Kinkin é um aplicativo para smartphone que contribuirá com a política de vitalização da língua
+            Kokama. Apresenta vocabulário contextualizado, áudio, atividades pedagógicas, além de possibilitar a
+            atualização de dados pelos próprios Kokama.
+          </Text>
+          <Text style={aboutStyle.about_text}>
+            Nossos mais sinceros agradecimentos ao prof. Hilmer Rodrigues Neri (UnB), ao prof. Alfredo Wagner Berno
+            de Almeida (UEA) e, também, aos estudantes e colaboradores do projeto.
+          </Text>
+        </View>
+
+        <Text style={aboutStyle.title}>Equipe de Tradução:</Text>
+        <View style={aboutStyle.photoSection}>
+          {membersTranslation.map((membersTranslation) => (
+            <UserPhoto
+              key={membersTranslation.name}
+              name={membersTranslation.name}
+              photo={membersTranslation.photo}
+            />
+          ))}
+        </View>
         <Text style={aboutStyle.title}>Equipe de Gerência-UnB:</Text>
         <View style={aboutStyle.photoSection}>
           {membersEPS.map((memberEPS) => (

@@ -8,6 +8,16 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     alignSelf: "center",
+    marginVertical: 15,
+  },
+  about_view: {
+    justifyContent:"center",
+    marginBottom: 15,
+  },
+  about_text: {
+    paddingHorizontal:40,
+    lineHeight: 20,
+    textAlign: 'justify', 
   },
   photoSection: {
     display: "flex",

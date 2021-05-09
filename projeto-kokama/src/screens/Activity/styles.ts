@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
   },
   option: {
     borderWidth: 1,
-    borderColor: Colors.RED,
     borderRadius: 10,
     width: 135,
     padding: 5,
@@ -68,6 +67,12 @@ const styles = StyleSheet.create({
   },
   optionText: {
     fontSize: 20,
+  },
+  greenBorder: {
+    borderColor: Colors.GREEN,
+  },
+  redBorder: {
+    borderColor: Colors.RED,
   },
   buttonArea: {
     alignItems: "center",
