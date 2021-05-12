@@ -7,7 +7,7 @@ import {
 import React from "react";
 import styles from "./styles";
 
-export default function Story({ route }) {
+export default function Story({ route, navigation }) {
     const { story } = route.params;
 
     return( 

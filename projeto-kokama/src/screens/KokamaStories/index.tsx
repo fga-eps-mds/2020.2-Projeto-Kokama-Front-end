@@ -5,7 +5,7 @@ import {
     SafeAreaView,
     TouchableWithoutFeedback
 } from "react-native";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles";
 import { KokamaStories } from "./interface";
 import Api from "../../api/Api";
@@ -27,7 +27,6 @@ export default function Stories() {
     }    
     console.log("bonitinha")
 
-    // let memorizedValue = useCallback(() => {setKokamaStories(kokamaStories)}, [] );
 
     useEffect(() => {
         const fetchData = async () => {

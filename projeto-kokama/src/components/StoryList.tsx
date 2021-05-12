@@ -1,7 +1,8 @@
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
 import Colors from "../assets/Colors";
 import { KokamaStories } from "../screens/KokamaStories/interface";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useNavigation } from '@react-navigation/native';
 
 
 const styles = StyleSheet.create({
@@ -40,8 +41,9 @@ interface Props {
 }
 
 
-const StoryList = (props: Props, navigation) => {
+const StoryList = (props: Props) => {
     let [newList, setNewList] = useState<Array<KokamaStories>>([]);
+    const navigation = useNavigation();
 
     function getCorrectStories(oldlist: KokamaStories[]) {
         let list: KokamaStories[] = [];
@@ -79,13 +81,13 @@ const StoryList = (props: Props, navigation) => {
                 </View>
             ) || (
                 <View>
-                    {newList.map((story: KokamaStories, index: number) => 
+                    {newList.map((story: KokamaStories, index: number) => (
                         <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}> 
                             <View style={styles.titleArea}>
                                 <Text style={styles.title}>{story.title_portuguese}</Text>
                             </View>
                         </TouchableWithoutFeedback>
-                    )}
+                    ))}
                 </View>
             )}
         </View>
