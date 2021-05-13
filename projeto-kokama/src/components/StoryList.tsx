@@ -72,7 +72,7 @@ const StoryList = (props: Props) => {
             {props.language == "Kokama" && (
                 <View>
                     {newList.map((story: KokamaStories, index: number) => (
-                        <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}>
+                        <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story, language: props.language, })}>
                             <View style={styles.titleArea}>
                                 <Text style={styles.title}>{story.title_kokama}</Text>
                             </View>
@@ -82,7 +82,7 @@ const StoryList = (props: Props) => {
             ) || (
                 <View>
                     {newList.map((story: KokamaStories, index: number) => (
-                        <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}> 
+                        <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story, language: props.language, })}> 
                             <View style={styles.titleArea}>
                                 <Text style={styles.title}>{story.title_portuguese}</Text>
                             </View>
