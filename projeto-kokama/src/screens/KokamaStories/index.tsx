@@ -49,11 +49,6 @@ export default function Stories() {
             setDestLanguage(KOKAMA);
         }
     }
-    
-    // export default class App extends React.Component { constructor(props) {
-    //     super(props);
-    //     this.state = { search: '', isLoading: true }; this.arrayholder = [];
-    // }
 
     return (
         <SafeAreaView>
