@@ -20,12 +20,18 @@ const styles = StyleSheet.create({
     borderColor: Colors.DARK_GRAY,
     backgroundColor: Colors.LIGHT_GRAY,
   },
+  nextText: {
+    fontSize:35,
+    color: Colors.DARK_GRAY,
+  },
   activityTitle: {
     textAlign: "center",
     fontSize: 30,
     color: Colors.BLACK,
   },
-  nextActivity: {},
+  nextActivity: {
+    alignItems: "center",
+  },
   activityPhraseArea: {
     maxWidth: screen.width,
     marginTop: 15,

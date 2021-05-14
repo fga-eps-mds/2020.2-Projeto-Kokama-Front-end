@@ -4,6 +4,8 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
+  TouchableHighlightBase,
+  TouchableNativeFeedback,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
@@ -11,7 +13,8 @@ import { Exercise } from "./interface";
 import Api from "../../api/Api";
 import SpinnerLoading from "../../components/SpinnerLoading";
 import { createBlankSpace } from "../../utils/activity";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { TouchableHighlight, TouchableWithoutFeedback } from "react-native-gesture-handler";
+import Colors from "../../assets/Colors";
 
 function shuffle(list: Array<any>) {
   var currentIndex = list.length,
@@ -26,28 +29,37 @@ function shuffle(list: Array<any>) {
   }
   return list;
 }
+
 let randomOptions: Array<number> = shuffle([0, 1, 2, 3]);
+let dataActivities: Array<Exercise> = ([]);
 
 export default function Activity({ navigation }) {
   const [activities, setActivities] = useState<Array<Exercise>>([]);
-  const [clicked, setClicked] = useState<number>(-1);  
+  const [clicked, setClicked] = useState<number>(-1);
   let index: number = 0;
-  
+
+  function nextExercise() {
+    setClicked(-1);
+    setActivities(shuffle(dataActivities));
+    randomOptions = shuffle([0, 1, 2, 3]);
+    console.log(randomOptions);
+  }
+
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await Api(
         "https://run.mocky.io/v3/913b3b38-fa2a-40d4-8f40-171563bb604a"
       );
       if (result.status === 200) {
-        // setActivities(shuffle(result.data));
-        setActivities(result.data);
+        dataActivities = result.data;
+        setActivities(shuffle(dataActivities));
+
       }
     };
     fetchData();
-    
-  }, []);
 
-  
+  }, []);
 
   return (
 
@@ -77,7 +89,7 @@ export default function Activity({ navigation }) {
             <View style={styles.optionsRow}>
 
               <TouchableWithoutFeedback
-                onPress={() => {setClicked(0); }}
+                onPress={() => { setClicked(0); }}
                 style={[styles.option, (clicked !== -1 && randomOptions[0] === 0 ? styles.greenBorder :
                   (clicked === 0 ? styles.redBorder : styles.option))]}
               >
@@ -106,7 +118,7 @@ export default function Activity({ navigation }) {
                   setClicked(2);
                 }}
                 style={[styles.option, (clicked !== -1 && randomOptions[2] === 0 ? styles.greenBorder :
-                   (clicked === 2 ? styles.redBorder : styles.option))]}
+                  (clicked === 2 ? styles.redBorder : styles.option))]}
               >
                 <Text style={styles.optionText}>
                   {activities[index].options[randomOptions[2]]}
@@ -124,9 +136,24 @@ export default function Activity({ navigation }) {
                   {activities[index].options[randomOptions[3]]}
                 </Text>
               </TouchableWithoutFeedback>
-              
+
             </View>
           </View>
+
+          <View>
+            <TouchableOpacity
+              activeOpacity={0.3} 
+              onPress={() => {
+                nextExercise();
+              }}
+              style={styles.nextActivity}
+            >
+              <Text style={styles.nextText}>
+                Próximo
+                </Text>
+            </TouchableOpacity>
+          </View>
+
         </ScrollView>
       )}
     </SafeAreaView>
