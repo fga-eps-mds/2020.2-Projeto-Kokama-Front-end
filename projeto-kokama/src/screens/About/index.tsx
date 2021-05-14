@@ -33,15 +33,17 @@ export default function About() {
         </View>
 
         <Text style={aboutStyle.title}>Equipe de Tradução:</Text>
+
         <View style={aboutStyle.photoSection}>
-          {membersTranslation.map((membersTranslation) => (
+          {membersTranslation.map((memberTranslation) => (
             <UserPhoto
-              key={membersTranslation.name}
-              name={membersTranslation.name}
-              photo={membersTranslation.photo}
+              key={memberTranslation.name}
+              name={memberTranslation.name}
+              photo={memberTranslation.photo}
             />
           ))}
         </View>
+
         <Text style={aboutStyle.title}>Equipe de Gerência-UnB:</Text>
         <View style={aboutStyle.photoSection}>
           {membersEPS.map((memberEPS) => (
@@ -52,6 +54,7 @@ export default function About() {
             />
           ))}
         </View>
+
         <Text style={aboutStyle.title}>Equipe de Desenvolvimento-UnB:</Text>
         <View style={aboutStyle.photoSection}>
           {membersMDS.map((memberMDS) => (
@@ -62,6 +65,7 @@ export default function About() {
             />
           ))}
         </View>
+
         <Text style={aboutStyle.title}>Apoiadores</Text>
         <View style={aboutStyle.photoSection}>
           <Image
