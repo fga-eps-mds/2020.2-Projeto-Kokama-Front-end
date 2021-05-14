@@ -25,3 +25,7 @@ export function createBlankSpace(
 
   return "Error 404: Frase não encontrada";
 }
+
+export function removeMarkers(text: string) {
+  return text.replace('<', '').replace('>', '');
+}

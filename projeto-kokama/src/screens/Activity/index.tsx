@@ -10,10 +10,11 @@ import styles from "./styles";
 import { Exercise } from "./interface";
 import Api from "../../api/Api";
 import SpinnerLoading from "../../components/SpinnerLoading";
-import { createBlankSpace } from "../../utils/activity";
+import { createBlankSpace, removeMarkers } from "../../utils/activity";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { LEARN_MICROSERVICE_URL } from "@env";
 import NetInfo from '@react-native-community/netinfo';
+
 
 
 function shuffle(list: Array<any>) {
@@ -78,7 +79,7 @@ export default function Activity({ navigation }) {
       {activities.length == 0 && <SpinnerLoading />}
       {activities.length > 0 && isConnected && (
         <ScrollView keyboardShouldPersistTaps={"always"}>
-
+          {clicked === -1 && (
           <View style={styles.activityPhraseArea}>
             <Text style={styles.activityPhrasePortuguese}>
               {createBlankSpace(
@@ -95,7 +96,21 @@ export default function Activity({ navigation }) {
               )}
             </Text>
           </View>
+          ) || (
+            <View style={styles.activityPhraseArea}>
+            <Text style={styles.activityPhrasePortuguese}>
+              {
+                removeMarkers(activities[index].phrase_portuguese)
+              }
+            </Text>
 
+            <Text style={styles.activityPhraseKokama}>
+              {
+                removeMarkers(activities[index].phrase_kokama)
+              }
+            </Text>
+          </View>
+          )}
           <View style={styles.optionsArea}>
             <View style={styles.optionsRow}>
               <TouchableWithoutFeedback
