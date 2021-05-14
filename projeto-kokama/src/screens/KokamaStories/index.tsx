@@ -25,8 +25,6 @@ export default function Stories() {
     if (originLanguage == "") {
         setOriginLanguage(PORTUGUESE);
     }    
-    console.log("bonitinha")
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,9 +32,7 @@ export default function Stories() {
                 "https://run.mocky.io/v3/7c65553d-7f08-4368-8a19-97c460dc39e4"
             );
             if (result.status === 200 && kokamaStories != result.data) {
-                console.log("Chegou")
                 setKokamaStories(result.data);
-                console.log("As histórias foram atualizadas corretamente!");
             } else {
                 console.log("A requisição não pôde ser concluída.\n[Status: ", result.status, "]");
             }
@@ -54,6 +50,11 @@ export default function Stories() {
         }
     }
     
+    // export default class App extends React.Component { constructor(props) {
+    //     super(props);
+    //     this.state = { search: '', isLoading: true }; this.arrayholder = [];
+    // }
+
     return (
         <SafeAreaView>
             {kokamaStories && kokamaStories.length == 0 && (
@@ -63,8 +64,8 @@ export default function Stories() {
                 <ScrollView style={styles.container}>
                     <View style={styles.area}>
                         <View style={styles.searchBarBox}>
-                            <SearchBar />
-                            <View style={styles.swapButton}>
+                            <SearchBar/>
+                            <View style={styles.swapButtonArea}>
                                 <TouchableWithoutFeedback onPress={exchangeLanguage}>
                                     <Icon name="swap" size={40} />
                                 </TouchableWithoutFeedback>
