@@ -4,8 +4,6 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
-  TouchableHighlightBase,
-  TouchableNativeFeedback,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
@@ -13,8 +11,8 @@ import { Exercise } from "./interface";
 import Api from "../../api/Api";
 import SpinnerLoading from "../../components/SpinnerLoading";
 import { createBlankSpace } from "../../utils/activity";
-import { TouchableHighlight, TouchableWithoutFeedback } from "react-native-gesture-handler";
-import Colors from "../../assets/Colors";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+
 
 function shuffle(list: Array<any>) {
   var currentIndex = list.length,
