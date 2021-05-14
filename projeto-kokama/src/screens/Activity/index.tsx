@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import styles from "./styles";
+import styles, {getStyleOption} from "./styles";
 import { Exercise } from "./interface";
 import Api from "../../api/Api";
 import SpinnerLoading from "../../components/SpinnerLoading";
@@ -41,24 +41,21 @@ export default function Activity({ navigation }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
-      setIsConnected(state.isConnected);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
     const fetchData = async () => {
       const result = await Api(
         LEARN_MICROSERVICE_URL + "ensino/atividades/"
       );
+      const unsubscribe = NetInfo.addEventListener((state) => {
+        setIsConnected(state.isConnected);
+      });
       if (result.status === 200) {
         dataActivities = result.data;
         setActivities(shuffle(dataActivities));
 
       }
+      return () => {
+        unsubscribe();
+      };
     };
     fetchData();
   }, []);
@@ -115,8 +112,7 @@ export default function Activity({ navigation }) {
             <View style={styles.optionsRow}>
               <TouchableWithoutFeedback
                 onPress={() => { setClicked(0); }}
-                style={[styles.option, (clicked !== -1 && randomOptions[0] === 0 ? styles.greenBorder :
-                  (clicked === 0 ? styles.redBorder : styles.option))]}
+                style={ getStyleOption(clicked, randomOptions[0] === 0, 0)}
               >
                 <Text style={styles.optionText}>
                   {activities[index].options[randomOptions[0]]}
@@ -127,8 +123,7 @@ export default function Activity({ navigation }) {
                 onPress={() => {
                   setClicked(1);
                 }}
-                style={[styles.option, (clicked !== -1 && randomOptions[1] === 0 ? styles.greenBorder :
-                  (clicked === 1 ? styles.redBorder : styles.option))]}
+                style={getStyleOption(clicked, randomOptions[1] === 0, 1)}
               >
                 <Text style={styles.optionText}>
                   {activities[index].options[randomOptions[1]]}
@@ -142,8 +137,7 @@ export default function Activity({ navigation }) {
                 onPress={() => {
                   setClicked(2);
                 }}
-                style={[styles.option, (clicked !== -1 && randomOptions[2] === 0 ? styles.greenBorder :
-                  (clicked === 2 ? styles.redBorder : styles.option))]}
+                style={getStyleOption(clicked, randomOptions[2] === 0, 2)}
               >
                 <Text style={styles.optionText}>
                   {activities[index].options[randomOptions[2]]}
@@ -154,8 +148,7 @@ export default function Activity({ navigation }) {
                 onPress={() => {
                   setClicked(3);
                 }}
-                style={[styles.option, (clicked !== -1 && randomOptions[3] === 0 ? styles.greenBorder :
-                  (clicked === 3 ? styles.redBorder : styles.option))]}
+                style={getStyleOption(clicked, randomOptions[3] === 0, 3)}
               >
                 <Text style={styles.optionText}>
                   {activities[index].options[randomOptions[3]]}
