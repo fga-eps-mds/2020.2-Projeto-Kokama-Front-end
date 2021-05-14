@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
     height: window.height,
     backgroundColor: Colors.WHITE,
   },
+  notConectedTitle: {
+    textAlign: "center",
+    paddingTop:20,
+    fontSize:20,
+  },
   activityTitleArea: {
     maxWidth: screen.width,
     paddingVertical: 15,

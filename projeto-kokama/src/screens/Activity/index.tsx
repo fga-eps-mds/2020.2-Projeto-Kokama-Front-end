@@ -13,6 +13,7 @@ import SpinnerLoading from "../../components/SpinnerLoading";
 import { createBlankSpace } from "../../utils/activity";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { LEARN_MICROSERVICE_URL } from "@env";
+import NetInfo from '@react-native-community/netinfo';
 
 
 function shuffle(list: Array<any>) {
@@ -35,14 +36,17 @@ let dataActivities: Array<Exercise> = ([]);
 export default function Activity({ navigation }) {
   const [activities, setActivities] = useState<Array<Exercise>>([]);
   const [clicked, setClicked] = useState<number>(-1);
-  let index: number = 0;
+  const [isConnected, setIsConnected] = useState(true);
+  const [index, setIndex] = useState(0);
 
-  function nextExercise() {
-    setActivities(shuffle(dataActivities));
-    setClicked(-1);
-    randomOptions = shuffle([0, 1, 2, 3]);
-  }
-
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsConnected(state.isConnected);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -56,14 +60,23 @@ export default function Activity({ navigation }) {
       }
     };
     fetchData();
-
   }, []);
 
-  return (
+  function nextActivity() {
+    setClicked(-1);
+    setActivities(shuffle(activities));
+    if (index === activities.length - 1) {
+      setIndex(0);
+    } else {
+      setIndex(index+1);
+    }
+    randomOptions = shuffle([0, 1, 2, 3]);
+  }
 
+  return (
     <SafeAreaView style={styles.contentArea}>
       {activities.length == 0 && <SpinnerLoading />}
-      {activities.length > 0 && (
+      {activities.length > 0 && isConnected && (
         <ScrollView keyboardShouldPersistTaps={"always"}>
 
           <View style={styles.activityPhraseArea}>
@@ -140,7 +153,7 @@ export default function Activity({ navigation }) {
             <TouchableOpacity
               activeOpacity={0.5}
               onPress={() => {
-                nextExercise();
+                nextActivity();
               }}
               style={styles.nextActivity}
             >
@@ -151,7 +164,12 @@ export default function Activity({ navigation }) {
           </View>
 
         </ScrollView>
-      )}
+      ) || (activities.length > 0 && (
+        <Text style={styles.notConectedTitle}>
+          Sem acesso à internet!
+        </Text>)
+        )
+      }
     </SafeAreaView>
   );
 }
