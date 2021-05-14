@@ -15,10 +15,10 @@ export default function Story({ route, navigation }) {
             <ScrollView style={styles.container}>
                 <View style={styles.container}>
                     <Text style={styles.textField}>
-                        {story.titulo}
+                        {story.title}
                     </Text>
                     <Text style={styles.textField}>
-                        {story.texto}
+                        {story.text}
                     </Text>
                 </View>
             </ScrollView>

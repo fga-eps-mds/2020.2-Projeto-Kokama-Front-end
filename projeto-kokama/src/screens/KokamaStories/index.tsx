@@ -10,14 +10,14 @@ import styles from "./styles";
 import { KokamaStories } from "./interface";
 import Api from "../../api/Api";
 import SpinnerLoading from "../../components/SpinnerLoading";
+import {LEARN_MICROSERVICE_URL} from "@env"
 
 export default function Stories({ navigation }) {
     const [kokamaStories, setKokamaStories] = useState<Array<KokamaStories>>([]);
-
     useEffect(() => {
         const fetchData = async () => {
             const result = await Api(
-                "https://run.mocky.io/v3/c9ae454d-b760-450f-9aef-4b4710a94504"
+                LEARN_MICROSERVICE_URL+"ensino/lista_de_historias/?format=json"
             );
             if (result.status === 200) {
                 setKokamaStories(result.data);
@@ -41,7 +41,7 @@ export default function Stories({ navigation }) {
                             {kokamaStories.map((story: KokamaStories, index: number) => (
                                 <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story })}>
                                     <View style={styles.titleArea}>
-                                        <Text style={styles.title}>{story.titulo} </Text>
+                                        <Text style={styles.title}>{story.title} </Text>
                                     </View>
                                 </TouchableWithoutFeedback>
                             ))}

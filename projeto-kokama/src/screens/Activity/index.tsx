@@ -12,6 +12,7 @@ import Api from "../../api/Api";
 import SpinnerLoading from "../../components/SpinnerLoading";
 import { createBlankSpace } from "../../utils/activity";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { LEARN_MICROSERVICE_URL } from "@env";
 
 
 function shuffle(list: Array<any>) {
@@ -37,17 +38,16 @@ export default function Activity({ navigation }) {
   let index: number = 0;
 
   function nextExercise() {
-    setClicked(-1);
     setActivities(shuffle(dataActivities));
+    setClicked(-1);
     randomOptions = shuffle([0, 1, 2, 3]);
-    console.log(randomOptions);
   }
 
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await Api(
-        "https://run.mocky.io/v3/913b3b38-fa2a-40d4-8f40-171563bb604a"
+        LEARN_MICROSERVICE_URL + "ensino/atividades/"
       );
       if (result.status === 200) {
         dataActivities = result.data;
@@ -85,7 +85,6 @@ export default function Activity({ navigation }) {
 
           <View style={styles.optionsArea}>
             <View style={styles.optionsRow}>
-
               <TouchableWithoutFeedback
                 onPress={() => { setClicked(0); }}
                 style={[styles.option, (clicked !== -1 && randomOptions[0] === 0 ? styles.greenBorder :
@@ -134,13 +133,12 @@ export default function Activity({ navigation }) {
                   {activities[index].options[randomOptions[3]]}
                 </Text>
               </TouchableWithoutFeedback>
-
             </View>
           </View>
 
           <View>
             <TouchableOpacity
-              activeOpacity={0.3} 
+              activeOpacity={0.5}
               onPress={() => {
                 nextExercise();
               }}
@@ -148,7 +146,7 @@ export default function Activity({ navigation }) {
             >
               <Text style={styles.nextText}>
                 Próximo
-                </Text>
+              </Text>
             </TouchableOpacity>
           </View>
 
