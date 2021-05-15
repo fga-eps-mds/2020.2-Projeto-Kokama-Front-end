@@ -35,9 +35,9 @@ const styles = StyleSheet.create({
     },
     emptyListMessage: {
         alignSelf: "center",
-        fontSize: 15,
+        fontSize: 18,
         marginTop: 50,
-        // borderTopWidth: 1,
+        
     },
 });
 
