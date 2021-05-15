@@ -9,7 +9,6 @@ import styles from "./styles";
 
 export default function Story({ route, navigation }) {
     const { story, language } = route.params;
-    console.log(route.params)
     interface Props {
         language: string;
     }

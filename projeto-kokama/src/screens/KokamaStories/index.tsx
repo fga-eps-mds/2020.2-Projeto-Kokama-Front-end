@@ -10,21 +10,22 @@ import styles from "./styles";
 import { KokamaStories } from "./interface";
 import Api from "../../api/Api";
 import SpinnerLoading from "../../components/SpinnerLoading";
-import SearchBar from "../../components/SearchBar";
 import Icon from "react-native-vector-icons/AntDesign";
 import {
     PORTUGUESE,
     KOKAMA,
 } from "../../config/constants";
 import StoryList from "../../components/StoryList";
+import { SearchBar } from 'react-native-elements';
 
 export default function Stories() {
     const [kokamaStories, setKokamaStories] = useState<Array<KokamaStories>>();
     const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
     const [destLanguage, setDestLanguage] = useState(KOKAMA);
+    const [search, setSearch] = useState("");
     if (originLanguage == "") {
         setOriginLanguage(PORTUGUESE);
-    }    
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -53,22 +54,29 @@ export default function Stories() {
     return (
         <SafeAreaView>
             {kokamaStories && kokamaStories.length == 0 && (
-                <SpinnerLoading />
+                <SpinnerLoading/>
             )}
             {kokamaStories && kokamaStories.length > 0 && (
                 <ScrollView style={styles.container}>
                     <View style={styles.area}>
                         <View style={styles.searchBarBox}>
-                            <SearchBar/>
+                            <SearchBar
+                                placeholder="Pesquise aqui..."
+                                onChangeText={setSearch}
+                                value={search}
+                                platform="android"
+                                containerStyle={{ width:300}}
+                            />
                             <View style={styles.swapButtonArea}>
                                 <TouchableWithoutFeedback onPress={exchangeLanguage}>
-                                    <Icon name="swap" size={40} />
+                                    <Icon name="swap" size={40}/>
                                 </TouchableWithoutFeedback>
                                 <Text>{originLanguage}</Text>
                             </View>
                         </View>
-                        <StoryList 
-                            list={kokamaStories} 
+                        <StoryList
+                            search={search}
+                            list={kokamaStories}
                             language={originLanguage || ""}
                         />
                     </View>
