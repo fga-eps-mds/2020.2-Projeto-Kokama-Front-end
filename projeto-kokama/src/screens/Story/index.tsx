@@ -8,7 +8,7 @@ import React from "react";
 import styles from "./styles";
 
 export default function Story({ route, navigation }) {
-    const { story, language } = route.params;
+    const { story } = route.params;
     interface Props {
         language: string;
     }

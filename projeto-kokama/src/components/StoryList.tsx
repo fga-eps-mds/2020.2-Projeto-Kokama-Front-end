@@ -47,46 +47,41 @@ interface Props {
     language: string;
 }
 
-
-const StoryList = (props: Props) => {
-    let [newList, setNewList] = useState<Array<KokamaStories>>([]);
-    const navigation = useNavigation();
-
-    function getCorrectStories(oldlist: KokamaStories[]) {
-        let list: KokamaStories[] = [];
-        let search: string=props.search.toLowerCase().trim();
-        if (props.language == "Kokama") {
-            for (let story of oldlist) {
-                if (story.title_kokama != "") {
-                    if(props.search != ""){
-                        if(story.title_kokama.toLowerCase().includes(search) 
-                        || story.text_kokama.toLowerCase().includes(search)){
-                            list.unshift(story);
-                        }
-                    }else{
-                        list.unshift(story);
-                    }
-                }
-            }
-        } else {
-            for (let story of oldlist) {
-                if (story.title_portuguese != "") {
-                    if(props.search != ""){
-                        if(story.title_portuguese.toLowerCase().includes(search)
-                        || story.text_portuguese.toLowerCase().includes(search)){
-                            list.unshift(story);
-                        }    
-                    }else{
-                        list.unshift(story);
-                    }
-                }
+function getCorrectStories(oldlist: KokamaStories[],language: string, searchInput: string) {
+    let list: KokamaStories[] = [];
+    let search: string=searchInput.toLowerCase().trim();
+    if (language == "Kokama") {
+        for (let story of oldlist) {
+            if (story.title_kokama != "" && searchInput != "" && 
+                (story.title_kokama.toLowerCase().includes(search) 
+                    || story.text_kokama.toLowerCase().includes(search))
+            ) {
+                list.unshift(story);
+            } else if(story.title_kokama != "" && searchInput == ""){
+                list.unshift(story);
             }
         }
-        return list;
+    } else {
+        for (let story of oldlist) {
+            if (story.title_portuguese != "" && searchInput != "" && 
+                (story.title_portuguese.toLowerCase().includes(search) 
+                    || story.text_portuguese.toLowerCase().includes(search))
+            ) {
+                list.unshift(story);
+            } else if(story.title_portuguese != "" && searchInput == ""){
+                list.unshift(story);
+            }
+        }
     }
+    return list;
+}
 
-    if (newList != getCorrectStories(props.list)) {
-        newList=getCorrectStories(props.list);
+const StoryList = (props: Props) => {
+    let [newList] = useState<Array<KokamaStories>>([]);
+    const navigation = useNavigation();
+
+    if (newList != getCorrectStories(props.list, props.language, props.search)) {
+        newList=getCorrectStories(props.list, props.language, props.search);
     }
 
     return (

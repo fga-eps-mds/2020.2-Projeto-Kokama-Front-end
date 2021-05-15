@@ -21,7 +21,6 @@ import { SearchBar } from 'react-native-elements';
 export default function Stories() {
     const [kokamaStories, setKokamaStories] = useState<Array<KokamaStories>>();
     const [originLanguage, setOriginLanguage] = useState(PORTUGUESE);
-    const [destLanguage, setDestLanguage] = useState(KOKAMA);
     const [search, setSearch] = useState("");
     if (originLanguage == "") {
         setOriginLanguage(PORTUGUESE);
@@ -44,10 +43,8 @@ export default function Stories() {
     function exchangeLanguage() {
         if (originLanguage === PORTUGUESE) {
             setOriginLanguage(KOKAMA);
-            setDestLanguage(PORTUGUESE);
         } else {
             setOriginLanguage(PORTUGUESE);
-            setDestLanguage(KOKAMA);
         }
     }
 
