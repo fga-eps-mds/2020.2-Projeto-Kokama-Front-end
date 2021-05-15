@@ -2,6 +2,7 @@ const Colors = {
     RED: "#F23232",
     WHITE: "#FFFFFF",
     LIGHT_GRAY: "#FAFAFA",
+    GRAY: "#757575",
     DARK_GRAY: "#E4DFDF",
     BLACK: "#000000",
     TEXT: "#333333",

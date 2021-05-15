@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Api from "../api/Api";
+import { TRANSLATION_MICROSERVICE_URL } from "@env";
 
 function getCurrentDate() {
 	let newDate = new Date()
@@ -23,8 +24,8 @@ export function updateDictionary() {
 				if (lastUpdate === null || getCurrentDate() !== lastUpdate) {
 					await AsyncStorage.setItem("last-update", getCurrentDate());
 					const request = await Api(
-						"https://projeto-kokama-traducao.herokuapp.com/dicionario/?format=json"
-					);
+						TRANSLATION_MICROSERVICE_URL + "dicionario/"				
+						);
 					if (request.status === 200) {
 						await AsyncStorage.setItem("dictionary", JSON.stringify(request.data));
 					} else {

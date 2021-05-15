@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.LIGHT_GRAY,
   },
   nextText: {
-    fontSize:35,
-    color: Colors.DARK_GRAY,
+    fontSize:25,
+    color: Colors.GRAY,
   },
   activityTitle: {
     textAlign: "center",
@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     color: Colors.BLACK,
   },
   nextActivity: {
-    alignItems: "center",
+    alignItems: "baseline",
+    marginLeft:230, 
   },
   activityPhraseArea: {
     maxWidth: screen.width,

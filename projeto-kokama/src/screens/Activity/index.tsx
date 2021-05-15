@@ -41,17 +41,16 @@ export default function Activity({ navigation }) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    let unsubscribe = NetInfo.addEventListener((state) => {
+      setIsConnected(state.isConnected);
+    });
     const fetchData = async () => {
       const result = await Api(
         LEARN_MICROSERVICE_URL + "ensino/atividades/"
       );
-      const unsubscribe = NetInfo.addEventListener((state) => {
-        setIsConnected(state.isConnected);
-      });
       if (result.status === 200) {
         dataActivities = result.data;
         setActivities(shuffle(dataActivities));
-
       }
       return () => {
         unsubscribe();
@@ -159,7 +158,7 @@ export default function Activity({ navigation }) {
 
           <View>
             <TouchableOpacity
-              activeOpacity={0.5}
+              activeOpacity={1.0}
               onPress={() => {
                 nextActivity();
               }}
