@@ -106,7 +106,6 @@ const StoryList = (props: Props) => {
         <View>
             {newList.length === 0 && (
                 <Text style={styles.emptyListMessage}>Nenhuma história foi encontrada</Text>
-
             ) || (
                 <View>
                     {props.language == "Kokama" && (
