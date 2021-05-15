@@ -47,31 +47,49 @@ interface Props {
     language: string;
 }
 
+function checkListKokama(oldlist: KokamaStories[], searchInput: string, search: string) {
+    let list: KokamaStories[] = [];
+    for (let story of oldlist) {
+        if (story.title_kokama != "") {
+            if (searchInput != "") {
+                if (story.title_kokama.toLowerCase().includes(search)
+                    || story.text_kokama.toLowerCase().includes(search)) {
+                    list.unshift(story);
+                }
+            } else {
+                list.unshift(story);
+            }
+        }
+    }
+    return list;
+}
+
+function checkListPortuguese(oldlist: KokamaStories[], searchInput: string, search: string) {
+    let list: KokamaStories[] = [];
+    for (let story of oldlist) {
+        if (story.title_portuguese != "") {
+            if (searchInput != "") {
+                if (story.title_portuguese.toLowerCase().includes(search)
+                    || story.text_portuguese.toLowerCase().includes(search)) {
+                    list.unshift(story);
+                }
+            } else {
+                list.unshift(story);
+            }
+        }
+    }
+    return list;
+}
+
 function getCorrectStories(oldlist: KokamaStories[],language: string, searchInput: string) {
     let list: KokamaStories[] = [];
     let search: string=searchInput.toLowerCase().trim();
+
     if (language == "Kokama") {
-        for (let story of oldlist) {
-            if (story.title_kokama != "" && searchInput != "" && 
-                (story.title_kokama.toLowerCase().includes(search) 
-                    || story.text_kokama.toLowerCase().includes(search))
-            ) {
-                list.unshift(story);
-            } else if(story.title_kokama != "" && searchInput == ""){
-                list.unshift(story);
-            }
-        }
+        list = checkListKokama(oldlist, searchInput, search);    
+    
     } else {
-        for (let story of oldlist) {
-            if (story.title_portuguese != "" && searchInput != "" && 
-                (story.title_portuguese.toLowerCase().includes(search) 
-                    || story.text_portuguese.toLowerCase().includes(search))
-            ) {
-                list.unshift(story);
-            } else if(story.title_portuguese != "" && searchInput == ""){
-                list.unshift(story);
-            }
-        }
+        list = checkListPortuguese(oldlist, searchInput, search);            
     }
     return list;
 }
