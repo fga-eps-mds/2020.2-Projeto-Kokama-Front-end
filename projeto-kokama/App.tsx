@@ -13,6 +13,7 @@ import Story from "./src/screens/Story";
 import Activity from "./src/screens/Activity";
 import User from "./src/screens/About";
 
+
 const Tab = createBottomTabNavigator();
 const TranslateStack = createStackNavigator();
 const CardStack = createStackNavigator();

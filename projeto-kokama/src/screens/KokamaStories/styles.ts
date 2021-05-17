@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     swapButtonArea: {
         display: "flex",
         width: 80,
+        marginLeft: -20,
         flexDirection: "column",
         alignItems:"center",
     },

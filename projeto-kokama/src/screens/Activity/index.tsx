@@ -6,14 +6,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import styles from "./styles";
+import styles, {getStyleOption} from "./styles";
 import { Exercise } from "./interface";
 import Api from "../../api/Api";
 import SpinnerLoading from "../../components/SpinnerLoading";
-import { createBlankSpace } from "../../utils/activity";
+import { createBlankSpace, removeMarkers } from "../../utils/activity";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import Colors from "../../assets/Colors";
-import Icon from "react-native-vector-icons/AntDesign";
+import { LEARN_MICROSERVICE_URL } from "@env";
+import NetInfo from '@react-native-community/netinfo';
+
+
 
 function shuffle(list: Array<any>) {
   var currentIndex = list.length,
@@ -29,56 +31,51 @@ function shuffle(list: Array<any>) {
   return list;
 }
 
-function checkOptions(option: number) {
-  return option === 0;
-}
-
 let randomOptions: Array<number> = shuffle([0, 1, 2, 3]);
+let dataActivities: Array<Exercise> = ([]);
 
 export default function Activity({ navigation }) {
   const [activities, setActivities] = useState<Array<Exercise>>([]);
-  const [confirmAnswer, setConfirmAnswer] = useState<boolean>(false);
-  let index: number = 0;
+  const [clicked, setClicked] = useState<number>(-1);
+  const [isConnected, setIsConnected] = useState(true);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    let unsubscribe = NetInfo.addEventListener((state) => {
+      setIsConnected(state.isConnected);
+    });
     const fetchData = async () => {
       const result = await Api(
-        "https://run.mocky.io/v3/913b3b38-fa2a-40d4-8f40-171563bb604a"
+        LEARN_MICROSERVICE_URL + "ensino/atividades/"
       );
       if (result.status === 200) {
-        setActivities(shuffle(result.data));
-        console.log("Os exercícios foram atualizados corretamente!");
-      } else {
-        console.log(
-          "A requisição não pôde ser concluída.\n[Status: ",
-          result.status,
-          "]"
-        );
+        dataActivities = result.data;
+        setActivities(shuffle(dataActivities));
       }
+      return () => {
+        unsubscribe();
+      };
     };
     fetchData();
   }, []);
 
+  function nextActivity() {
+    setClicked(-1);
+    setActivities(shuffle(activities));
+    if (index === activities.length - 1) {
+      setIndex(0);
+    } else {
+      setIndex(index+1);
+    }
+    randomOptions = shuffle([0, 1, 2, 3]);
+  }
+
   return (
     <SafeAreaView style={styles.contentArea}>
       {activities.length == 0 && <SpinnerLoading />}
-      {activities.length > 0 && (
+      {activities.length > 0 && isConnected && (
         <ScrollView keyboardShouldPersistTaps={"always"}>
-          <View style={styles.activityTitleArea}>
-            <Text style={styles.activityTitle}>
-              Exercício {activities[index].id}
-            </Text>
-            <TouchableWithoutFeedback
-              onPress={() => {
-                navigation.pop();
-                navigation.navigate("Atividades");
-              }}
-              style={styles.nextActivity}
-            >
-              <Icon name="right" size={40} />
-            </TouchableWithoutFeedback>
-          </View>
-
+          {clicked === -1 && (
           <View style={styles.activityPhraseArea}>
             <Text style={styles.activityPhrasePortuguese}>
               {createBlankSpace(
@@ -95,166 +92,91 @@ export default function Activity({ navigation }) {
               )}
             </Text>
           </View>
+          ) || (
+            <View style={styles.activityPhraseArea}>
+            <Text style={styles.activityPhrasePortuguese}>
+              {
+                removeMarkers(activities[index].phrase_portuguese)
+              }
+            </Text>
 
-          {(!confirmAnswer && (
-            <View style={styles.optionsArea}>
-              <View style={styles.optionsRow}>
-                <TouchableOpacity
-                  onPress={() => {
-                    checkOptions(randomOptions[0]);
-                  }}
-                  style={styles.option}
-                >
-                  <Text style={styles.optionText}>
-                    {activities[index].options[randomOptions[0]]}
-                  </Text>
-                </TouchableOpacity>
-                <TouchableWithoutFeedback
-                  onPress={() => {
-                    checkOptions(randomOptions[1]);
-                  }}
-                  style={styles.option}
-                >
-                  <Text style={styles.optionText}>
-                    {activities[index].options[randomOptions[1]]}
-                  </Text>
-                </TouchableWithoutFeedback>
-              </View>
-              <View style={styles.optionsRow}>
-                <TouchableWithoutFeedback
-                  onPress={() => {
-                    checkOptions(randomOptions[2]);
-                  }}
-                  style={styles.option}
-                >
-                  <Text style={styles.optionText}>
-                    {activities[index].options[randomOptions[2]]}
-                  </Text>
-                </TouchableWithoutFeedback>
-                <TouchableWithoutFeedback
-                  onPress={() => {
-                    checkOptions(randomOptions[3]);
-                  }}
-                  style={styles.option}
-                >
-                  <Text style={styles.optionText}>
-                    {activities[index].options[randomOptions[3]]}
-                  </Text>
-                </TouchableWithoutFeedback>
-              </View>
-            </View>
-          )) || (
-            <View style={styles.optionsArea}>
-              <View style={styles.optionsRow}>
-                {(checkOptions(randomOptions[0]) && (
-                  <TouchableOpacity
-                    onPress={() => {
-                      checkOptions(randomOptions[0]);
-                    }}
-                    style={[styles.option, { backgroundColor: Colors.GREEN }]}
-                  >
-                    <Text style={[styles.optionText, { color: Colors.WHITE }]}>
-                      {activities[index].options[randomOptions[0]]}
-                    </Text>
-                  </TouchableOpacity>
-                )) || (
-                  <TouchableWithoutFeedback
-                    onPress={() => {
-                      checkOptions(randomOptions[0]);
-                    }}
-                    style={[styles.option, { backgroundColor: Colors.RED }]}
-                  >
-                    <Text style={[styles.optionText, { color: Colors.WHITE }]}>
-                      {activities[index].options[randomOptions[0]]}
-                    </Text>
-                  </TouchableWithoutFeedback>
-                )}
-                {(checkOptions(randomOptions[1]) && (
-                  <TouchableWithoutFeedback
-                    onPress={() => {
-                      checkOptions(randomOptions[1]);
-                    }}
-                    style={[styles.option, { backgroundColor: Colors.GREEN }]}
-                  >
-                    <Text style={[styles.optionText, { color: Colors.WHITE }]}>
-                      {activities[index].options[randomOptions[1]]}
-                    </Text>
-                  </TouchableWithoutFeedback>
-                )) || (
-                  <TouchableWithoutFeedback
-                    onPress={() => {
-                      checkOptions(randomOptions[1]);
-                    }}
-                    style={[styles.option, { backgroundColor: Colors.RED }]}
-                  >
-                    <Text style={[styles.optionText, { color: Colors.WHITE }]}>
-                      {activities[index].options[randomOptions[1]]}
-                    </Text>
-                  </TouchableWithoutFeedback>
-                )}
-              </View>
-              <View style={styles.optionsRow}>
-                {(checkOptions(randomOptions[2]) && (
-                  <TouchableWithoutFeedback
-                    onPress={() => {
-                      checkOptions(randomOptions[2]);
-                    }}
-                    style={[styles.option, { backgroundColor: Colors.GREEN }]}
-                  >
-                    <Text style={[styles.optionText, { color: Colors.WHITE }]}>
-                      {activities[index].options[randomOptions[2]]}
-                    </Text>
-                  </TouchableWithoutFeedback>
-                )) || (
-                  <TouchableWithoutFeedback
-                    onPress={() => {
-                      checkOptions(randomOptions[2]);
-                    }}
-                    style={[styles.option, { backgroundColor: Colors.RED }]}
-                  >
-                    <Text style={[styles.optionText, { color: Colors.WHITE }]}>
-                      {activities[index].options[randomOptions[2]]}
-                    </Text>
-                  </TouchableWithoutFeedback>
-                )}
-                {(checkOptions(randomOptions[3]) && (
-                  <TouchableWithoutFeedback
-                    onPress={() => {
-                      checkOptions(randomOptions[3]);
-                    }}
-                    style={[styles.option, { backgroundColor: Colors.GREEN }]}
-                  >
-                    <Text style={[styles.optionText, { color: Colors.WHITE }]}>
-                      {activities[index].options[randomOptions[3]]}
-                    </Text>
-                  </TouchableWithoutFeedback>
-                )) || (
-                  <TouchableWithoutFeedback
-                    onPress={() => {
-                      checkOptions(randomOptions[3]);
-                    }}
-                    style={[styles.option, { backgroundColor: Colors.RED }]}
-                  >
-                    <Text style={[styles.optionText, { color: Colors.WHITE }]}>
-                      {activities[index].options[randomOptions[3]]}
-                    </Text>
-                  </TouchableWithoutFeedback>
-                )}
-              </View>
-            </View>
+            <Text style={styles.activityPhraseKokama}>
+              {
+                removeMarkers(activities[index].phrase_kokama)
+              }
+            </Text>
+          </View>
           )}
-          <View style={styles.buttonArea}>
+          <View style={styles.optionsArea}>
+            <View style={styles.optionsRow}>
+              <TouchableWithoutFeedback
+                onPress={() => { setClicked(0); }}
+                style={ getStyleOption(clicked, randomOptions[0] === 0, 0)}
+              >
+                <Text style={styles.optionText}>
+                  {activities[index].options[randomOptions[0]]}
+                </Text>
+              </TouchableWithoutFeedback>
+
+              <TouchableWithoutFeedback
+                onPress={() => {
+                  setClicked(1);
+                }}
+                style={getStyleOption(clicked, randomOptions[1] === 0, 1)}
+              >
+                <Text style={styles.optionText}>
+                  {activities[index].options[randomOptions[1]]}
+                </Text>
+              </TouchableWithoutFeedback>
+
+            </View>
+            <View style={styles.optionsRow}>
+
+              <TouchableWithoutFeedback
+                onPress={() => {
+                  setClicked(2);
+                }}
+                style={getStyleOption(clicked, randomOptions[2] === 0, 2)}
+              >
+                <Text style={styles.optionText}>
+                  {activities[index].options[randomOptions[2]]}
+                </Text>
+              </TouchableWithoutFeedback>
+
+              <TouchableWithoutFeedback
+                onPress={() => {
+                  setClicked(3);
+                }}
+                style={getStyleOption(clicked, randomOptions[3] === 0, 3)}
+              >
+                <Text style={styles.optionText}>
+                  {activities[index].options[randomOptions[3]]}
+                </Text>
+              </TouchableWithoutFeedback>
+            </View>
+          </View>
+
+          <View>
             <TouchableOpacity
-              style={styles.button}
+              activeOpacity={1.0}
               onPress={() => {
-                setConfirmAnswer(true);
+                nextActivity();
               }}
+              style={styles.nextActivity}
             >
-              <Text style={styles.buttonText}>Confirmar</Text>
+              <Text style={styles.nextText}>
+                Próximo
+              </Text>
             </TouchableOpacity>
           </View>
+
         </ScrollView>
-      )}
+      ) || (activities.length > 0 && (
+        <Text style={styles.notConectedTitle}>
+          Sem acesso à internet!
+        </Text>)
+        )
+      }
     </SafeAreaView>
   );
 }

@@ -17,6 +17,8 @@ import {
 } from "../../config/constants";
 import StoryList from "../../components/StoryList";
 import { SearchBar } from 'react-native-elements';
+import {LEARN_MICROSERVICE_URL} from "@env"
+
 
 export default function Stories() {
     const [kokamaStories, setKokamaStories] = useState<Array<KokamaStories>>();
@@ -29,7 +31,7 @@ export default function Stories() {
     useEffect(() => {
         const fetchData = async () => {
             const result = await Api(
-                "https://run.mocky.io/v3/7c65553d-7f08-4368-8a19-97c460dc39e4"
+                LEARN_MICROSERVICE_URL+"ensino/lista_de_historias/?format=json"
             );
             if (result.status === 200 && kokamaStories != result.data) {
                 setKokamaStories(result.data);
@@ -64,6 +66,7 @@ export default function Stories() {
                                 platform="android"
                                 containerStyle={{ width:300}}
                             />
+                            
                             <View style={styles.swapButtonArea}>
                                 <TouchableWithoutFeedback onPress={exchangeLanguage}>
                                     <Icon name="swap" size={40}/>
