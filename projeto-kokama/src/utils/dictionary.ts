@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Api from "../api/Api";
 import { TRANSLATION_MICROSERVICE_URL } from "@env";
 
-function getCurrentDate() {
+export function getCurrentDate() {
 	let newDate = new Date()
 	let date = newDate.getDate();
 	let month = newDate.getMonth() + 1;

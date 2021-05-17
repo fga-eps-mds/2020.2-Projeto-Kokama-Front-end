@@ -3,8 +3,7 @@ let undesiredChars: Array<string> = [",", ".", "!", "?", " ", "", "\0", "\n"];
 export function createBlankSpace(
   text: string,
   word: string = "",
-  language: string = "portuguese"
-) {
+  language: string = "portuguese") {
   let phrase: string = text.replace("<", "").replace(">", "");
   if (language == "portuguese") {
     return phrase;
