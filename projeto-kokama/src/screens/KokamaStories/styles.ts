@@ -64,6 +64,18 @@ const styles = StyleSheet.create({
         borderWidth: 5,
         backgroundColor: "#f23232",
     },
+    searchBarBox: {
+        display: "flex",
+        width: "100%",
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    swapButtonArea: {
+        display: "flex",
+        width: 80,
+        flexDirection: "column",
+        alignItems:"center",
+    },
 });
 
 export default styles;
