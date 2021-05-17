@@ -66,6 +66,7 @@ export default function Stories() {
                                 platform="android"
                                 containerStyle={{ width:300}}
                             />
+                            
                             <View style={styles.swapButtonArea}>
                                 <TouchableWithoutFeedback onPress={exchangeLanguage}>
                                     <Icon name="swap" size={40}/>
