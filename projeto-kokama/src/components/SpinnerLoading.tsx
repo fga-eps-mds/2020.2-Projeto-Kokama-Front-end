@@ -17,15 +17,15 @@ const spinnerStyle = StyleSheet.create({
 });
 
 
-export default class SpinnerLoading extends Component {
-    render() {
-        return (
-            <View style={spinnerStyle.loading}>
-                <Spinner color={Colors.RED} />
-                <Text style={spinnerStyle.message}>
-                    Carregando...
+const SpinnerLoading = () => {
+    return (
+        <View style={spinnerStyle.loading}>
+            <Spinner color={Colors.RED} />
+            <Text style={spinnerStyle.message}>
+                Carregando...
                 </Text>
-            </View>
-        );
-    }
+        </View>
+    );
 }
+
+export default SpinnerLoading;

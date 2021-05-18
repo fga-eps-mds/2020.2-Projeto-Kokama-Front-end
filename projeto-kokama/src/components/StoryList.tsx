@@ -47,11 +47,11 @@ interface Props {
     language: string;
 }
 
-function checkListKokama(oldlist: KokamaStories[], searchInput: string, search: string) {
+export function checkListKokama(oldlist: KokamaStories[], search: string) {
     let list: KokamaStories[] = [];
     for (let story of oldlist) {
         if (story.title_kokama != "") {
-            if (searchInput != "") {
+            if (search != "") {
                 if (story.title_kokama.toLowerCase().includes(search)
                     || story.text_kokama.toLowerCase().includes(search)) {
                     list.unshift(story);
@@ -64,11 +64,11 @@ function checkListKokama(oldlist: KokamaStories[], searchInput: string, search: 
     return list;
 }
 
-function checkListPortuguese(oldlist: KokamaStories[], searchInput: string, search: string) {
+export function checkListPortuguese(oldlist: KokamaStories[], search: string) {
     let list: KokamaStories[] = [];
     for (let story of oldlist) {
         if (story.title_portuguese != "") {
-            if (searchInput != "") {
+            if (search != "") {
                 if (story.title_portuguese.toLowerCase().includes(search)
                     || story.text_portuguese.toLowerCase().includes(search)) {
                     list.unshift(story);
@@ -81,15 +81,15 @@ function checkListPortuguese(oldlist: KokamaStories[], searchInput: string, sear
     return list;
 }
 
-function getCorrectStories(oldlist: KokamaStories[],language: string, searchInput: string) {
+export function getCorrectStories(oldlist: KokamaStories[],language: string, searchInput: string) {
     let list: KokamaStories[] = [];
     let search: string=searchInput.toLowerCase().trim();
 
     if (language == "Kokama") {
-        list = checkListKokama(oldlist, searchInput, search);    
+        list = checkListKokama(oldlist, search);    
     
     } else {
-        list = checkListPortuguese(oldlist, searchInput, search);            
+        list = checkListPortuguese(oldlist, search);            
     }
     return list;
 }
