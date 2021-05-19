@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, } from "react-native";
 import { Spinner } from "native-base";
 import Colors from "../assets/Colors"
