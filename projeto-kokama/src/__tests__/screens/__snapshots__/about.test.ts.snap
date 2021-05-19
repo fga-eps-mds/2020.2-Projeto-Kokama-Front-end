@@ -1,0 +1,647 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check About screen 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Object {
+      "backgroundColor": "#FAFAFA",
+    }
+  }
+>
+  <RCTScrollView>
+    <View>
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 20,
+            "marginVertical": 15,
+          }
+        }
+      >
+        Sobre:
+      </Text>
+      <View
+        style={
+          Object {
+            "justifyContent": "center",
+            "marginBottom": 15,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "lineHeight": 20,
+              "paddingHorizontal": 40,
+              "textAlign": "justify",
+            }
+          }
+        >
+          O novo aplicativo Kokama é resultado das parcerias: do movimento de vitalização da língua Kokama, coordenado por Altaci Corrêa Rubim, Kokama; da universidade de Brasília-UnB, por meio do Campus Gama com os estudantes do curso Engenharia de Software; do campus Darcy Ribeiro, com os estudantes do curso de licenciatura de Português do Brasil como Segunda Língua-PBSL; da Universidade do Estado do Amazonas-UEA, por meio do Projeto Nova Cartografia Social da Amazônia e demais colaboradores.
+        </Text>
+        <Text
+          style={
+            Object {
+              "lineHeight": 20,
+              "paddingHorizontal": 40,
+              "textAlign": "justify",
+            }
+          }
+        >
+          O App Kokama Kinkin-APKKK tem como referência: o dicionário Kukama-Kukamiria, elaborado por Rosa Vallejos e Rosa Amias, do Peru, além de dados coletados nas oficinas de ensino e aprendizagem da língua Kokama.
+        </Text>
+        <Text
+          style={
+            Object {
+              "lineHeight": 20,
+              "paddingHorizontal": 40,
+              "textAlign": "justify",
+            }
+          }
+        >
+          O APP Kokama Kinkin é um aplicativo para smartphone que contribuirá com a política de vitalização da língua Kokama. Apresenta vocabulário contextualizado, áudio, atividades pedagógicas, além de possibilitar a atualização de dados pelos próprios Kokama.
+        </Text>
+        <Text
+          style={
+            Object {
+              "lineHeight": 20,
+              "paddingHorizontal": 40,
+              "textAlign": "justify",
+            }
+          }
+        >
+          Nossos mais sinceros agradecimentos ao prof. Hilmer Rodrigues Neri (UnB), ao prof. Alfredo Wagner Berno de Almeida (UEA) e, também, aos estudantes e colaboradores do projeto.
+        </Text>
+      </View>
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 20,
+            "marginVertical": 15,
+          }
+        }
+      >
+        Equipe de Tradução:
+      </Text>
+      <View
+        style={
+          Object {
+            "borderColor": "#FAFAFA",
+            "borderWidth": 10,
+            "display": "flex",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "justifyContent": "space-around",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+      </View>
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 20,
+            "marginVertical": 15,
+          }
+        }
+      >
+        Equipe de Gerência-UnB:
+      </Text>
+      <View
+        style={
+          Object {
+            "borderColor": "#FAFAFA",
+            "borderWidth": 10,
+            "display": "flex",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "justifyContent": "space-around",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+      </View>
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 20,
+            "marginVertical": 15,
+          }
+        }
+      >
+        Equipe de Desenvolvimento-UnB:
+      </Text>
+      <View
+        style={
+          Object {
+            "borderColor": "#FAFAFA",
+            "borderWidth": 10,
+            "display": "flex",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "justifyContent": "space-around",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+      </View>
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 20,
+            "marginVertical": 15,
+          }
+        }
+      >
+        Apoiadores
+      </Text>
+      <View
+        style={
+          Object {
+            "borderColor": "#FAFAFA",
+            "borderWidth": 10,
+            "display": "flex",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "justifyContent": "space-around",
+          }
+        }
+      >
+        <Image
+          source={1}
+          style={
+            Object {
+              "display": "flex",
+              "maxHeight": 100,
+              "maxWidth": 100,
+            }
+          }
+        />
+        <Image
+          source={1}
+          style={
+            Object {
+              "display": "flex",
+              "maxHeight": 100,
+              "maxWidth": 200,
+            }
+          }
+        />
+      </View>
+    </View>
+  </RCTScrollView>
+</RCTSafeAreaView>
+`;

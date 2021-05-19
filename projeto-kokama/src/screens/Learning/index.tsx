@@ -15,12 +15,12 @@ export default function Learning({ navigation }) {
             <ScrollView>
                 <View style={{ alignItems: "flex-start" }}>
                     <Text style={cardsStyle.cardTitle}>Histórias</Text>
-                    <TouchableWithoutFeedback
+                    <TouchableWithoutFeedback testID = 'history'
                         onPress={() => navigation.push('Histórias do Povo Kokama')}>
                         <Image style={cardsStyle.historyCard} source={require("../../assets/img/floresta.jpg")} />
                     </TouchableWithoutFeedback>
                     <Text style={cardsStyle.cardTitle}>Atividades</Text>
-                    <TouchableWithoutFeedback
+                    <TouchableWithoutFeedback testID = 'activity'
                         onPress={() => navigation.push('Atividades')}>
                         <Image style={cardsStyle.historyCard} source={require("../../assets/img/study.jpg")} />
                     </TouchableWithoutFeedback>

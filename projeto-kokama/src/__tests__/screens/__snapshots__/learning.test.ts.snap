@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check Learning screen 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+>
+  <RCTScrollView>
+    <View>
+      <View
+        style={
+          Object {
+            "alignItems": "flex-start",
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#333333",
+              "fontSize": 20,
+              "marginTop": 10,
+              "paddingLeft": 23,
+              "textAlign": "left",
+            }
+          }
+        >
+          Histórias
+        </Text>
+        <Image
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          source={1}
+          style={
+            Object {
+              "height": 150,
+              "width": 750,
+            }
+          }
+          testID="history"
+        />
+        <Text
+          style={
+            Object {
+              "color": "#333333",
+              "fontSize": 20,
+              "marginTop": 10,
+              "paddingLeft": 23,
+              "textAlign": "left",
+            }
+          }
+        >
+          Atividades
+        </Text>
+        <Image
+          accessible={true}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          source={1}
+          style={
+            Object {
+              "height": 150,
+              "width": 750,
+            }
+          }
+          testID="activity"
+        />
+      </View>
+    </View>
+  </RCTScrollView>
+</RCTSafeAreaView>
+`;

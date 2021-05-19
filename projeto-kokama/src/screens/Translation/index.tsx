@@ -271,7 +271,7 @@ const Translation = () => {
 						{phrases.map((phrase, index) => (
 							<View style={translationStyle.exampleArea} key={index}>
 								{/* Phrase kokama */}
-								<HighlightText
+								<HighlightText 
 									style={translationStyle.examplesText}
 									highlightStyle={{ color: Colors.RED }}
 									searchWords={[
@@ -318,7 +318,7 @@ const Translation = () => {
 
 					{/* Change language icon */}
 					<View style={translationStyle.languageExchangeArea}>
-						<TouchableWithoutFeedback onPress={exchangeLanguage}>
+						<TouchableWithoutFeedback onPress={exchangeLanguage} testID = 'exchangeLanguage'>
 							<Icon name="swap" size={40} />
 						</TouchableWithoutFeedback>
 					</View>
@@ -331,14 +331,14 @@ const Translation = () => {
 
 				{/* Text box for the user entry */}
 				<View style={translationStyle.userInput}>
-					<TextInput
+					<TextInput testID = 'setTranslation'
 						style={translationStyle.textBox}
 						placeholder="Toque para digitar"
 						onChangeText={(input) => setTranslation(input)}
 						defaultValue={translation}
 					/>
 
-					<TouchableWithoutFeedback onPress={insertSymbol}>
+					<TouchableWithoutFeedback onPress={insertSymbol} testID='insertSymbol'>
 						<View style={translationStyle.symbolArea}>
 							<Text style={translationStyle.symbol}>ɨ</Text>
 						</View>

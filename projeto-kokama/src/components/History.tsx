@@ -51,7 +51,7 @@ const History = (props: Props) => {
       {props.data.length > 0 && props.isEnabled && (
         <View style={styles.Area}>
           {props.data.map((word: HistoryTuple, index: number) => (
-            <TouchableWithoutFeedback
+            <TouchableWithoutFeedback testID= 'history' 
               key={index}
               onPress={() => props.onPressWord(word.kokama, props.translateFrom)}
             >

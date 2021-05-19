@@ -45,7 +45,9 @@ export default function App() {
             ),
           }}
         />
-        <Tab.Screen name="Usuário" component={UserStackScreen}
+        <Tab.Screen 
+          name="Usuário" 
+          component={UserStackScreen}
           options={{
             tabBarIcon: props => (
               <Icon5 name="info-circle" size={30} color={props.color}/>
@@ -58,7 +60,7 @@ export default function App() {
 }
 
 // Page Translate Relation
-const TranslateStackScreen = () => (
+export const TranslateStackScreen = () => (
   <TranslateStack.Navigator>
     <TranslateStack.Screen
       name="Tradução"
@@ -76,7 +78,7 @@ const TranslateStackScreen = () => (
 );
 
 // Page Cards Relation
-const CardStackScreen = () => (
+export const CardStackScreen = () => (
   <CardStack.Navigator>
     <CardStack.Screen
       name="Menu dos Cards"
