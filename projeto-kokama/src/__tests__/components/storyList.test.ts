@@ -1,7 +1,5 @@
 import { checkListKokama, checkListPortuguese, getCorrectStories } from "../../components/StoryList"
 import { KokamaStories } from "../../screens/KokamaStories/interface"
-import renderer from 'react-test-renderer';
-import StoryList from '../../components/StoryList'
 
 
 test("Check story inside kokama story list", () => {
@@ -39,7 +37,7 @@ test("Check story inside kokama story list", () => {
     expect(result).toStrictEqual(expected);
 
     result = checkListKokama(stories_list, '');
-    expected = stories_list.reverse();
+    expected = [...stories_list].reverse();
     expect(result).toStrictEqual(expected);
 
 });
@@ -79,7 +77,7 @@ test("Check story inside portuguese story list", () => {
     expect(result).toStrictEqual(expected);
 
     result = checkListPortuguese(stories_list, '');
-    expected = stories_list.reverse();
+    expected = [...stories_list].reverse();
     expect(result).toStrictEqual(expected);
 
 });
