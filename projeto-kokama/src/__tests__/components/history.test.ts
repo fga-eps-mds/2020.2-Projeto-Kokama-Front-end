@@ -11,9 +11,9 @@ test("Check History component", async () => {
     const props: Props = {
         isEnabled: true,
         data: [],
-        onPressTitle: () => { },
+        onPressTitle: () => {console.log('')},
         translateFrom: KOKAMA,
-        onPressWord: (_kokamaWord: string, _originLanguage: string) => { }
+        onPressWord: (_kokamaWord: string, _originLanguage: string) => {console.log('')}
     }
 
     let menu = History(props)
