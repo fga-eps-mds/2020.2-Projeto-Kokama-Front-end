@@ -1,10 +1,14 @@
-import renderer from 'react-test-renderer';
+import renderer, { act } from 'react-test-renderer';
 import Story from '../../screens/Story';
 import { KokamaStories } from '../../screens/KokamaStories/interface';
 import { KOKAMA, PORTUGUESE } from '../../config/constants';
 
 
-test("Check Story screen", () => {
+function sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+test("Check Story screen", async () => {
     const expected: KokamaStories =
     {
         id: 2,
@@ -16,10 +20,16 @@ test("Check Story screen", () => {
     let params = {'story': expected, 'language': KOKAMA}
     let story = Story({ route: {'params': params}, navigation: null})
     let tree = renderer.create(story)
+
+    await act(() => sleep(500) as unknown as void);
+
     expect(tree).toMatchSnapshot();
 
     params = {'story': expected, 'language': PORTUGUESE}
     story = Story({ route: {'params': params}, navigation: null})
     tree = renderer.create(story)
+
+    await act(() => sleep(500) as unknown as void);
+    
     expect(tree).toMatchSnapshot();
 })

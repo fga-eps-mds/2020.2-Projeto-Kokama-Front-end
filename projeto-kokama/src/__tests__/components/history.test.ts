@@ -1,9 +1,13 @@
 import { History, Props } from "../../components/History";
 import { KOKAMA } from "../../config/constants";
-import renderer from 'react-test-renderer';
+import renderer, { act } from 'react-test-renderer';
 
 
-test("Check History component", () => {
+function sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+test("Check History component", async () => {
     const props: Props = {
         isEnabled: true,
         data: [],
@@ -13,6 +17,7 @@ test("Check History component", () => {
     }
 
     let menu = History(props)
-    const tree = renderer.create(menu)    
+    const tree = renderer.create(menu)
+    await act(() => sleep(500) as unknown as void);  
     expect(tree).toMatchSnapshot();
 })

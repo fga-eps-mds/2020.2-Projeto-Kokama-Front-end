@@ -45,7 +45,26 @@ exports[`Check History component 1`] = `
         }
       }
     >
-      <Text />
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "#555555",
+              "fontSize": 22,
+            },
+            undefined,
+            Object {
+              "fontFamily": "anticon",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
     </View>
   </View>
 </View>
