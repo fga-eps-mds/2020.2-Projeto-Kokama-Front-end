@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check History component 1`] = `
+<View>
+  <View
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#FFFFFF",
+        "borderBottomWidth": 1.5,
+        "borderColor": "#E4DFDF",
+        "borderTopWidth": 1.5,
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "space-between",
+        "marginTop": 5,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#A5A5A5",
+          "fontSize": 20,
+          "paddingLeft": 23,
+          "textAlign": "left",
+        }
+      }
+    >
+      Histórico
+    </Text>
+    <View
+      style={
+        Object {
+          "marginRight": 25,
+        }
+      }
+    >
+      <Text />
+    </View>
+  </View>
+</View>
+`;

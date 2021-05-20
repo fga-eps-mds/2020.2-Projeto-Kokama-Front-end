@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-interface Props {
+export interface Props {
   isEnabled: boolean;
   data: HistoryTuple[];
   onPressTitle: () => void;
@@ -39,7 +39,7 @@ interface Props {
   onPressWord: (kokamaWord:string, originLanguage:string) => void;
 }
 
-const History = (props: Props) => {
+export const History = (props: Props) => {
   return (
     <View>
       <HistoryTitle
@@ -51,7 +51,8 @@ const History = (props: Props) => {
       {props.data.length > 0 && props.isEnabled && (
         <View style={styles.Area}>
           {props.data.map((word: HistoryTuple, index: number) => (
-            <TouchableWithoutFeedback testID= 'history' 
+            <TouchableWithoutFeedback
+              testID='history' 
               key={index}
               onPress={() => props.onPressWord(word.kokama, props.translateFrom)}
             >
