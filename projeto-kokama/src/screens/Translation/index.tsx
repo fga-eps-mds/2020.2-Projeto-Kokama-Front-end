@@ -248,8 +248,8 @@ const Translation = () => {
 			<View>
 				{/* Warning if the user input does not match any word in dictionary */}
 				{phrases.length === 0 && translation !== "" && (
-					<View style={{ alignItems: "center" }}>
-						<Text style={{ textAlign: "center" }}>Tradução não encontrada</Text>
+					<View style={translationStyle.notFound}>
+						<Text style={{ textAlign: "center", marginVertical: 0 }}>Tradução não encontrada</Text>
 					</View>
 				)}
 				{/* If a translation is found, present the translations and phrases */}

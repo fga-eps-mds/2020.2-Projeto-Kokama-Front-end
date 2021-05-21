@@ -19,11 +19,11 @@ const styles = StyleSheet.create({
   Title: {
     textAlign: "left",
     fontSize: 20,
-    paddingLeft: 23,
+    paddingLeft: 15,
     color: Colors.HISTORY_TEXT,
   },
   Icon: {
-    marginRight: 25,
+    marginRight: 26,
   },
 });
 
