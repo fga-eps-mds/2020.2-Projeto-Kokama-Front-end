@@ -36,13 +36,13 @@ const Translation = () => {
 
 	const MyCustomShare = async () => {
 
-		try{
-			 await Share.share({
+		try {
+			await Share.share({
 				title: 'Tadução Kokama',
 				message: translation.concat(" - ", shareTranslation, "\nPara saber mais do aplicativo acesse esse link: \nhttps://fga-eps-mds.github.io/2020.2-Projeto-Kokama-Wiki/"),
 			});
 
-		}catch (error) {
+		} catch (error) {
 			console.log('error => ', error);
 		}
 	};
@@ -126,7 +126,7 @@ const Translation = () => {
 			historyArray.pop();
 		}
 		// Add the updated history array as an object to storage
-		if(history !== historyArray) {
+		if (history !== historyArray) {
 			setHistory(historyArray);
 		}
 	}
@@ -136,7 +136,7 @@ const Translation = () => {
 		if (translation !== capitalizeFirstLetter(word)) {
 			setTranslation(capitalizeFirstLetter(word));
 		}
-		
+
 		if (language !== KOKAMA) {
 			exchangeLanguage();
 		}
@@ -262,12 +262,12 @@ const Translation = () => {
 							</Text>
 							<TouchableWithoutFeedback onPress={MyCustomShare}>
 								<View style={translationStyle.ShareIcon}>
-									<Icon5 name="share-square" size={22} color={Colors.HISTORY_WORD_TEXT}/>
-								</View>					
+									<Icon5 name="share-square" size={22} color={Colors.HISTORY_WORD_TEXT} />
+								</View>
 							</TouchableWithoutFeedback>
 						</View>
-						
-	
+
+
 						{phrases.map((phrase, index) => (
 							<View style={translationStyle.exampleArea} key={index}>
 								{/* Phrase kokama */}
@@ -301,62 +301,60 @@ const Translation = () => {
 	}
 
 	return (
-		<SafeAreaView>
-			<ScrollView
-				style={translationStyle.container}
-				keyboardShouldPersistTaps={"always"}
-			>
+		<ScrollView
+			style={translationStyle.container}
+			keyboardShouldPersistTaps={"always"}
+		>
 
-				{/* Change language area */}
-				<View style={translationStyle.changeLanguage}>
-					{/* First language */}
-					<View style={[translationStyle.originLanguageArea]}>
-						<Text style={translationStyle.originLanguage}>
-							{originLanguage}
-						</Text>
-					</View>
-
-					{/* Change language icon */}
-					<View style={translationStyle.languageExchangeArea}>
-						<TouchableWithoutFeedback onPress={exchangeLanguage}>
-							<Icon name="swap" size={40} />
-						</TouchableWithoutFeedback>
-					</View>
-
-					{/* Second Language */}
-					<View style={[translationStyle.destLanguageArea]}>
-						<Text style={translationStyle.destLanguage}>{destLanguage}</Text>
-					</View>
+			{/* Change language area */}
+			<View style={translationStyle.changeLanguage}>
+				{/* First language */}
+				<View style={[translationStyle.originLanguageArea]}>
+					<Text style={translationStyle.originLanguage}>
+						{originLanguage}
+					</Text>
 				</View>
 
-				{/* Text box for the user entry */}
-				<View style={translationStyle.userInput}>
-					<TextInput
-						style={translationStyle.textBox}
-						placeholder="Toque para digitar"
-						onChangeText={(input) => setTranslation(input)}
-						defaultValue={translation}
-					/>
-
-					<TouchableWithoutFeedback onPress={insertSymbol}>
-						<View style={translationStyle.symbolArea}>
-							<Text style={translationStyle.symbol}>ɨ</Text>
-						</View>
+				{/* Change language icon */}
+				<View style={translationStyle.languageExchangeArea}>
+					<TouchableWithoutFeedback onPress={exchangeLanguage}>
+						<Icon name="swap" size={40} />
 					</TouchableWithoutFeedback>
 				</View>
 
-				{/* Translate answer */}
-				<View>{Translate(originLanguage, translation)}</View>
+				{/* Second Language */}
+				<View style={[translationStyle.destLanguageArea]}>
+					<Text style={translationStyle.destLanguage}>{destLanguage}</Text>
+				</View>
+			</View>
 
-				<History
-					isEnabled={historyIsEnabled}
-					data={history}
-					onPressTitle={toggleHistory}
-					onPressWord={translateHistoryWord}
-					translateFrom={originLanguage}
+			{/* Text box for the user entry */}
+			<View style={translationStyle.userInput}>
+				<TextInput
+					style={translationStyle.textBox}
+					placeholder="Toque para digitar"
+					onChangeText={(input) => setTranslation(input)}
+					defaultValue={translation}
 				/>
-			</ScrollView>
-		</SafeAreaView>
+
+				<TouchableWithoutFeedback onPress={insertSymbol}>
+					<View style={translationStyle.symbolArea}>
+						<Text style={translationStyle.symbol}>ɨ</Text>
+					</View>
+				</TouchableWithoutFeedback>
+			</View>
+
+			{/* Translate answer */}
+			<View>{Translate(originLanguage, translation)}</View>
+
+			<History
+				isEnabled={historyIsEnabled}
+				data={history}
+				onPressTitle={toggleHistory}
+				onPressWord={translateHistoryWord}
+				translateFrom={originLanguage}
+			/>
+		</ScrollView>
 	);
 };
 
