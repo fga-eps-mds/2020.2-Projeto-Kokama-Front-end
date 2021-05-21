@@ -31,14 +31,23 @@ const Translation = () => {
 	const [destLanguage, setDestLanguage] = useState(KOKAMA);
 	const [dictionary, setDictionary] = useState<Dictionary[]>([]);
 	const [history, setHistory] = useState<HistoryTuple[]>([]);
-	let shareTranslation: string = "";
+	let shareTranslation: string[] = [];
 
 	const MyCustomShare = async () => {
 
+		let translations:string = shareTranslation[0];
+		if (shareTranslation.length > 1) {
+			for (let i in shareTranslation) {
+				if (!translations.includes(shareTranslation[i])) {
+					translations = translations.concat(", ", shareTranslation[i]);
+				}
+			}
+		}
+
 		try {
 			await Share.share({
-				title: 'Tadução Kokama',
-				message: translation.concat(" - ", shareTranslation, "\nPara saber mais do aplicativo acesse esse link: \nhttps://fga-eps-mds.github.io/2020.2-Projeto-Kokama-Wiki/"),
+				title: 'Tradução Kokama',
+				message: translation.concat(" - ", translations, "\n\nEssa tradução foi feita pelo Aplicativo Kokama Kinkin.\n\nPara saber mais do aplicativo acesse esse link: \nhttps://fga-eps-mds.github.io/2020.2-Projeto-Kokama-Wiki/"),
 			});
 
 		} catch (error) {
@@ -197,12 +206,11 @@ const Translation = () => {
 
 	// For a given dictionary element(word), return its kokama and portuguese words for presentation
 	function getWords(language: string, word: Dictionary) {
-		let stringConcat: string = '';
 		if (language == KOKAMA) {
-			shareTranslation = word.translations[0];
+			shareTranslation = word.translations;
 			return word.translations;
 		} else {
-			shareTranslation = word.word_kokama;
+			shareTranslation = [word.word_kokama];
 			return [word.word_kokama];
 		}
 	}
