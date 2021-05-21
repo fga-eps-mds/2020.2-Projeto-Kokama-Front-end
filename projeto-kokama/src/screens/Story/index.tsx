@@ -2,12 +2,11 @@ import {
     View,
     Text,
     ScrollView,
-    SafeAreaView,
 } from "react-native";
 import React from "react";
 import styles from "./styles";
 
-export default function Story({ route, navigation }) {
+export default function Story({ route }) {
     const { story } = route.params;
 
     return (

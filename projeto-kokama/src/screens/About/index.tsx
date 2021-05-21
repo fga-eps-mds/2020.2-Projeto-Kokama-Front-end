@@ -35,11 +35,11 @@ export default function About() {
         <Text style={aboutStyle.title}>Professores:</Text>
 
         <View style={aboutStyle.photoSection}>
-          {teachers.map((memberTranslation) => (
+          {teachers.map((teacher) => (
             <UserPhoto
-              key={memberTranslation.name}
-              name={memberTranslation.name}
-              photo={memberTranslation.photo}
+              key={teacher.name}
+              name={teacher.name}
+              photo={teacher.photo}
             />
           ))}
         </View>
