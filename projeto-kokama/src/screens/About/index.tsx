@@ -2,7 +2,7 @@ import { View, Text, Image, ScrollView, SafeAreaView } from "react-native";
 import React from "react";
 import aboutStyle from "./styles";
 import UserPhoto from "../../components/MemberPhoto";
-import { membersEPS, membersMDS, membersTranslation } from "./membersData";
+import { teachers, membersEPS, membersMDS, membersTranslation } from "./membersData";
 
 export default function About() {
   return (
@@ -23,13 +23,25 @@ export default function About() {
           </Text>
           <Text style={aboutStyle.about_text}>
             O APP Kokama Kinkin é um aplicativo para smartphone que contribuirá com a política de vitalização da língua
-            Kokama. Apresenta vocabulário contextualizado, áudio, atividades pedagógicas, além de possibilitar a
+            Kokama. Apresenta vocabulário contextualizado, atividades pedagógicas, além de possibilitar a
             atualização de dados pelos próprios Kokama.
           </Text>
           <Text style={aboutStyle.about_text}>
             Nossos mais sinceros agradecimentos ao prof. Hilmer Rodrigues Neri (UnB), ao prof. Alfredo Wagner Berno
             de Almeida (UEA) e, também, aos estudantes e colaboradores do projeto.
           </Text>
+        </View>
+
+        <Text style={aboutStyle.title}>Professores:</Text>
+
+        <View style={aboutStyle.photoSection}>
+          {teachers.map((memberTranslation) => (
+            <UserPhoto
+              key={memberTranslation.name}
+              name={memberTranslation.name}
+              photo={memberTranslation.photo}
+            />
+          ))}
         </View>
 
         <Text style={aboutStyle.title}>Equipe de Tradução:</Text>
@@ -44,7 +56,7 @@ export default function About() {
           ))}
         </View>
 
-        <Text style={aboutStyle.title}>Equipe de Gerência-UnB:</Text>
+        <Text style={aboutStyle.title}>Equipe de Gerência - UnB:</Text>
         <View style={aboutStyle.photoSection}>
           {membersEPS.map((memberEPS) => (
             <UserPhoto
@@ -55,7 +67,7 @@ export default function About() {
           ))}
         </View>
 
-        <Text style={aboutStyle.title}>Equipe de Desenvolvimento-UnB:</Text>
+        <Text style={aboutStyle.title}>Equipe de Desenvolvimento - UnB:</Text>
         <View style={aboutStyle.photoSection}>
           {membersMDS.map((memberMDS) => (
             <UserPhoto
