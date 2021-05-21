@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         padding: 10,
         marginTop: 10,
-        fontSize: 20,
+        fontSize: 24,
     },
     textField: {
         display: "flex",
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         textAlignVertical: "center",
         padding: 15,
         marginBottom: 20,
-        fontSize: 20,
+        fontSize: 18,
     },
 });
 
