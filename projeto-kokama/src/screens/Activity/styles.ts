@@ -1,14 +1,14 @@
 import { StyleSheet, Dimensions } from "react-native";
 import Colors from "../../assets/Colors";
 
-// Constants and Global Variables
+
 const window = Dimensions.get("window");
 const screen = Dimensions.get("screen");
 
 export function getStyleOption(clicked:number, check:boolean, aux:number){
   if(clicked !== -1 && check){
     return {
-      borderWidth: 1,
+      borderWidth: 3,
       borderRadius: 10,
       width: 135,
       padding: 5,
@@ -19,7 +19,7 @@ export function getStyleOption(clicked:number, check:boolean, aux:number){
   }
   else if(clicked === 0 && aux === 0 || clicked === 1 && aux === 1 || clicked === 2 && aux === 2|| clicked === 3 && aux === 3){
     return {
-      borderWidth: 1,
+      borderWidth: 3,
       borderRadius: 10,
       width: 135,
       padding: 5,
@@ -71,7 +71,8 @@ const styles = StyleSheet.create({
   },
   nextActivity: {
     alignItems: "baseline",
-    marginLeft:230, 
+    alignSelf: "flex-end",
+    marginRight: 30,
   },
   activityPhraseArea: {
     maxWidth: screen.width,

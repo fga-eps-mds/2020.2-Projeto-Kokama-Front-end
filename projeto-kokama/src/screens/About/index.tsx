@@ -15,7 +15,7 @@ export default function About() {
   return (
     <SafeAreaView style={aboutStyle.container}>
       <ScrollView>
-        <Text style={aboutStyle.title}>Sobre:</Text>
+        <Text style={[aboutStyle.title, {fontSize: 25}]}>Sobre:</Text>
         <View style={aboutStyle.about_view}>
           <Text style={aboutStyle.about_text}>
             O novo aplicativo Kokama é resultado das parcerias: do movimento de vitalização da língua Kokama,
