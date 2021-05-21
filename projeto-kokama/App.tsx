@@ -25,7 +25,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        tabBarOptions={{ activeTintColor: "red", showLabel: false }}
+        tabBarOptions={{ activeTintColor: "red", showLabel: false, keyboardHidesTabBar: true }}
       >
         <Tab.Screen
           name="Tradução"

@@ -41,7 +41,7 @@ interface Props {
 
 const History = (props: Props) => {
   return (
-    <View>
+    <View style={{marginBottom: 5 }}>
       <HistoryTitle
         isEnabled={props.isEnabled}
         data={props.data}
