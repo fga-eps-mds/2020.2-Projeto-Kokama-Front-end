@@ -4,7 +4,6 @@ import {
 	TextInput,
 	TouchableWithoutFeedback,
 	ScrollView,
-	SafeAreaView,
 	Share,
 } from "react-native";
 import React, { useState, useEffect } from "react";
