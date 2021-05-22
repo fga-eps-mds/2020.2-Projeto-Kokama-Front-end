@@ -1,7 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Check History component 1`] = `
-<View>
+<View
+  style={
+    Object {
+      "marginBottom": 5,
+    }
+  }
+>
   <View
     accessible={true}
     focusable={true}
@@ -31,7 +37,7 @@ exports[`Check History component 1`] = `
         Object {
           "color": "#A5A5A5",
           "fontSize": 20,
-          "paddingLeft": 23,
+          "paddingLeft": 15,
           "textAlign": "left",
         }
       }
@@ -41,7 +47,7 @@ exports[`Check History component 1`] = `
     <View
       style={
         Object {
-          "marginRight": 25,
+          "marginRight": 26,
         }
       }
     >

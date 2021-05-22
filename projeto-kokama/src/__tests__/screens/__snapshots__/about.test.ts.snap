@@ -13,11 +13,16 @@ exports[`Check About screen 1`] = `
     <View>
       <Text
         style={
-          Object {
-            "alignSelf": "center",
-            "fontSize": 20,
-            "marginVertical": 15,
-          }
+          Array [
+            Object {
+              "alignSelf": "center",
+              "fontSize": 20,
+              "marginVertical": 15,
+            },
+            Object {
+              "fontSize": 25,
+            },
+          ]
         }
       >
         Sobre:
@@ -61,7 +66,7 @@ exports[`Check About screen 1`] = `
             }
           }
         >
-          O APP Kokama Kinkin é um aplicativo para smartphone que contribuirá com a política de vitalização da língua Kokama. Apresenta vocabulário contextualizado, áudio, atividades pedagógicas, além de possibilitar a atualização de dados pelos próprios Kokama.
+          O APP Kokama Kinkin é um aplicativo para smartphone que contribuirá com a política de vitalização da língua Kokama. Apresenta vocabulário contextualizado, atividades pedagógicas, além de possibilitar a atualização de dados pelos próprios Kokama.
         </Text>
         <Text
           style={
@@ -74,6 +79,120 @@ exports[`Check About screen 1`] = `
         >
           Nossos mais sinceros agradecimentos ao prof. Hilmer Rodrigues Neri (UnB), ao prof. Alfredo Wagner Berno de Almeida (UEA) e, também, aos estudantes e colaboradores do projeto.
         </Text>
+      </View>
+      <Text
+        style={
+          Object {
+            "alignSelf": "center",
+            "fontSize": 20,
+            "marginVertical": 15,
+          }
+        }
+      >
+        Professores:
+      </Text>
+      <View
+        style={
+          Object {
+            "borderColor": "#FAFAFA",
+            "borderWidth": 10,
+            "display": "flex",
+            "flexDirection": "row",
+            "flexWrap": "wrap",
+            "justifyContent": "space-around",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "display": "flex",
+              "height": 100,
+              "margin": 8,
+            }
+          }
+        >
+          <Image
+            accessible={true}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            source={1}
+            style={
+              Object {
+                "borderRadius": 250,
+                "maxHeight": 80,
+                "maxWidth": 80,
+              }
+            }
+          />
+        </View>
       </View>
       <Text
         style={
@@ -258,7 +377,7 @@ exports[`Check About screen 1`] = `
           }
         }
       >
-        Equipe de Gerência-UnB:
+        Equipe de Gerência - UnB:
       </Text>
       <View
         style={
@@ -402,7 +521,7 @@ exports[`Check About screen 1`] = `
           }
         }
       >
-        Equipe de Desenvolvimento-UnB:
+        Equipe de Desenvolvimento - UnB:
       </Text>
       <View
         style={

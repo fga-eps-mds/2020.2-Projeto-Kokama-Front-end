@@ -6,27 +6,8 @@ exports[`Check Learning screen 1`] = `
 >
   <RCTScrollView>
     <View>
-      <View
-        style={
-          Object {
-            "alignItems": "flex-start",
-          }
-        }
-      >
-        <Text
-          style={
-            Object {
-              "color": "#333333",
-              "fontSize": 20,
-              "marginTop": 10,
-              "paddingLeft": 23,
-              "textAlign": "left",
-            }
-          }
-        >
-          Histórias
-        </Text>
-        <Image
+      <View>
+        <View
           accessible={true}
           focusable={true}
           onClick={[Function]}
@@ -36,29 +17,30 @@ exports[`Check Learning screen 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          source={1}
-          style={
-            Object {
-              "height": 150,
-              "width": 750,
-            }
-          }
-          testID="history"
-        />
-        <Text
-          style={
-            Object {
-              "color": "#333333",
-              "fontSize": 20,
-              "marginTop": 10,
-              "paddingLeft": 23,
-              "textAlign": "left",
-            }
-          }
         >
-          Atividades
-        </Text>
-        <Image
+          <Text
+            style={
+              Object {
+                "color": "#333333",
+                "fontSize": 20,
+                "marginVertical": 10,
+                "paddingLeft": 15,
+              }
+            }
+          >
+            Histórias
+          </Text>
+          <Image
+            source={1}
+            style={
+              Object {
+                "height": 150,
+                "width": 750,
+              }
+            }
+          />
+        </View>
+        <View
           accessible={true}
           focusable={true}
           onClick={[Function]}
@@ -68,15 +50,29 @@ exports[`Check Learning screen 1`] = `
           onResponderTerminate={[Function]}
           onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
-          source={1}
-          style={
-            Object {
-              "height": 150,
-              "width": 750,
+        >
+          <Text
+            style={
+              Object {
+                "color": "#333333",
+                "fontSize": 20,
+                "marginVertical": 10,
+                "paddingLeft": 15,
+              }
             }
-          }
-          testID="activity"
-        />
+          >
+            Atividades
+          </Text>
+          <Image
+            source={1}
+            style={
+              Object {
+                "height": 150,
+                "width": 750,
+              }
+            }
+          />
+        </View>
       </View>
     </View>
   </RCTScrollView>

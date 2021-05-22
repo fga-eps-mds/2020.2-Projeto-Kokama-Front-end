@@ -25,7 +25,7 @@ exports[`Check TopMenu render 1`] = `
       style={
         Object {
           "fontSize": 15,
-          "marginBottom": 50,
+          "marginBottom": 35,
         }
       }
     >
