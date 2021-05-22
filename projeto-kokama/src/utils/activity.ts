@@ -1,6 +1,6 @@
 import { PORTUGUESE } from "../config/constants";
 
-let undesiredChars: Array<string> = [",", ".", "!", "?", " ", "", "\0", "\n"];
+const undesiredChars: Array<string> = [",", ".", "!", "?", " ", "", "\0", "\n"];
 
 export function createBlankSpace(
   text: string,

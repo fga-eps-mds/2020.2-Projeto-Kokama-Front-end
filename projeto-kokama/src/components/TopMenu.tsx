@@ -11,12 +11,12 @@ import Colors from "../assets/Colors";
 
 const styles = StyleSheet.create({
 
-  logoArea: {    
+  logoArea: {
     borderColor: Colors.DARK_GRAY,
     alignItems: "center",
     backgroundColor: "transparent",
   },
-  
+
   logo: {
     borderRadius: 100,
     height: 50,
@@ -25,8 +25,7 @@ const styles = StyleSheet.create({
 
   windowName: {
     fontSize: 15,
-    marginBottom: 50,
-    
+    marginBottom: 35,
   },
 
 });

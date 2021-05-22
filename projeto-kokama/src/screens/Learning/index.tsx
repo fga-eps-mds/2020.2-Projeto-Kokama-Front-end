@@ -9,20 +9,25 @@ import {
 import React from "react";
 import cardsStyle from "./styles";
 
+
 export default function Learning({ navigation }) {
     return (
         <SafeAreaView>
             <ScrollView>
-                <View style={{ alignItems: "flex-start" }}>
-                    <Text style={cardsStyle.cardTitle}>Histórias</Text>
-                    <TouchableWithoutFeedback testID = 'history'
+                <View>
+                    <TouchableWithoutFeedback
                         onPress={() => navigation.push('Histórias do Povo Kokama')}>
-                        <Image style={cardsStyle.historyCard} source={require("../../assets/img/floresta.jpg")} />
+                        <View>
+                            <Text style={cardsStyle.cardTitle}>Histórias</Text>
+                            <Image style={cardsStyle.cardImage} source={require("../../assets/img/story.jpg")} />
+                        </View>
                     </TouchableWithoutFeedback>
-                    <Text style={cardsStyle.cardTitle}>Atividades</Text>
-                    <TouchableWithoutFeedback testID = 'activity'
+                    <TouchableWithoutFeedback
                         onPress={() => navigation.push('Atividades')}>
-                        <Image style={cardsStyle.historyCard} source={require("../../assets/img/study.jpg")} />
+                        <View>
+                            <Text style={cardsStyle.cardTitle}>Atividades</Text>
+                            <Image style={cardsStyle.cardImage} source={require("../../assets/img/study.jpg")} />
+                        </View>
                     </TouchableWithoutFeedback>
                 </View>
             </ScrollView>

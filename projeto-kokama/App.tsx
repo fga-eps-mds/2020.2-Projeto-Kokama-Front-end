@@ -25,7 +25,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        tabBarOptions={{ activeTintColor: "red", showLabel: false }}
+        tabBarOptions={{ activeTintColor: "red", showLabel: false, keyboardHidesTabBar: true }}
       >
         <Tab.Screen
           name="Tradução"
@@ -68,7 +68,7 @@ export const TranslateStackScreen = () => (
       options={{
         headerTitle: () => <TopMenu name="Tradução" />,
         headerTitleAlign: "center",
-        headerStatusBarHeight: 75,
+        headerStatusBarHeight: 58,
         headerStyle: {
           backgroundColor: "#FFFFFF",
         },
@@ -86,7 +86,7 @@ export const CardStackScreen = () => (
       options={{
         headerTitle: () => <TopMenu name="Ensino" />,
         headerTitleAlign: "center",
-        headerStatusBarHeight: 75,
+        headerStatusBarHeight: 58,
         headerStyle: {
           backgroundColor: "#FFFFFF",
         },
@@ -100,7 +100,7 @@ export const CardStackScreen = () => (
       options={{
         headerTitle: () => <TopMenu name="Histórias do povo Kokama" />,
         headerTitleAlign: "center",
-        headerStatusBarHeight: 75,
+        headerStatusBarHeight: 58,
         headerStyle: {
           backgroundColor: "#FFFFFF",
         },
@@ -114,7 +114,7 @@ export const CardStackScreen = () => (
       options={{
         headerTitle: () => <TopMenu name="História" />,
         headerTitleAlign: "center",
-        headerStatusBarHeight: 75,
+        headerStatusBarHeight: 58,
         headerStyle: {
           backgroundColor: "#FFFFFF",
         },
@@ -128,7 +128,7 @@ export const CardStackScreen = () => (
       options={{
         headerTitle: () => <TopMenu name="Atividades" />,
         headerTitleAlign: "center",
-        headerStatusBarHeight: 75,
+        headerStatusBarHeight: 58,
         headerStyle: {
           backgroundColor: "#FFFFFF",
         },
@@ -146,7 +146,7 @@ const UserStackScreen = () => (
       options={{
         headerTitle: () => <TopMenu name="Informações" />,
         headerTitleAlign: 'center',
-        headerStatusBarHeight: 75,
+        headerStatusBarHeight: 58,
         headerStyle: {
           backgroundColor: "#FFFFFF",
         },

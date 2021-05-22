@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Api from "../api/Api";
-import { TRANSLATION_MICROSERVICE_URL } from "@env";
+import { TRANSLATE_MICROSERVICE_URL } from "@env";
 
 export function getCurrentDate() {
 	let newDate = new Date()
@@ -23,7 +23,7 @@ export function updateDictionary() {
 				lastUpdate = await AsyncStorage.getItem("last-update");
 				if (lastUpdate === null || getCurrentDate() !== lastUpdate) {
 					await AsyncStorage.setItem("last-update", getCurrentDate());
-					const request = await Api(TRANSLATION_MICROSERVICE_URL + "dicionario/");
+					const request = await Api(TRANSLATE_MICROSERVICE_URL + "dicionario/");
 					if (request.status === 200) {
 						await AsyncStorage.setItem("dictionary", JSON.stringify(request.data));
 					} else {

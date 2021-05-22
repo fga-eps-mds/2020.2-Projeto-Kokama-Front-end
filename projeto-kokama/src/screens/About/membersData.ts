@@ -14,6 +14,13 @@ import photoMaria from "../../assets/img/team-traduction/Maria.png";
 import photoMariana from "../../assets/img/team-traduction/Mariana.png";
 import photoMatheus from "../../assets/img/team-traduction/Matheus.png";
 
+
+export const teachers = [
+  { name: "Altaci Rubim", photo: photoLeonardo },
+  { name: "Alfredo Almeida", photo: photoLeonardo },
+  { name: "Hilmer Neri", photo: photoLeonardo },
+];
+
 export const membersEPS = [
   { name: "André Pinto", photo: photoAndre },
   { name: "Leonardo Medeiros", photo: photoLeonardo },

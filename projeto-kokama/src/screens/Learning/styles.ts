@@ -12,13 +12,12 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.LIGHT_GRAY,
     },
     cardTitle: {
-        textAlign: "left",
         fontSize: 20,
-        paddingLeft: 23,
+        paddingLeft: 15,
+        marginVertical: 10,
         color: Colors.TEXT,
-        marginTop: 10,
     },
-    historyCard: {
+    cardImage: {
         height: 150,
         width: screen.width,
     },

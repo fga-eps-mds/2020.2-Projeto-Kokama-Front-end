@@ -3,27 +3,25 @@ import Colors from "../assets/Colors";
 import { KokamaStories } from "../screens/KokamaStories/interface";
 import React, { useState } from "react";
 import { useNavigation } from '@react-navigation/native';
+import { KOKAMA } from "../config/constants";
 
 
 const styles = StyleSheet.create({
-    Area: {
-        flexDirection: "column",
-        backgroundColor: Colors.WHITE,
-        borderBottomWidth: 1.5,
+    container: {
         borderColor: Colors.DARK_GRAY,
     },
     titleArea: {
         display: "flex",
         width: "100%",
         textAlignVertical: "center",
-        textAlign: "left",
         fontSize: 18,
         marginTop: 5,
         borderTopWidth: 1.5,
         borderBottomWidth: 1.5,
         borderColor: Colors.DARK_GRAY,
-        paddingLeft: 23,
-        paddingVertical: 7,
+        backgroundColor: Colors.WHITE,
+        paddingLeft: 15,
+        paddingVertical: 10,
     },
     title: {
         display: "flex",
@@ -37,7 +35,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         fontSize: 18,
         marginTop: 50,
-        
+
     },
 });
 
@@ -83,11 +81,10 @@ export function checkListPortuguese(oldlist: KokamaStories[], search: string) {
 
 export function getCorrectStories(oldlist: KokamaStories[],language: string, searchInput: string) {
     let list: KokamaStories[] = [];
-    let search: string=searchInput.toLowerCase().trim();
+    let search: string = searchInput.toLowerCase().trim();
 
     if (language == "Kokama") {
         list = checkListKokama(oldlist, search);    
-    
     } else {
         list = checkListPortuguese(oldlist, search);            
     }
@@ -99,16 +96,16 @@ const StoryList = (props: Props) => {
     const navigation = useNavigation();
 
     if (newList != getCorrectStories(props.list, props.language, props.search)) {
-        newList=getCorrectStories(props.list, props.language, props.search);
+        newList = getCorrectStories(props.list, props.language, props.search);
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             {newList.length === 0 && (
                 <Text style={styles.emptyListMessage}>Nenhuma história foi encontrada</Text>
             ) || (
                 <View>
-                    {props.language == "Kokama" && (
+                    {props.language == KOKAMA && (
                         <View>
                             {newList.map((story: KokamaStories, index: number) => (
                                 <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story, language: props.language, })}>
@@ -121,7 +118,7 @@ const StoryList = (props: Props) => {
                     ) || (
                         <View>
                             {newList.map((story: KokamaStories, index: number) => (
-                                <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story, language: props.language, })}> 
+                                <TouchableWithoutFeedback key={index} onPress={() => navigation.push('História', { story, language: props.language, })}>
                                     <View style={styles.titleArea}>
                                         <Text style={styles.title}>{story.title_portuguese}</Text>
                                     </View>
@@ -133,6 +130,7 @@ const StoryList = (props: Props) => {
             )}
         </View>
     );
+
 }
 
 export default StoryList;

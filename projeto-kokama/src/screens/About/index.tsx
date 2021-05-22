@@ -1,14 +1,21 @@
-import { View, Text, Image, ScrollView, SafeAreaView } from "react-native";
-import React from "react";
+import { View, Text, Image, ScrollView, SafeAreaView, TouchableWithoutFeedback, Linking } from "react-native";
+import React, { useCallback } from "react";
 import aboutStyle from "./styles";
 import UserPhoto from "../../components/MemberPhoto";
-import { membersEPS, membersMDS, membersTranslation } from "./membersData";
+import { teachers, membersEPS, membersMDS, membersTranslation } from "./membersData";
+import Colors from "../../assets/Colors";
 
 export default function About() {
+
+  const wikiURL = "https://fga-eps-mds.github.io/2020.2-Projeto-Kokama-Wiki/"
+  const redirectTo = useCallback(async () => {
+    await Linking.openURL(wikiURL);
+  }, []);
+
   return (
     <SafeAreaView style={aboutStyle.container}>
       <ScrollView>
-        <Text style={aboutStyle.title}>Sobre:</Text>
+        <Text style={[aboutStyle.title, {fontSize: 25}]}>Sobre:</Text>
         <View style={aboutStyle.about_view}>
           <Text style={aboutStyle.about_text}>
             O novo aplicativo Kokama é resultado das parcerias: do movimento de vitalização da língua Kokama,
@@ -23,13 +30,30 @@ export default function About() {
           </Text>
           <Text style={aboutStyle.about_text}>
             O APP Kokama Kinkin é um aplicativo para smartphone que contribuirá com a política de vitalização da língua
-            Kokama. Apresenta vocabulário contextualizado, áudio, atividades pedagógicas, além de possibilitar a
+            Kokama. Apresenta vocabulário contextualizado, atividades pedagógicas, além de possibilitar a
             atualização de dados pelos próprios Kokama.
           </Text>
           <Text style={aboutStyle.about_text}>
             Nossos mais sinceros agradecimentos ao prof. Hilmer Rodrigues Neri (UnB), ao prof. Alfredo Wagner Berno
             de Almeida (UEA) e, também, aos estudantes e colaboradores do projeto.
           </Text>
+          <TouchableWithoutFeedback onPress={redirectTo}>
+            <Text style={aboutStyle.about_text}>
+              Para saber mais, acesse a <Text style={{ color: Colors.RED }}>página do projeto</Text>.
+            </Text>
+          </TouchableWithoutFeedback>
+        </View>
+
+        <Text style={aboutStyle.title}>Professores:</Text>
+
+        <View style={aboutStyle.photoSection}>
+          {teachers.map((teacher) => (
+            <UserPhoto
+              key={teacher.name}
+              name={teacher.name}
+              photo={teacher.photo}
+            />
+          ))}
         </View>
 
         <Text style={aboutStyle.title}>Equipe de Tradução:</Text>
@@ -44,7 +68,7 @@ export default function About() {
           ))}
         </View>
 
-        <Text style={aboutStyle.title}>Equipe de Gerência-UnB:</Text>
+        <Text style={aboutStyle.title}>Equipe de Gerência - UnB:</Text>
         <View style={aboutStyle.photoSection}>
           {membersEPS.map((memberEPS) => (
             <UserPhoto
@@ -55,7 +79,7 @@ export default function About() {
           ))}
         </View>
 
-        <Text style={aboutStyle.title}>Equipe de Desenvolvimento-UnB:</Text>
+        <Text style={aboutStyle.title}>Equipe de Desenvolvimento - UnB:</Text>
         <View style={aboutStyle.photoSection}>
           {membersMDS.map((memberMDS) => (
             <UserPhoto
