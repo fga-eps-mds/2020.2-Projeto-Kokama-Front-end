@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check Story screen 1`] = `
+<RCTScrollView
+  style={
+    Object {
+      "backgroundColor": "#FAFAFA",
+      "height": 1334,
+      "maxWidth": 750,
+    }
+  }
+>
+  <View>
+    <View>
+      <Text
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "column",
+            "fontSize": 24,
+            "marginTop": 10,
+            "padding": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        outro titulo kokama
+      </Text>
+      <Text
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "column",
+            "fontSize": 18,
+            "marginBottom": 20,
+            "padding": 15,
+            "textAlignVertical": "center",
+          }
+        }
+      >
+        outro texto kokama
+      </Text>
+      <Text
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "column",
+            "fontSize": 24,
+            "marginTop": 10,
+            "padding": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        outro titulo portugues
+      </Text>
+      <Text
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "column",
+            "fontSize": 18,
+            "marginBottom": 20,
+            "padding": 15,
+            "textAlignVertical": "center",
+          }
+        }
+      >
+        outro texto portugues
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;
+
+exports[`Check Story screen 2`] = `
+<RCTScrollView
+  style={
+    Object {
+      "backgroundColor": "#FAFAFA",
+      "height": 1334,
+      "maxWidth": 750,
+    }
+  }
+>
+  <View>
+    <View>
+      <Text
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "column",
+            "fontSize": 24,
+            "marginTop": 10,
+            "padding": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        outro titulo portugues
+      </Text>
+      <Text
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "column",
+            "fontSize": 18,
+            "marginBottom": 20,
+            "padding": 15,
+            "textAlignVertical": "center",
+          }
+        }
+      >
+        outro texto portugues
+      </Text>
+      <Text
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "column",
+            "fontSize": 24,
+            "marginTop": 10,
+            "padding": 10,
+            "textAlign": "center",
+          }
+        }
+      >
+        outro titulo kokama
+      </Text>
+      <Text
+        style={
+          Object {
+            "display": "flex",
+            "flexDirection": "column",
+            "fontSize": 18,
+            "marginBottom": 20,
+            "padding": 15,
+            "textAlignVertical": "center",
+          }
+        }
+      >
+        outro texto kokama
+      </Text>
+    </View>
+  </View>
+</RCTScrollView>
+`;

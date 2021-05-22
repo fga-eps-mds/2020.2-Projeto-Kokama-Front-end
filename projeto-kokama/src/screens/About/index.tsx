@@ -1,16 +1,11 @@
-import { View, Text, Image, ScrollView, SafeAreaView, TouchableWithoutFeedback, Linking } from "react-native";
-import React, { useCallback } from "react";
+import { View, Text, Image, ScrollView, SafeAreaView } from "react-native";
+import React from "react";
 import aboutStyle from "./styles";
 import UserPhoto from "../../components/MemberPhoto";
 import { teachers, membersEPS, membersMDS, membersTranslation } from "./membersData";
-import Colors from "../../assets/Colors";
+
 
 export default function About() {
-
-  const wikiURL = "https://fga-eps-mds.github.io/2020.2-Projeto-Kokama-Wiki/"
-  const redirectTo = useCallback(async () => {
-    await Linking.openURL(wikiURL);
-  }, []);
 
   return (
     <SafeAreaView style={aboutStyle.container}>
@@ -37,11 +32,6 @@ export default function About() {
             Nossos mais sinceros agradecimentos ao prof. Hilmer Rodrigues Neri (UnB), ao prof. Alfredo Wagner Berno
             de Almeida (UEA) e, também, aos estudantes e colaboradores do projeto.
           </Text>
-          <TouchableWithoutFeedback onPress={redirectTo}>
-            <Text style={aboutStyle.about_text}>
-              Para saber mais, acesse a <Text style={{ color: Colors.RED }}>página do projeto</Text>.
-            </Text>
-          </TouchableWithoutFeedback>
         </View>
 
         <Text style={aboutStyle.title}>Professores:</Text>

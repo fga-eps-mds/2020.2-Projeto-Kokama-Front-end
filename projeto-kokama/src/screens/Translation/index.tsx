@@ -278,7 +278,7 @@ const Translation = () => {
 						{phrases.map((phrase, index) => (
 							<View style={translationStyle.exampleArea} key={index}>
 								{/* Phrase kokama */}
-								<HighlightText
+								<HighlightText 
 									style={translationStyle.examplesText}
 									highlightStyle={{ color: Colors.RED }}
 									searchWords={[

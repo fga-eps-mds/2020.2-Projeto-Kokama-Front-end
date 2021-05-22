@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Platform,
   StatusBar,
   StyleSheet,
   View,
@@ -9,7 +8,6 @@ import {
 } from "react-native";
 import Colors from "../assets/Colors";
 
-const STATUSBAR_HEIGHT = Platform.OS === "ios" ? 20 : StatusBar.currentHeight;
 
 const styles = StyleSheet.create({
 
