@@ -1,9 +1,9 @@
-import { View, Text, Image, ScrollView, SafeAreaView, TouchableWithoutFeedback, Linking } from "react-native";
-import React, { useCallback } from "react";
+import { View, Text, Image, ScrollView, SafeAreaView } from "react-native";
+import React from "react";
 import aboutStyle from "./styles";
 import UserPhoto from "../../components/MemberPhoto";
 import { teachers, membersEPS, membersMDS, membersTranslation } from "./membersData";
-import Colors from "../../assets/Colors";
+
 
 export default function About() {
 
