@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import styles, {getStyleOption} from "./styles";
+import styles, { getStyleOption } from "./styles";
 import { Exercise } from "./interface";
 import Api from "../../api/Api";
 import SpinnerLoading from "../../components/SpinnerLoading";
@@ -14,6 +14,7 @@ import { createBlankSpace, removeMarkers } from "../../utils/activity";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { LEARN_MICROSERVICE_URL } from "@env";
 import NetInfo from '@react-native-community/netinfo';
+import { KOKAMA, PORTUGUESE } from "../../config/constants";
 
 
 
@@ -65,7 +66,7 @@ export default function Activity({ navigation }) {
     if (index === activities.length - 1) {
       setIndex(0);
     } else {
-      setIndex(index+1);
+      setIndex(index + 1);
     }
     randomOptions = shuffle([0, 1, 2, 3]);
   }
@@ -76,45 +77,45 @@ export default function Activity({ navigation }) {
       {activities.length > 0 && isConnected && (
         <ScrollView keyboardShouldPersistTaps={"always"}>
           {clicked === -1 && (
-          <View style={styles.activityPhraseArea}>
-            <Text style={styles.activityPhrasePortuguese}>
-              {createBlankSpace(
-                activities[index].phrase_portuguese,
-                "portuguese"
-              )}
-            </Text>
-
-            <Text style={styles.activityPhraseKokama}>
-              {createBlankSpace(
-                activities[index].phrase_kokama,
-                activities[index].options[0],
-                "kokama"
-              )}
-            </Text>
-          </View>
-          ) || (
             <View style={styles.activityPhraseArea}>
-            <Text style={styles.activityPhrasePortuguese}>
-              {
-                removeMarkers(activities[index].phrase_portuguese)
-              }
-            </Text>
+              <Text style={styles.activityPhrasePortuguese}>
+                {createBlankSpace(
+                  activities[index].phrase_portuguese,
+                  PORTUGUESE
+                )}
+              </Text>
 
-            <Text style={styles.activityPhraseKokama}>
-              {
-                removeMarkers(activities[index].phrase_kokama)
-              }
-            </Text>
-          </View>
-          )}
+              <Text style={styles.activityPhraseKokama}>
+                {createBlankSpace(
+                  activities[index].phrase_kokama,
+                  activities[index].options[0],
+                  KOKAMA
+                )}
+              </Text>
+            </View>
+          ) || (
+              <View style={styles.activityPhraseArea}>
+                <Text style={styles.activityPhrasePortuguese}>
+                  {
+                    removeMarkers(activities[index].phrase_portuguese)
+                  }
+                </Text>
+
+                <Text style={styles.activityPhraseKokama}>
+                  {
+                    removeMarkers(activities[index].phrase_kokama)
+                  }
+                </Text>
+              </View>
+            )}
           <View style={styles.optionsArea}>
             <View style={styles.optionsRow}>
               <TouchableWithoutFeedback
                 onPress={() => { setClicked(0); }}
-                style={ getStyleOption(clicked, randomOptions[0] === 0, 0)}
+                style={getStyleOption(clicked, randomOptions[0] === 0, 0)}
               >
                 <Text style={styles.optionText}>
-                  {activities[index].options[randomOptions[0]]}
+                  {activities[index].options[randomOptions[0]].toLowerCase()}
                 </Text>
               </TouchableWithoutFeedback>
 
@@ -125,7 +126,7 @@ export default function Activity({ navigation }) {
                 style={getStyleOption(clicked, randomOptions[1] === 0, 1)}
               >
                 <Text style={styles.optionText}>
-                  {activities[index].options[randomOptions[1]]}
+                  {activities[index].options[randomOptions[1]].toLowerCase()}
                 </Text>
               </TouchableWithoutFeedback>
 
@@ -139,7 +140,7 @@ export default function Activity({ navigation }) {
                 style={getStyleOption(clicked, randomOptions[2] === 0, 2)}
               >
                 <Text style={styles.optionText}>
-                  {activities[index].options[randomOptions[2]]}
+                  {activities[index].options[randomOptions[2]].toLowerCase()}
                 </Text>
               </TouchableWithoutFeedback>
 
@@ -150,7 +151,7 @@ export default function Activity({ navigation }) {
                 style={getStyleOption(clicked, randomOptions[3] === 0, 3)}
               >
                 <Text style={styles.optionText}>
-                  {activities[index].options[randomOptions[3]]}
+                  {activities[index].options[randomOptions[3]].toLowerCase()}
                 </Text>
               </TouchableWithoutFeedback>
             </View>

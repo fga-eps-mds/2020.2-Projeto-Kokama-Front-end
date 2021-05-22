@@ -17,7 +17,7 @@ import {
 } from "../../config/constants";
 import StoryList from "../../components/StoryList";
 import { SearchBar } from 'react-native-elements';
-import {LEARN_MICROSERVICE_URL} from "@env"
+import { LEARN_MICROSERVICE_URL } from "@env"
 
 
 export default function Stories() {
@@ -31,7 +31,7 @@ export default function Stories() {
     useEffect(() => {
         const fetchData = async () => {
             const result = await Api(
-                LEARN_MICROSERVICE_URL+"ensino/lista_de_historias/?format=json"
+                LEARN_MICROSERVICE_URL + "ensino/lista_de_historias/?format=json"
             );
             if (result.status === 200 && kokamaStories != result.data) {
                 setKokamaStories(result.data);
@@ -53,33 +53,31 @@ export default function Stories() {
     return (
         <SafeAreaView>
             {kokamaStories && kokamaStories.length == 0 && (
-                <SpinnerLoading/>
+                <SpinnerLoading />
             )}
             {kokamaStories && kokamaStories.length > 0 && (
-                <ScrollView style={styles.container}>
-                    <View style={styles.area}>
-                        <View style={styles.searchBarBox}>
-                            <SearchBar
-                                placeholder="Pesquise aqui..."
-                                onChangeText={setSearch}
-                                value={search}
-                                platform="android"
-                                containerStyle={{ width:300}}
-                            />
-                            
-                            <View style={styles.swapButtonArea}>
-                                <TouchableWithoutFeedback onPress={exchangeLanguage}>
-                                    <Icon name="swap" size={40}/>
-                                </TouchableWithoutFeedback>
-                                <Text>{originLanguage}</Text>
-                            </View>
-                        </View>
-                        <StoryList
-                            search={search}
-                            list={kokamaStories}
-                            language={originLanguage || ""}
+                <ScrollView style={styles.container} keyboardShouldPersistTaps="always">
+                    <View style={styles.searchBarArea}>
+                        <SearchBar
+                            placeholder="Pesquise aqui..."
+                            onChangeText={setSearch}
+                            value={search}
+                            platform="android"
+                            containerStyle={ styles.searchBar }
                         />
+
+                        <View style={styles.swapButtonArea}>
+                            <TouchableWithoutFeedback onPress={exchangeLanguage}>
+                                <Icon name="swap" size={40} />
+                            </TouchableWithoutFeedback>
+                            <Text>{originLanguage}</Text>
+                        </View>
                     </View>
+                    <StoryList
+                        search={search}
+                        list={kokamaStories}
+                        language={originLanguage || ""}
+                    />
                 </ScrollView>
             )}
         </SafeAreaView>

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, View, Text, TouchableWithoutFeedback, ScrollView } from "react-native";
 import Colors from "../assets/Colors";
 import { HistoryTuple } from "../screens/Translation/interface";
 import HistoryTitle from "./HistoryTitle";
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderBottomWidth: 0.5,
     borderColor: Colors.DARK_GRAY,
-    paddingLeft: 23,
+    paddingLeft: 20,
     paddingVertical: 7,
   },
   Words: {
@@ -41,7 +41,7 @@ interface Props {
 
 const History = (props: Props) => {
   return (
-    <View>
+    <View style={{marginBottom: 5 }}>
       <HistoryTitle
         isEnabled={props.isEnabled}
         data={props.data}
@@ -49,7 +49,7 @@ const History = (props: Props) => {
       />
       
       {props.data.length > 0 && props.isEnabled && (
-        <View style={styles.Area}>
+        <ScrollView style={styles.Area}>
           {props.data.map((word: HistoryTuple, index: number) => (
             <TouchableWithoutFeedback
               key={index}
@@ -65,7 +65,7 @@ const History = (props: Props) => {
               </View>
             </TouchableWithoutFeedback>
           ))}
-        </View>
+        </ScrollView>
       )}
     </View>
   );
