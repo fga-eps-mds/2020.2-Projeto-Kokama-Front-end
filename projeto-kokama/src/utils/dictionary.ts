@@ -23,9 +23,7 @@ export function updateDictionary() {
 				lastUpdate = await AsyncStorage.getItem("last-update");
 				if (lastUpdate === null || getCurrentDate() !== lastUpdate) {
 					await AsyncStorage.setItem("last-update", getCurrentDate());
-					const request = await Api(
-						TRANSLATION_MICROSERVICE_URL + "dicionario/"				
-						);
+					const request = await Api(TRANSLATION_MICROSERVICE_URL + "dicionario/");
 					if (request.status === 200) {
 						await AsyncStorage.setItem("dictionary", JSON.stringify(request.data));
 					} else {

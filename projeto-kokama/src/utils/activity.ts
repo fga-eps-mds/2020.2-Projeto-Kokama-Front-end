@@ -1,11 +1,13 @@
+import { PORTUGUESE } from "../config/constants";
+
 let undesiredChars: Array<string> = [",", ".", "!", "?", " ", "", "\0", "\n"];
 
 export function createBlankSpace(
   text: string,
   word: string = "",
-  language: string = "portuguese") {
+  language: string = PORTUGUESE) {
   let phrase: string = text.replace("<", "").replace(">", "");
-  if (language == "portuguese") {
+  if (language == PORTUGUESE) {
     return phrase;
   }
 

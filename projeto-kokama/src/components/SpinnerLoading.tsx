@@ -23,7 +23,7 @@ const SpinnerLoading = () => {
             <Spinner color={Colors.RED} />
             <Text style={spinnerStyle.message}>
                 Carregando...
-                </Text>
+            </Text>
         </View>
     );
 }

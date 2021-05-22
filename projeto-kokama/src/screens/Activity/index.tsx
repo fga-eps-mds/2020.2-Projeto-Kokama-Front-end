@@ -14,6 +14,7 @@ import { createBlankSpace, removeMarkers } from "../../utils/activity";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { LEARN_MICROSERVICE_URL } from "@env";
 import NetInfo from '@react-native-community/netinfo';
+import { KOKAMA, PORTUGUESE } from "../../config/constants";
 
 
 
@@ -80,7 +81,7 @@ export default function Activity({ navigation }) {
             <Text style={styles.activityPhrasePortuguese}>
               {createBlankSpace(
                 activities[index].phrase_portuguese,
-                "portuguese"
+                PORTUGUESE
               )}
             </Text>
 
@@ -88,7 +89,7 @@ export default function Activity({ navigation }) {
               {createBlankSpace(
                 activities[index].phrase_kokama,
                 activities[index].options[0],
-                "kokama"
+                KOKAMA
               )}
             </Text>
           </View>
