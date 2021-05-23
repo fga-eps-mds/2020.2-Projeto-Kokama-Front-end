@@ -1,0 +1,24 @@
+name: Jest tests pipeline
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the dev branch
+  push:
+    branches: [ dev ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules and run tests
+        run: |
+          cd projeto-kokama
+          yarn
+          yarn test
+      - name: Publish tests to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          files: ./projeto-kokama/coverage/coverage-final.json
+          flags: unittests
+          fail_ci_if_error: true
+          verbose: false
