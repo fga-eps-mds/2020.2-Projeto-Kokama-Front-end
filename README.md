@@ -6,6 +6,10 @@
 
 ## Execução
 
+### Configurar as variáveis de ambiente
+
+* Criar arquivos `.env` e preenchê-los de acordo as instruções dos arquivos `env-reference` (mesma pasta).
+
 ### Para executar o ambiente dockerizado
 * Para iniciar o ambiente basta usar a chamada `make`
   - Dentro dele, execute o expo com `expo start`
