@@ -6,19 +6,8 @@
 ## Execução
 
 ### Configurar as variáveis de ambiente
-* Criar um arquivo .env da api do projeto;
-- SECRET_KEY=
-- DEBUG=
-- ALLOWED_HOSTS=
-- ...
 
-* Criar um arquivo .env do projeto;
- - POSTGRES_DB=
- - POSTGRES_USER=
-- ...
-* Tem que conter os seguintes links:
- - LEARN_MICROSERVICE_URL=http://seu_ip:8001/
- - TRANSLATE_MICROSERVICE_URL=http://seu_ip:8000/
+* Criar arquivos `.env` e preenchê-los de acordo as instruções dos arquivos `env-reference` (mesma pasta).
 
 ### Para executar o ambiente dockerizado
 * Para iniciar o ambiente basta usar a chamada `make`
